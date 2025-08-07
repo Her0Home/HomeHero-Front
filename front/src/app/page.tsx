@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
+// import { NavigationMenuList } from "@/components/ui/navigation-menu";
+// import { NavigationMenu, NavigationMenuItem } from "@radix-ui/react-navigation-menu";
+
 export default function Home() {
   return (
-    <div className="p-4 bg-gray-100 ">
+    <>
+    <div className="p-4 bg-gray-100   ">
       <h1 className=" text-3xL">Viendindo a Home Hero</h1>
       <Card className="w-1/5 ">
         <CardHeader>
@@ -46,5 +50,6 @@ export default function Home() {
       </Card>
       
     </div>
+    </>
   );
 }
