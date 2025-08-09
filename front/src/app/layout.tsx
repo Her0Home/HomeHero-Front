@@ -28,8 +28,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${zenDots.variable} ${sansation.variable} `}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${zenDots.variable} ${sansation.variable}  `}>
+      <div className="bg-hero-blue">
+
         {children}
+      </div>
       </body>
     </html>
   );
