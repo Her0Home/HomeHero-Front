@@ -1,3 +1,4 @@
+import NameLogo from "@/components/Logo/logo";
 import React from "react";
 export const Footer = () => {
     return(
@@ -6,10 +7,7 @@ export const Footer = () => {
           <div className="grid gap-8 md:grid-cols-4">
             <div>
               <div className="flex items-center mb-4 space-x-2">
-                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-orange-500 to-blue-500">
-                  <span className="font-bold text-white">H</span>
-                </div>
-                <h3 className="text-xl font-bold font-Name">Home Hero</h3>
+                <NameLogo/>
               </div>
               <p className="text-gray-400 font-Textn">Conectando hogares con profesionales de confianza</p>
             </div>

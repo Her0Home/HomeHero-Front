@@ -19,7 +19,7 @@ export const navbarClientLinks = [
     href: routes.servicios,
   },
   {
-    label : "perfil",
+    label : "Perfil",
     href: routes.profile,
   }
 ]
@@ -31,11 +31,11 @@ export const navbarProLinks = [
     href: routes.trabaja_con_nosotros,
   },
   {
-    label: "citas",
+    label: "Citas",
     href: routes.servicios,
   },
   {
-    label: "perfil",
+    label: "Perfil",
     href: routes.profile,
   },
 ]
@@ -47,11 +47,11 @@ export const navbarAdminLinks = [
     href: routes.servicios,
   },
   {
-    label : "anlaytics",
+    label : "Anlaytics",
     href: routes.ganancias,
   },
   {
-    label: "dashboard",
+    label: "Dashboard",
     href: routes.profile,
   },
 ]

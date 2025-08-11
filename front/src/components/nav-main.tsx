@@ -10,6 +10,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { navbarAdminLinks } from "@/constants/navbar"
+import Link from "next/link"
 
 export function NavMain({
   items,
@@ -42,11 +44,15 @@ export function NavMain({
           </SidebarMenuItem>
         </SidebarMenu>
         <SidebarMenu>
-          {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton className="font-Text" tooltip={item.title}>
-                {item.icon && <item.icon />}
-                <span>{item.title}</span>
+          {navbarAdminLinks.map((item) => (
+            <SidebarMenuItem key={item.label}>
+              <SidebarMenuButton className="font-Text" tooltip={item.label}>
+                <Link
+                href={item.href}
+                >
+                <span>{item.label}</span>
+                
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}

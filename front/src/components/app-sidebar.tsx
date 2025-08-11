@@ -28,6 +28,9 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
+import NameLogo from "./Logo/logo"
+import { routes } from "@/routes"
 
 const data = {
   user: {
@@ -148,9 +151,11 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="none" {...props}>
+    <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
-        
+        <Link className="border border-hero-white hover:border-hero-purple" href={routes.home}>
+         <NameLogo   className2="text-1xl" />
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />

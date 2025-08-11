@@ -29,7 +29,7 @@ export const NavMenu: FC = () => {
   };
 
   const isAuth = true; // Esto en real vendría de un estado global o auth
-  const roles = "admin" as Role; // Esto en real vendría de un estado global o auth
+  const roles = "client" as Role; // Esto en real vendría de un estado global o auth
   const links = () => {
     switch (roles) {
       case "admin":

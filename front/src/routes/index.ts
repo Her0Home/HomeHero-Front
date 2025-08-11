@@ -5,7 +5,7 @@ export const routes = {
   landing: "/landing",
   pro_detail: "/pro-detail",
   notFound: "/not-found",
-  trabaja_con_nosotros: "/trabaja-con-nosotros",
+  trabaja_con_nosotros: "/infopro",
   //
   profile: "/profile",
   //
