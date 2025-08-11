@@ -3,6 +3,7 @@ import { OurServices } from "./components/nuestrosServicios/ourServicies";
 import { HeroSection } from "./components/heroSection/heroSection";
 import { HowItWork } from "./components/heroHowItWork/heroHowItWork";
 import { SectionProfesional } from "./components/sectionProfesional/sectionProfesional";
+import { ReadyHero } from "./components/readyHero/readyHero";
 
 // import { NavigationMenuList } from "@/components/ui/navigation-menu";
 // import { NavigationMenu, NavigationMenuItem } from "@radix-ui/react-navigation-menu";
@@ -15,6 +16,7 @@ export default function Home() {
     <OurServices/>
     <HowItWork/>
     <SectionProfesional/>
+    <ReadyHero/>
     </>
   );
 }

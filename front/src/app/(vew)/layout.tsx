@@ -1,3 +1,4 @@
+import { Footer } from "@/components/layout/Footer/Footer";
 import Navbar from "@/components/layout/Navbar/NavBar";
 import { FC } from "react";
 
@@ -9,6 +10,7 @@ const LayoutMainViews: FC<LayoutMainViewProps> = ({ children }) => {
   <>
   <Navbar/>
     {children}
+    <Footer/>
   </> 
   )
 }
