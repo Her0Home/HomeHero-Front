@@ -2,12 +2,12 @@ import animatePlugin from "tailwindcss-animate";
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
-    darkMode: ["class"],
-    content: [
+  darkMode: ["class"],
+  content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
- 
+
     // Or if using `src` directory:
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
@@ -19,6 +19,15 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+  			hero: {
+  				orange: '#F97316',
+  				purple: '#C1A2F6',
+  				blue: '#2563EB',
+  				cream: '#F5F0E1',
+  				gray: '#E5E5E5',
+  				white: '#FFFFFF',
+  				black: '#1A1A1A'
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -58,10 +67,36 @@ module.exports = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
+  			},
+  			sidebar: {
+  				DEFAULT: 'hsl(var(--sidebar-background))',
+  				foreground: 'hsl(var(--sidebar-foreground))',
+  				primary: 'hsl(var(--sidebar-primary))',
+  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+  				accent: 'hsl(var(--sidebar-accent))',
+  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+  				border: 'hsl(var(--sidebar-border))',
+  				ring: 'hsl(var(--sidebar-ring))'
   			}
+  		},
+  		fontFamily: {
+  			Name: [
+  				'var(--font-aclonica)',
+  				'sans-serif'
+  			],
+  			Title: [
+  				'var(--font-zen-dots)',
+  				'sans-serif'
+  			],
+  			Text: [
+  				'var(--font-sansation)',
+  				'sans-serif'
+  			]
+  		},
+  		backgroundImage: {
+  			'content-gradient': 'linear-gradient(to right, #F97316, #a578f2, #2563EB)'
   		}
   	}
   },
   plugins: [animatePlugin],
-}
-
+};
