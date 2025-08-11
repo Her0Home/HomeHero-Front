@@ -17,7 +17,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-red-600 ",
         outlineGradient:
-          "border  border-hero-blue text-hero-blue   rounded- bg-background shadow-sm hover:border-none hover:bg-content-gradient hover:text-white",
+          "border  border-hero-blue text-hero-blue   rounded- bg-background shadow-sm hover:border-none hover:bg-content-gradient  hover:text-white",
         outline:
           "border border-hero-purple  text-hero-purple  hover:border hover:border-purple-700 hover:text-purple-700 hover:-bg-content-gradient",
         ghost: "border-2 text-hero-white border-hero-white  hover:bg-hero-white hover:text-hero-orange  ",

@@ -1,55 +1,49 @@
-"use client"
+"use client";
 
-import * as React from "react"
-// import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react"
-
+import { FC } from "react";
+import ItemsNav from "./itemsNav";
+import { routes } from "@/routes";
+import Swal from "sweetalert2";
 import {
-  NavigationMenu,
-  NavigationMenuList,
-} from "@/components/layout/Navbar/navigation-menu"
-import { Button } from "../../ui/button"
+  navbarAdminLinks,
+  navbarClientLinks,
+  navbarLinks,
+  navbarProLinks,
+} from "@/constants/navbar";
 
+type Role = "admin" | "pro" | "client";
 
-const items = [
-  {
-    title: "Home",
-    href: "/",
-    description: "Welcome to our homepage",
-  },
-  {
-    title: "Servicios",
-    href: "/about",
-    description: "Learn more about us",
-  },
-  {
-    title: "Login",
-    href: "/services",
-    description: "Discover our services",
-  },
-  {
-    title: "Register",
-    href: "/contact",
-    description: "Get in touch with us",
-  },
-]
+export const NavMenu: FC = () => {
+  const logout = () => {
+    // Implement logout logic here
+    location.assign(routes.home); // Redirigir al usuario a la página de inicio después de cerrar sesión
 
-export function NavMenu() {
+    Swal.fire({
+      title: "Sesión cerrada correctamente",
+      icon: "success",
+      confirmButtonText: "Aceptar",
+      position: "top-end",
+      timer: 1500,
+      timerProgressBar: true,
+    });
+  };
+
+  const isAuth = true; // Esto en real vendría de un estado global o auth
+  const roles = "admin" as Role; // Esto en real vendría de un estado global o auth
+  const links = () => {
+    switch (roles) {
+      case "admin":
+        return navbarAdminLinks;
+      case "pro":
+        return navbarProLinks;
+      case "client":
+        return navbarClientLinks;
+      default:
+        return navbarLinks;
+    }
+  };
+
   return (
-    <NavigationMenu  >
-      <NavigationMenuList className="gap-10">
-        {items.map(items => (
-          <Button 
-            key={items.title}
-            variant={"link"}
-            className="font-Title "
-            >
-              {items.title} 
-          </Button>
-        ))}
-        
-      
-      </NavigationMenuList>
-    </NavigationMenu>
-  )
-}
-
+    <ItemsNav handleOnClick={logout} isAuthenticated={isAuth} Links={links} />
+  );
+};

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono} from "next/font/google";
-import "../styles/globals.css";
+import '@/styles/globals.css';
+
 import { aclonica, sansation, zenDots } from "@/styles/fonts";
 
 
@@ -28,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${zenDots.variable} ${sansation.variable} `}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${zenDots.variable} ${sansation.variable}  `}>
         {children}
       </body>
     </html>

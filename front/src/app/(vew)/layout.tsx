@@ -7,11 +7,13 @@ interface LayoutMainViewProps {
 }
 const LayoutMainViews: FC<LayoutMainViewProps> = ({ children }) => {
   return (
-  <>
-  <Navbar/>
-    {children}
-    <Footer/>
-  </> 
+    <>
+    <div className="bg-hero-cream">
+    <Navbar/>
+      {children}
+    </div> 
+      <Footer/>  
+    </>
   )
 }
 
