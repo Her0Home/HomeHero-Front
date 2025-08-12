@@ -76,7 +76,7 @@ return (
                     <span className="text-gray-500">({professional.reviews} reseñas)</span>
                   </div>
                   <p className="mb-4 text-sm text-gray-600">{professional.experience} de experiencia</p>
-                  <Link href={`/profesional/${professional.id}`}>
+                  <Link href={`/pro-detail/${professional.id}`}>
                     <Button className="w-full text-white bg-orange-500 hover:bg-orange-600">Ver Perfil</Button>
                   </Link>
                 </CardContent>
