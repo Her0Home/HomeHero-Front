@@ -271,7 +271,7 @@ export default function ProfessionalInfoPage() {
                     </div>
                   </div>
                 </div>
-                <p className="italic text-gray-700 font-Text">"{testimonial.comment}"</p>
+                <p className="italic text-gray-700 font-Text">{testimonial.comment}</p>
               </Card>
             ))}
           </div>
