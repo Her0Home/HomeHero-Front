@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-interface LayoutMainViewProps {
+interface LayouStaticViewProps {
   children:React.ReactNode; 
 }
-const LayoutMainViews: FC<LayoutMainViewProps> = ({ children }) => {
+const LayouStaticViews: FC<LayouStaticViewProps> = ({ children }) => {
   return (
     <>
     <div className="bg-hero-cream">
@@ -13,4 +13,4 @@ const LayoutMainViews: FC<LayoutMainViewProps> = ({ children }) => {
   )
 }
 
-export default LayoutMainViews
+export default LayouStaticViews
