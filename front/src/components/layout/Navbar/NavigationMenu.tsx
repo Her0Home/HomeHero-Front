@@ -5,15 +5,16 @@ import ItemsNav from "./itemsNav";
 import { routes } from "@/routes";
 import Swal from "sweetalert2";
 import {
-  navbarAdminLinks,
   navbarClientLinks,
   navbarLinks,
   navbarProLinks,
 } from "@/constants/navbar";
+import { isAuthenticatedGlobal, roleGlobal } from "@/helpers/estatus";
 
-type Role = "admin" | "pro" | "client";
+type Role =  "pro" | "client";
 
 export const NavMenu: FC = () => {
+  
   const logout = () => {
     // Implement logout logic here
     location.assign(routes.home); // Redirigir al usuario a la página de inicio después de cerrar sesión
@@ -28,12 +29,11 @@ export const NavMenu: FC = () => {
     });
   };
 
-  const isAuth = true; // Esto en real vendría de un estado global o auth
-  const roles = "admin" as Role; // Esto en real vendría de un estado global o auth
+  const isAuth = isAuthenticatedGlobal; // Esto en real vendría de un estado global o auth
+  const roles = roleGlobal as Role; // Esto en real vendría de un estado global o auth
+  
   const links = () => {
     switch (roles) {
-      case "admin":
-        return navbarAdminLinks;
       case "pro":
         return navbarProLinks;
       case "client":
