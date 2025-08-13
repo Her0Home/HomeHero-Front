@@ -8,7 +8,7 @@ export const navbarLinks = [
   },
   {
     label : "Trabaja con nosotros",
-    href: routes.trabaja_con_nosotros,
+    href: routes.infopro,
   }
 ]
 
@@ -19,39 +19,19 @@ export const navbarClientLinks = [
     href: routes.servicios,
   },
   {
-    label : "perfil",
-    href: routes.profile,
+    label : "Perfil",
+    href: routes.dashboard,
   }
 ]
 
 export const navbarProLinks = [
 
   {
-    label : "Trabaja con nosotros",
-    href: routes.trabaja_con_nosotros,
-  },
-  {
-    label: "citas",
-    href: routes.servicios,
+    label: "Citas",
+    href: routes.citas,
   },
   {
     label: "perfil",
-    href: routes.profile,
-  },
-]
-
-export const navbarAdminLinks = [
-
-  {
-    label: "Servicios",
-    href: routes.servicios,
-  },
-  {
-    label : "anlaytics",
-    href: routes.ganancias,
-  },
-  {
-    label: "dashboard",
-    href: routes.profile,
+    href: routes.dashboard,
   },
 ]

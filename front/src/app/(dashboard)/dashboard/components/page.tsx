@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar"
+// import { AppSidebar } from "@/components/app-sidebar"
 import { ChartAreaInteractive } from "@/components/chart-area-interactive"
 import { DataTable } from "@/components/data-table"
 import { SectionCards } from "@/components/section-cards"
@@ -7,11 +7,14 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
 import data from "./data.json"
 
-export default function Page() {
+export default function SideBar() {
   return (
     <SidebarProvider>
-      <AppSidebar variant="inset" />
-      {/* <SidebarInset>
+      {/* /sidebar */}
+      {/* <AppSidebar variant="inset" /> */}
+      
+      <SidebarInset>
+        <h1>Hola Mundo </h1>
         <SiteHeader />
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
@@ -24,7 +27,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-      </SidebarInset> */}
+      </SidebarInset>
     </SidebarProvider>
   )
 }

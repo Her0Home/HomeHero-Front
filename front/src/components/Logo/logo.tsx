@@ -13,7 +13,7 @@ interface NameLogoProps {
 
 const NameLogo: FC<NameLogoProps> = ({
   className1 = "flex-row ",
-  className2 = `text-2xl`,
+  className2 = `text-3xl`,
   width = 70,
   height = 70,
 }) => {
@@ -29,7 +29,7 @@ const NameLogo: FC<NameLogoProps> = ({
             height={height}
             className="-mt-3 -mb-4"
           />
-        <h1 className={`${className2} font-Name font-bold logo text-3xl  `}>
+        <h1 className={`${className2} font-Name font-bold logo   `}>
         Home Hero
         </h1>
       </div>

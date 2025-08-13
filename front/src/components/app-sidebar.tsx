@@ -27,7 +27,12 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
+  SidebarProvider,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
+import NameLogo from "./Logo/logo"
+import { routes } from "@/routes"
+import { roleGlobal } from "@/helpers/estatus"
 
 const data = {
   user: {
@@ -121,11 +126,6 @@ const data = {
       url: "#",
       icon: HelpCircleIcon,
     },
-    {
-      title: "Search",
-      url: "#",
-      icon: SearchIcon,
-    },
   ],
   documents: [
     {
@@ -147,19 +147,32 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+  // This component is used to render the sidebar in the application.
+
+  const typeUser= roleGlobal; // This should be dynamically set based on the user's role
+  const user = "Juan Example"; // This should be dynamically set based on the logged-in user
   return (
-    <Sidebar collapsible="none" {...props}>
+    
+
+    <Sidebar collapsible="offcanvas" {...props}>
+
       <SidebarHeader>
-        
+        <Link className="border border-hero-white hover:border-hero-purple" href={routes.home}>
+          <NameLogo   className2="text-2xl" />
+        </Link>
       </SidebarHeader>
+
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        <NavMain role={typeUser} user={user} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
+
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
+
     </Sidebar>
+
   )
 }
