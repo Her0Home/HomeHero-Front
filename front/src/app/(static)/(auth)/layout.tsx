@@ -1,8 +1,8 @@
 import NameLogo from "@/components/Logo/logo";
-import { RegisterForm } from "@/components/register-form";
+import { Card, CardContent } from "@/components/ui/card";
 import { routes } from "@/routes";
-import { Link } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 
 interface LayoutAuthViewProps {
@@ -11,28 +11,29 @@ interface LayoutAuthViewProps {
 const LayoutAuthViews: FC<LayoutAuthViewProps> = ({ children }) => {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
-      <div className="flex flex-col bg-hero-white gap-4 p-6 md:p-10">
+      <div className="flex flex-col  bg-gradient-to-br from-hero-cream via-hero-gray to-hero-white gap-4 p-6 md:p-10">
         <div className="flex  gap-2 ">
           <Link href={routes.home} >
-            <div className="flex flex-row  gap-2">
             <NameLogo/>
-            </div>
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-xs">
-            {children}
-          </div>
+          
+            <Card className="w-2/3">
+              <CardContent className="flex flex-col  p-6 ">
+                {children}
+              </CardContent>
+            </Card>
+          
         </div>
       </div>
       <div className="relative hidden bg-muted lg:block">
         <Image
-          src=""
+          src="https://ik.imagekit.io/ankxi835d/Home%20Hero/limpieza.jpg"
           alt="Image"
-          width={1920}
-          height={1080}
+         
           fill
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          className="absolute inset-0  w-full object-cover"
         />
       </div>
     </div>
