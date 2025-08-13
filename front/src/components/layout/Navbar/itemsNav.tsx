@@ -74,7 +74,7 @@ const ItemsNav:FC<Props>  = ({handleOnClick,isAuthenticated, Links}) => {
           className="font-Title"
           onClick={handleOnClick}
           >
-            LogAuth
+          Cerrar Sesión
           </Button>
       </NavigationMenuList>
     </NavigationMenu>
