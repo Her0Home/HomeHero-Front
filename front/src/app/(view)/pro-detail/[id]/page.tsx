@@ -8,6 +8,7 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { BookingModal } from "@/components/bookingModal"
 import { ProfessionalReviews } from "@/components/ui/profesionalReview"
+import { FC } from "react"
 
 // Datos de ejemplo de profesionales
 const professionals = {
@@ -124,7 +125,14 @@ const professionals = {
 }
 
 
-export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+
+export default function ProfessionalProfilePage({ params }: PageProps) {
     const { id } = params;
 
 
