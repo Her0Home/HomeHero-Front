@@ -1,12 +1,13 @@
 
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
- const professionals = [
+import { generateUrl } from "@/utils/gerateURL"
+import { routes } from "@/routes"
+ export const professionals1 = [
     {
       id: 1,
       name: "Carlos Mendoza",
@@ -54,8 +55,8 @@ return (
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {professionals.map((professional) => (
-              <Card key={professional.id} className="transition-shadow hover:shadow-lg">
+            {professionals1.map((professional) => (
+              <Card key={professional.id} className="transition-shadow hover:shadow-lg" >
                 <CardContent className="p-6 text-center">
                   <div className="relative w-32 h-32 mx-auto mb-4 overflow-hidden rounded -full">
                     <Image
@@ -78,7 +79,7 @@ return (
                     <span className="text-gray-500">({professional.reviews} reseñas)</span>
                   </div>
                   <p className="mb-4 text-sm text-gray-600">{professional.experience} de experiencia</p>
-                  <Link href={`/pro-detail/${professional.id}`}>
+                  <Link href={generateUrl(professional.id, routes.pro_detail, professional.name)}>
                     <Button className="w-full text-white bg-orange-500 hover:bg-orange-600">Ver Perfil</Button>
                   </Link>
                 </CardContent>
