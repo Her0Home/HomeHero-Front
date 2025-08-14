@@ -5,13 +5,12 @@ import Image from "next/image"
 
 
 
-import { notFound } from "next/navigation"
 import { BookingModal } from "@/components/bookingModal"
 import { ProfessionalReviews } from "@/components/ui/profesionalReview"
 
 // Datos de ejemplo de profesionales
-const professionals = {
-  "1": {
+const professionals = [ 
+  {
     id: "1",
     name: "Carlos Mendoza",
     profession: "Electricista Matriculado",
@@ -45,7 +44,7 @@ const professionals = {
       sunday: "No disponible",
     },
   },
-  "2": {
+   {
     id: "2",
     name: "María González",
     profession: "Cuidadora de Mascotas",
@@ -83,7 +82,7 @@ const professionals = {
       sunday: "8:00 - 16:00",
     },
   },
-  "3": {
+  {
     id: "3",
     name: "Ana Rodríguez",
     profession: "Especialista en Limpieza",
@@ -121,16 +120,27 @@ const professionals = {
       sunday: "No disponible",
     },
   },
-}
-
-export default async function ProfessionalProfilePage({ params }: { params: { id: string } }) {
-    const { id } = await params;
+]
 
 
-  const professional = professionals[id as keyof typeof professionals]
+
+type tParams = Promise<{ slug: string[] }>;
+
+export default async function ProfessionalProfilePage(
+  props
+:  { params: tParams}
+) {
+    const { slug} = await props.params;
+    const id = slug[0];
+
+  const professional = professionals?.find((pro)=> pro.id === id)
 
   if (!professional) {
-    notFound()
+    return (
+      <div>
+        <h2> No se encontro el perfil de el profesional </h2>
+      </div>
+    )
   }
 
   return (
