@@ -122,9 +122,15 @@ const professionals = {
     },
   },
 }
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
 
-export default async function ProfessionalProfilePage({ params }: { params: { id: string } }) {
-    const { id } = await params;
+
+export default function ProfessionalProfilePage({ params }: PageProps) {
+    const { id } = params;
 
 
   const professional = professionals[id as keyof typeof professionals]
