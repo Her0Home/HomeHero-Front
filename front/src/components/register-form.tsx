@@ -1,10 +1,14 @@
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-export default function RegisterPage() {
+
+export function RegisterForm({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"form">) {
   return (
-    
-    <form className="flex flex-col gap-6 " >
+    <form className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-Title font-bold">Regsitrate</h1>
         <p className="text-sm font-Text ">
@@ -14,19 +18,19 @@ export default function RegisterPage() {
       </div>
       <div className="grid gap-6">
         <div className="grid gap-2">
-          <Label htmlFor="email">Correo</Label>
+          <Label htmlFor="email">Email</Label>
           <Input id="email" type="email" placeholder="m@example.com" required />
         </div>
         <div className="grid gap-2">
           <div className="flex items-center">
-            <Label htmlFor="Name">Nombre</Label>
+            <Label htmlFor="Name">Name</Label>
           
           </div>
           <Input id="password" type="password" required />
         </div>
         <div className="grid gap-2">
           <div className="flex items-center">
-            <Label htmlFor="password">Contraseña</Label>
+            <Label htmlFor="password">Password</Label>
           
           </div>
           <Input id="password" type="password" required />
