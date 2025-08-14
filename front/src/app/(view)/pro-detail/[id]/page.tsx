@@ -125,14 +125,12 @@ const professionals = {
 }
 
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
 
 
-export default function ProfessionalProfilePage({ params }: PageProps) {
+
+export default function ProfessionalProfilePage({ params }:  {
+  params: { id: string }
+}) {
     const { id } = params;
 
 
