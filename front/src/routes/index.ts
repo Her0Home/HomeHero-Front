@@ -1,7 +1,7 @@
 
 export const routes = {
   home : "/",
-  servicios : "/services",
+  servicios : "/servicios",
   landing: "/landing",
   pro_detail: "/pro-detail",
   notFound: "/not-found",
