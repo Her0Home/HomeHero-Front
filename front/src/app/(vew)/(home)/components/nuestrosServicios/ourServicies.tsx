@@ -11,32 +11,33 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 
 const services = [
     {
       icon: <Zap className="w-8 h-8" />,
       title: "Electricista",
       description: "Instalaciones, reparaciones y mantenimiento eléctrico",
-      img: "https://ik.imagekit.io/ankxi835d/electricista.jpg?updatedAt=1754712092666"
+      img: "https://ik.imagekit.io/ankxi835d/Home%20Hero/electricista.jpg?updatedAt=1754756810334"
     },
     {
       icon: <Wrench className="w-8 h-8" />,
       title: "Plomería",
       description: "Reparación de tuberías, grifos y sistemas de agua",
-      img: "https://ik.imagekit.io/ankxi835d/plomeri%CC%81a.jpg?updatedAt=1754712092677"
+      img: "https://ik.imagekit.io/ankxi835d/Home%20Hero/plomeri%CC%81a.jpg?updatedAt=1754756810371"
     
     },
     {
       icon: <Home className="w-8 h-8" />,
       title: "Limpieza",
       description: "Limpieza profunda y mantenimiento del hogar",
-      img: "https://ik.imagekit.io/ankxi835d/aseo.jpg?updatedAt=1754712721393"
+      img: "https://ik.imagekit.io/ankxi835d/Home%20Hero/aseo.jpg?updatedAt=1754756810409"
     },
     {
       icon: <Scissors className="w-8 h-8" />,
       title: "Jardinería",
       description: "Cuidado de jardines y áreas verdes",
-      img: "https://ik.imagekit.io/ankxi835d/jardineria.jpg?updatedAt=1754712311567"
+      img: "https://ik.imagekit.io/ankxi835d/Home%20Hero/jardineria.jpg?updatedAt=1754756810383"
       
      
     },
@@ -44,13 +45,13 @@ const services = [
       icon: <PawPrint className="w-8 h-8" />,
       title: "Paseo de Mascotas",
       description: "Cuidado y paseo profesional de mascotas",
-      img: "https://ik.imagekit.io/ankxi835d/paseador-perros.jpg?updatedAt=1754712092585"
+      img: "https://ik.imagekit.io/ankxi835d/Home%20Hero/paseador-perros.jpg?updatedAt=1754756810322"
     },
     {
       icon: <Paintbrush className="w-8 h-8" />,
       title: "Pintura",
       description: "Pintura interior y exterior de espacios",
-      img: "https://ik.imagekit.io/ankxi835d/pintura.jpg?updatedAt=1754712487318"
+      img: "https://ik.imagekit.io/ankxi835d/Home%20Hero/pintura.jpg?updatedAt=1754756810337"
     },
   ]
 
@@ -79,11 +80,14 @@ return (
 
                   <h3 className="mb-2 text-xl font-bold font-Title">{service.title}</h3>
                   </div>
-                   <img
-      src={service.img}
-      alt={service.title}
-      className="object-cover w-full h-40 mb-4 rounded-md"
+                  <div className="relative h-40 mb-4 w-80 ">
+                   <Image
+                      src={service.img}
+                      alt={service.title}
+                    fill
+                     className="object-cover rounded-md"
     />
+                  </div>
                   <p className="mb-4 text-hero-black font-Text">{service.description}</p>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-1">

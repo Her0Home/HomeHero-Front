@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Star, DollarSign, Calendar, Shield, Users, TrendingUp, Clock, Award, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function ProfessionalInfoPage() {
   return (
@@ -48,7 +49,7 @@ export default function ProfessionalInfoPage() {
             </div>
 
             <div className="relative">
-              <img
+              <Image
                 src="https://ik.imagekit.io/ankxi835d/Home%20Hero/Plomero%20exitoso.jpg?updatedAt=1754839195741"
                 alt="Profesional exitoso"
                 width={400}
@@ -248,12 +249,12 @@ export default function ProfessionalInfoPage() {
             ].map((testimonial, index) => (
               <Card key={index} className="items-center justify-center p-6">
                 <div className="flex items-center mb-4 space-x-4">
-                  <img
+                  <Image
                     src={testimonial.image || "/placeholder.svg"}
                     alt={testimonial.name}
                     width={80}
                     height={80}
-                    className="rounded-full"
+                    className="rounded-md"
                   />
                   <div>
                     <h4 className="font-bold font-Title">{testimonial.name}</h4>
@@ -271,7 +272,7 @@ export default function ProfessionalInfoPage() {
                     </div>
                   </div>
                 </div>
-                <p className="italic text-gray-700 font-Text">"{testimonial.comment}"</p>
+                <p className="italic text-gray-700 font-Text">{testimonial.comment}</p>
               </Card>
             ))}
           </div>
