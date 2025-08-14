@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Star, MapPin, Clock, Shield, Award, Calendar, Phone, Mail, Wrench } from "lucide-react"
+import { Star, MapPin, Clock, Calendar, Wrench } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
+
 
 
 import { notFound } from "next/navigation"
@@ -124,8 +123,11 @@ const professionals = {
   },
 }
 
-export default function ProfessionalProfilePage({ params }: { params: { id: string } }) {
-  const professional = professionals[params.id as keyof typeof professionals]
+export default async function ProfessionalProfilePage({ params }: { params: { id: string } }) {
+    const { id } = await params;
+
+
+  const professional = professionals[id as keyof typeof professionals]
 
   if (!professional) {
     notFound()
