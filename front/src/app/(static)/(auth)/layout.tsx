@@ -31,7 +31,6 @@ const LayoutAuthViews: FC<LayoutAuthViewProps> = ({ children }) => {
         <Image
           src="https://ik.imagekit.io/ankxi835d/Home%20Hero/limpieza.jpg"
           alt="Image"
-         
           fill
           className="absolute inset-0  w-full object-cover"
         />
