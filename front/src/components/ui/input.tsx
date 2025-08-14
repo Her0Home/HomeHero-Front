@@ -1,22 +1,38 @@
-import * as React from "react"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
+type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  error?: string;
+};
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type = "text", error, id, ...props }, ref) => {
+    const describedBy = error ? `${id}-error` : undefined;
+
     return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          className
+      <div className="flex flex-col w-full gap-1">
+        <input
+          type={type}
+          id={id}
+          ref={ref}
+          aria-invalid={!!error}
+          aria-describedby={describedBy}
+          className={cn(
+            "flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+            error ? "border-red-500 focus-visible:ring-red-500" : "border-input",
+            className
+          )}
+          {...props}
+        />
+        {error && (
+          <p id={describedBy} className="text-hero-orange text-sm mt-1">
+            {error}
+          </p>
         )}
-        ref={ref}
-        {...props}
-      />
-    )
+      </div>
+    );
   }
-)
-Input.displayName = "Input"
+);
 
-export { Input }
+Input.displayName = "Input";
+export { Input };
