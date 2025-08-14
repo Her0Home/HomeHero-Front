@@ -124,14 +124,13 @@ const professionals = [
 
 
 
+type tParams = Promise<{ slug: string[] }>;
 
-
-export default function ProfessionalProfilePage({ 
-  params 
-}:  {
-  params: { slug: string[] };
-}) {
-    const { slug} = params;
+export default async function ProfessionalProfilePage(
+  props
+:  { params: tParams}
+) {
+    const { slug} = await props.params;
     const id = slug[0];
 
   const professional = professionals?.find((pro)=> pro.id === id)
