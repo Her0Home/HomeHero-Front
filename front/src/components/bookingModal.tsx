@@ -11,13 +11,13 @@ import { Badge } from "@/components/ui/badge"
 import { Clock, CalendarIcon, User, MapPin } from "lucide-react"
 import { format, addHours } from "date-fns"
 import { es } from "date-fns/locale"
+import Image from "next/image"
 
 interface Professional {
   id: string
   name: string
   profession: string
   rating: number
-  reviews: number
   image: string
   hourlyRate: number
 }
@@ -125,9 +125,10 @@ export function BookingModal({ professional, children }: BookingModalProps) {
           {/* Información del profesional */}
           <Card>
             <CardContent className="flex items-center p-4 space-x-4">
-              <img
+              <Image
                 src={professional.image || "/placeholder.svg"}
                 alt={professional.name}
+                fill
                 className="object-cover w-16 h-16 rounded-full"
               />
               <div className="flex-1">

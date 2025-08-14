@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, Star } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import React from "react"
  const professionals = [
@@ -56,11 +57,12 @@ return (
             {professionals.map((professional) => (
               <Card key={professional.id} className="transition-shadow hover:shadow-lg">
                 <CardContent className="p-6 text-center">
-                  <div className="relative mb-4">
-                    <img
-                      src={professional.image || "/placeholder.svg"}
+                  <div className="relative w-32 h-32 mx-auto mb-4 overflow-hidden rounded -full">
+                    <Image
+                      src={professional.image}
                       alt={professional.name}
-                      className="object-cover w-20 h-20 mx-auto rounded-full"
+                      fill
+                      className="object-cover "
                     />
                     {professional.verified && (
                       <div className="absolute flex items-center justify-center w-6 h-6 bg-green-500 rounded-full -top-1 -right-1">
