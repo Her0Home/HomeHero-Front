@@ -1,4 +1,4 @@
-import { Aclonica, Sansation, Zen_Dots } from "next/font/google";
+import { Aclonica, Kantumruy_Pro, Zen_Dots } from "next/font/google";
 
 export const zenDots = Zen_Dots({
   variable: "--font-zen-dots",
@@ -13,7 +13,7 @@ export const aclonica = Aclonica({
   weight: "400",
 })
 
-export const sansation =  Sansation({
+export const sansation = Kantumruy_Pro({
   variable: "--font-sansation",
   subsets: ["latin"],
   weight: "400",
