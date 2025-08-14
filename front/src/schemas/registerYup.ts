@@ -19,3 +19,4 @@ export const RegisterSchema = Yup.object({
     .oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden')
     .required('Debes confirmar tu contraseña'),
 });
+
