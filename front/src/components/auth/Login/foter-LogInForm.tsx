@@ -22,7 +22,7 @@ const FooterLogInForm: FC = () => {
       <div className="text-sm text-center">
         No tienes un cuenta?{" "}
         <Link href={routes.register} className="underline underline-offset-4">
-          Ingresa aca
+          Registrate aca
         </Link>
       </div>
     </div>
