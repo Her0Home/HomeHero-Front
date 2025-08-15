@@ -43,8 +43,27 @@ export default function ProfessionalInfoPage() {
                       <p className=" font-Title">10K+</p>
                       <p className="text-sm text-gray-600 font-Text">Clientes activos</p>
                     </div>
+                    
                   </div>
                 </div>
+                <div className="text-center">
+          <h3 className="mb-4 text-2xl font-bold text-gray-900 font-Title">¿Listo para hacer crecer tu negocio?</h3>
+          <p className="max-w-2xl mx-auto mb-8 text-gray-600 font-Text">
+            Contratá tu membresía y empezá a trabajar con nosotros. ¡Sumate a Home Hero y potenciá tus ingresos desde hoy!
+          </p>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <Link href="/membresias">
+              <Button
+                size="lg"
+                className="text-white bg-gradient-to-r from-orange-500 to-blue-500 hover:from-orange-600 hover:to-blue-600"
+              >
+                Comenzar Ahora
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+                
               </div>
             </div>
 
@@ -288,12 +307,13 @@ export default function ProfessionalInfoPage() {
               Únete a más de 500 profesionales que ya están creciendo con Home Hero
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <Link href="/profesional/membresias">
+              <Link href="/register">
                 <Button size="lg" className="px-8 py-4 text-lg text-orange-600 bg-white font-Text hover:bg-gray-100">
                   Registrarse Ahora
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
+              <Link href="/membresias">
               <Button
                 size="lg"
                 variant="outline"
@@ -301,6 +321,7 @@ export default function ProfessionalInfoPage() {
               >
                 Más Información
               </Button>
+              </Link>
             </div>
           </div>
         </div>
