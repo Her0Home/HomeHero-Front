@@ -1,15 +1,13 @@
 "use client"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Switch } from "@/components/ui/switch"
+
 import { CheckCircle, X, Star, Crown, Shield, Users, TrendingUp, Calendar, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export default function ProfessionalMembershipsPage() {
-  const [isAnnual, setIsAnnual] = useState(false)
+
 
   const plans = [
     {
@@ -80,14 +78,14 @@ export default function ProfessionalMembershipsPage() {
     },
   ]
 
-  const getPrice = (plan: any) => {
-    return isAnnual ? plan.annualPrice : plan.monthlyPrice
-  }
+  // const getPrice = (plan: any) => {
+  //   return isAnnual ? plan.annualPrice : plan.monthlyPrice
+  // }
 
-  const getSavings = (plan: any) => {
-    if (!isAnnual) return 0
-    return Math.round(((plan.monthlyPrice - plan.annualPrice) / plan.monthlyPrice) * 100)
-  }
+  // const getSavings = (plan: any) => {
+  //   if (!isAnnual) return 0
+  //   return Math.round(((plan.monthlyPrice - plan.annualPrice) / plan.monthlyPrice) * 100)
+  // }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -140,7 +138,7 @@ export default function ProfessionalMembershipsPage() {
                   <CardTitle className="mb-2 text-2xl font-Title">{plan.name}</CardTitle>
                   <p className="mb-4 text-sm text-gray-600">{plan.description}</p>
 
-                  <div className="text-center">
+                  {/* <div className="text-center">
                     <div className="text-4xl font-bold text-gray-900 font-Text">
                       ${getPrice(plan)}
                       <span className="text-lg font-normal text-gray-500 font-Text">/{isAnnual ? "mes" : "mes"}</span>
@@ -152,7 +150,7 @@ export default function ProfessionalMembershipsPage() {
                     {isAnnual && (
                       <div className="text-sm text-gray-500 font-Text">${getPrice(plan) * 12} facturado anualmente</div>
                     )}
-                  </div>
+                  </div> */}
                 </div>
               </CardHeader>
 
