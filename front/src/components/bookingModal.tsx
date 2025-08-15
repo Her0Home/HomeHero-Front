@@ -125,12 +125,14 @@ export function BookingModal({ professional, children }: BookingModalProps) {
           {/* Información del profesional */}
           <Card>
             <CardContent className="flex items-center p-4 space-x-4">
+              <div className="relative w-16 h-16">
               <Image
                 src={professional.image || "/placeholder.svg"}
                 alt={professional.name}
                 fill
-                className="object-cover w-16 h-16 rounded-full"
+                className="object-cover rounded-full"
               />
+              </div>
               <div className="flex-1">
                 <h3 className="font-bold font-Title">{professional.name}</h3>
                 <p className="text-hero-orange font-Text">{professional.profession}</p>
