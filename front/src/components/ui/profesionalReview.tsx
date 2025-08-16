@@ -34,7 +34,7 @@ const reviewsData: { [key: string]: Review[] } = {
       id: "1",
       clientName: "Roberto Silva",
       clientAvatar: "/placeholder.svg?height=40&width=40",
-      rating: 5,
+      rating: 4.5,
       comment:
         "Excelente trabajo! Carlos llegó puntual, fue muy profesional y resolvió el problema eléctrico de mi cocina rápidamente. Muy recomendado, definitivamente lo volvería a contratar.",
       service: "Reparación eléctrica",
