@@ -68,3 +68,4 @@ export interface RegisterUserDTO {
 
   password: string;
 }
+
