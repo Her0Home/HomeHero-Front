@@ -1,4 +1,5 @@
 import NameLogo from "@/components/Logo/logo";
+import Link from "next/link";
 import React from "react";
 export const Footer = () => {
     return(
@@ -14,80 +15,24 @@ export const Footer = () => {
 
             <div>
               <h4 className="mb-4 font-bold font-Title">Servicios</h4>
-              <ul className="space-y-2 text-gray-400 font-Text">
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Electricista
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Plomería
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Limpieza
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Jardinería
-                  </a>
-                </li>
-              </ul>
+              <Link href="/">
+              <span className="text-gray-400 font-Text">Buscador</span>
+              </Link>
             </div>
 
             <div>
               <h4 className="mb-4 font-bold font-Title">Empresa</h4>
-              <ul className="space-y-2 text-gray-400 font-Text">
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Acerca de
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Contacto
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Términos
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Privacidad
-                  </a>
-                </li>
-              </ul>
+              <Link href="/">
+              <span className="text-gray-400 font-Text">Contacto</span>
+              </Link>
+              
             </div>
 
             <div>
               <h4 className="mb-4 font-bold font-Title">Soporte</h4>
-              <ul className="space-y-2 text-gray-400 font-Text">
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Centro de Ayuda
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Chat en Vivo
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    FAQ
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition-colors hover:text-white">
-                    Garantías
-                  </a>
-                </li>
-              </ul>
+              <Link href="/">
+              <span className="text-gray-400 font-Text">Centro de Ayuda</span>
+              </Link>
             </div>
           </div>
 
