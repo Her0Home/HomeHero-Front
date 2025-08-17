@@ -15,7 +15,7 @@ export const sidebarProLinks:linksNav[] = [
     href: routes.chats,
   },
   {
-    label: "comentarios",
+    label: "Comentarios",
     href: routes.comentarios,
   },
   {
