@@ -11,7 +11,6 @@ const LayoutMainViews: FC<LayoutMainViewProps> = ({ children }) => {
     <>
     <div className="bg-hero-cream">
     <SidebarProvider>
-      {/* /sidebar */}
       <AppSidebar variant="inset" />
       
       <SidebarInset>

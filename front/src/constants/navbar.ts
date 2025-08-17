@@ -31,7 +31,7 @@ export const navbarProLinks = [
     href: routes.citas,
   },
   {
-    label: "perfil",
+    label: "Perfil",
     href: routes.dashboard,
   },
 ]

@@ -1,3 +1,4 @@
-type Role =  "pro" | "client"| "admin" ;
-export const roleGlobal: Role = "client"
+import { Role } from "@/types";
+
+export const roleGlobal: Role = Role.CLIENTE
 export const isAuthenticatedGlobal:boolean = false;

@@ -150,7 +150,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   // This component is used to render the sidebar in the application.
 
-  const typeUser= roleGlobal; // This should be dynamically set based on the user's role
+  const typeUser= roleGlobal; 
   const user = "Juan Example"; // This should be dynamically set based on the logged-in user
   return (
     
