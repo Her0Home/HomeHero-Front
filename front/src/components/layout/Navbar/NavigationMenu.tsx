@@ -10,12 +10,15 @@ import {
   navbarProLinks,
 } from "@/constants/navbar";
 import { isAuthenticatedGlobal, roleGlobal } from "@/helpers/estatus";
+import { useAuth } from "@/context/authcontext";
 
 type Role =  "pro" | "client";
 
 export const NavMenu: FC = () => {
   
+  const {isAuth, resetuserData } = useAuth(); // Esto en real vendría de un estado global o auth
   const logout = () => {
+    resetuserData();
     // Implement logout logic here
     location.assign(routes.home); // Redirigir al usuario a la página de inicio después de cerrar sesión
 
@@ -29,7 +32,6 @@ export const NavMenu: FC = () => {
     });
   };
 
-  const isAuth = isAuthenticatedGlobal; // Esto en real vendría de un estado global o auth
   const roles = roleGlobal as Role; // Esto en real vendría de un estado global o auth
   
   const links = () => {

@@ -9,6 +9,8 @@ import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
 import { Button } from "../../ui/button";
 import { LogInSchema } from "@/schemas/loginYup";
+import { useAuth } from "@/context/authcontext";
+import { postLogin } from "@/services/auth";
 interface LogInFormValues {
   email: string;
   password: string;
@@ -17,6 +19,7 @@ type LoginDTO = LogInFormValues;
 
 
 export const LoginForm = ()=> {
+const { saveUserData } = useAuth();
 
   const Routes = useRouter();
 
@@ -37,7 +40,7 @@ export const LoginForm = ()=> {
 
         // Aquí deberías llamar a tu API de registro
         // Ejemplo: const res = await registerUser(data);
-        const res = true; // Simulación de éxito
+        const res = await postLogin(data);
 
         if (!res) {
           return Swal.fire({
@@ -46,11 +49,12 @@ export const LoginForm = ()=> {
             text: "Error desconocido",
           });
         }
-
+        saveUserData(res.data);
+        console.log("response", res);
         await Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Usuario registrado correctamente",
+          title: "Usuario logueado correctamente",
           showConfirmButton: false,
           timer: 2000,
         });
@@ -71,7 +75,7 @@ export const LoginForm = ()=> {
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold font-Title">Iniciar Sesión</h1>
         <p className="text-sm font-Text ">
-         Ingresa tu correo electrónico para acceder a tu cuenta
+          Ingresa tu correo electrónico para acceder a tu cuenta
         </p>
       </div>
       <div className="flex flex-col gap-6">
