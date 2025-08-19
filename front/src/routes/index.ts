@@ -6,6 +6,7 @@ export const routes = {
   pro_detail: "/pro-detail",
   notFound: "/not-found",
   infopro: "/infopro",
+  
 
   //ADMIN DAHSBOARD
   citas_managear: "/dashboard/citas-managear",
@@ -28,3 +29,4 @@ export const routes = {
   login : "/login",
   register : "/register",
 }
+

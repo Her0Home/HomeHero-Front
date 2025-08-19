@@ -19,14 +19,14 @@ type LoginDTO = LogInFormValues;
 
 
 export const LoginForm = ()=> {
-const { saveUserData } = useAuth();
+const { saveToken } = useAuth();
 
   const Routes = useRouter();
 
   const formik = useFormik<LogInFormValues>({
     initialValues: {
-      email: "",
-      password: "",
+      email: "ricardo.diaz@example.com",
+      password: "Password456@",
 
     },
     validationSchema: LogInSchema,
@@ -36,21 +36,18 @@ const { saveUserData } = useAuth();
         password: values.password,
       };
       try {
-        console.log(data); // Solo para depurar, sin await
+        const res = await postLogin(data);   
 
-        // Aquí deberías llamar a tu API de registro
-        // Ejemplo: const res = await registerUser(data);
-        const res = await postLogin(data);
-
-        if (!res) {
+        if (!res?.data) {
           return Swal.fire({
             icon: "error",
             title: "Error al iniciar sesión",
             text: "Error desconocido",
           });
         }
-        saveUserData(res.data);
-        console.log("response", res);
+        
+        saveToken(res.data);
+        
         await Swal.fire({
           position: "top-end",
           icon: "success",

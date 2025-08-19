@@ -54,6 +54,49 @@ export interface IUser {
 
   profesionalChats: IChat[];
 }
+export interface IUserResponse {
+  id: string;
+
+  name: string;
+
+  email: string;
+
+  birthdate?: Date;
+
+  dni?: number;
+
+  imageProfile?: string;
+
+  description?: string;
+
+  avaregeRating?: number;
+
+  totalAppointments?: number;
+
+  isVerified: boolean;
+
+  isActive: boolean;
+
+  role: Role;
+
+  clientAppointments?: IAppointment[];
+
+  professionalAppointments?: IAppointment[];
+
+  membership: IMembership;
+
+  categories?: ICategory[];
+
+  subcategories?: ISubCategory[];
+
+  addres?: IAddres[]
+
+  image?: IImage[];
+
+  clientChats?: IChat[];
+
+  profesionalChats?: IChat[];
+}
 
 export interface LoginUserDTO {
   email: string;
