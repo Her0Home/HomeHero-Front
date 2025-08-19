@@ -7,7 +7,7 @@ import { LogInServiceResponse } from "@/types";
 
 export const postRegister = async (data: RegisterUserDTO) => {
   try {
-    const res = await axiosApiBack.post("/users/register", data);
+    const res = await axiosApiBack.post("/users", data);
     if (!res.data) {
       console.warn("No se pudo registrar el usuario", res.data);
       return {

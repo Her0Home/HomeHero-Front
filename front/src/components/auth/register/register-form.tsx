@@ -49,6 +49,15 @@ export const RegisterForm = ()=> {
           });
         }
 
+        if (res.errors) {
+          return Swal.fire({
+            icon: "error",
+            title: "Error al iniciar sesión",
+            text: res.message,
+          });
+        }
+
+
         await Swal.fire({
           position: "top-end",
           icon: "success",
