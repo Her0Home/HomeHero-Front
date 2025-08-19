@@ -29,6 +29,7 @@ const PasswordInput: FC<PasswordInputProps> = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
+    <div className="flex flex-col ">
     <div className="flex flex-row items-center  gap-1  justify-between">
       <Input
         id={id}
@@ -37,7 +38,6 @@ const PasswordInput: FC<PasswordInputProps> = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        error={error}
         required={required}
       />
 
@@ -48,6 +48,18 @@ const PasswordInput: FC<PasswordInputProps> = ({
       >
         {showPassword ? <BsFillEyeSlashFill className=" text-2xl "  /> : <IoEyeSharp  className="text-2xl"/>}
       </button>
+    </div>
+    <div>
+
+
+    </div>
+              {error && (
+          <p className="text-red-500 text-sm mt-1">
+            {error}
+          </p>
+        )}
+
+
     </div>
   );
 };

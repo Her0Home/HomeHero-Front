@@ -9,14 +9,15 @@ import {
   navbarLinks,
   navbarProLinks,
 } from "@/constants/navbar";
-import { isAuthenticatedGlobal, roleGlobal } from "@/helpers/estatus";
+import {  roleGlobal } from "@/helpers/estatus";
 import { useAuth } from "@/context/authcontext";
+import { Role } from "@/types";
 
-type Role =  "pro" | "client";
 
 export const NavMenu: FC = () => {
   
-  const {isAuth, resetuserData } = useAuth(); // Esto en real vendría de un estado global o auth
+  const {isAuth, resetuserData,user } = useAuth();
+   // Esto en real vendría de un estado global o auth
   const logout = () => {
     resetuserData();
     // Implement logout logic here
@@ -32,20 +33,21 @@ export const NavMenu: FC = () => {
     });
   };
 
-  const roles = roleGlobal as Role; // Esto en real vendría de un estado global o auth
+  const roles = roleGlobal ; // Esto en real vendría de un estado global o auth
   
   const links = () => {
     switch (roles) {
-      case "pro":
+      case Role.PROFESSIONAL:
         return navbarProLinks;
-      case "client":
+      case Role.CLIENTE:
         return navbarClientLinks;
       default:
         return navbarLinks;
     }
   };
-
+  console.log("return de auth user", user);
+  
   return (
-    <ItemsNav handleOnClick={logout} isAuthenticated={isAuth} Links={links} />
+    <ItemsNav handleOnClick={logout} User={user} isAuthenticated={isAuth} Links={links} />
   );
 };
