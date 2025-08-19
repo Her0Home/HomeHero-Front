@@ -3,6 +3,7 @@ import { Geist, Geist_Mono} from "next/font/google";
 import '@/styles/globals.css';
 
 import { aclonica, sansation, zenDots } from "@/styles/fonts";
+import { AuthProvider } from "@/context/authcontext";
 
 
 
@@ -30,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${aclonica.variable} ${zenDots.variable} ${sansation.variable}  `}>
+        <AuthProvider>
         {children}
+        </AuthProvider>
       </body>
     </html>
   );

@@ -6,6 +6,7 @@ import { FC } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 const FooterRegisterForm: FC = () => {
+  
   return (
     <div className="flex flex-col gap-2 mt-4">
       <div
@@ -18,8 +19,10 @@ const FooterRegisterForm: FC = () => {
           O continua con
         </span>
       </div>
-      <Button variant="outline" type="submit" className="w-full bg-hero-black">
-      {<FcGoogle className="text-2xl " />}Registrate con Google 
+      <Button variant="outline" className="w-full bg-hero-black" asChild>
+        <Link href={"https://homehero-back.onrender.com/login"}>
+          {<FcGoogle className="text-2xl " />}Registrate con Google
+        </Link>
       </Button>
 
       <div className="text-center text-sm">

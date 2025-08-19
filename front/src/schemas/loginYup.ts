@@ -10,10 +10,6 @@ export const LogInSchema = Yup.object({
     .required("El email es obligatorio"),
  
   password: Yup.string()
-    .min(6, "La contraseña debe tener al menos 6 caracteres")
-    .matches(/[a-zA-Z]/, "La contraseña debe contener al menos una letra")
-    .matches(/\d/, "La contraseña debe contener al menos un número")
-    .matches(/[!@#$%^&*(),.?":{}|<>]/,"La contraseña debe contener al menos un carácter especial")
     .required("La contraseña es obligatoria"),
 });
 

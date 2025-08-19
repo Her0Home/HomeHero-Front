@@ -8,6 +8,7 @@ import PasswordInput from "@/components/auth/paswordInputs";
 import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
 import { Button } from "../../ui/button";
+import { postRegister } from "@/services/auth";
 interface RegisterFormValues {
   email: string;
   name: string;
@@ -22,10 +23,10 @@ export const RegisterForm = ()=> {
 
   const formik = useFormik<RegisterFormValues>({
     initialValues: {
-      email: "",
-      name: "",
-      password: "",
-      confirmPassword: "",
+      email: "Sama@example.com",
+      name: "sama",
+      password: "Hola1*",
+      confirmPassword: "Hola1*",
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values, { resetForm }) => {
@@ -37,9 +38,8 @@ export const RegisterForm = ()=> {
       try {
         console.log(data); // Solo para depurar, sin await
 
-        // Aquí deberías llamar a tu API de registro
-        // Ejemplo: const res = await registerUser(data);
-        const res = true; // Simulación de éxito
+        
+        const res = await postRegister(data); 
 
         if (!res) {
           return Swal.fire({
@@ -49,20 +49,32 @@ export const RegisterForm = ()=> {
           });
         }
 
+        if (res.errors) {
+          return Swal.fire({
+            icon: "error",
+            title: "Error al iniciar sesión",
+            text: res.message,
+          });
+        }
+
+
         await Swal.fire({
           position: "top-end",
           icon: "success",
           title: "Usuario registrado correctamente",
+          text:  res.message,
           showConfirmButton: false,
-          timer: 2000,
+          timer: 5000,
         });
         resetForm();
         Routes.push(routes.login);
+
       } catch (e: unknown) {
         console.error("Error al registrar usuario", e);
         Swal.fire({
           icon: "error",
           title: "Error al registrar el usuario",
+          text: e instanceof Error ? e.message : "Error desconocido",
         });
       }
     },

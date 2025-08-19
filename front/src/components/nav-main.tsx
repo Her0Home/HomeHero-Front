@@ -27,9 +27,9 @@ export function NavMain({ role, user }: NavMainProps)
 
   const navLinks = () => {
     switch (roles) {
-      case "pro":
+      case Role.PROFESSIONAL:
         return sidebarProLinks; 
-        case "admin":
+        case  Role.ADMIN:
         return sidebarAdminLinks;
       default:
         return sidebarClientLinks; // Assuming client has similar links as admin // Default to admin links if role is unknown

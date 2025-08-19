@@ -15,14 +15,16 @@ const FooterLogInForm: FC = () => {
           O continua con
         </span>
       </div>
-      <Button variant="outline" type="submit" className="w-full bg-hero-black">
+      <Button variant="outline" type="button" className="w-full bg-hero-black" asChild>
+        <Link href={"https://homehero-back.onrender.com/login"}> 
       {<FcGoogle className="text-2xl " />}Inicia sesión con Google 
+        </Link>
       </Button>
 
       <div className="text-sm text-center">
         No tienes un cuenta?{" "}
         <Link href={routes.register} className="underline underline-offset-4">
-          Registrate aca
+          Registrate Aquí
         </Link>
       </div>
     </div>
