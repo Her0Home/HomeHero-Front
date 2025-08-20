@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { IUserResponse } from "./users";
 
 export enum Role {
   ADMIN = "admin",
@@ -28,6 +29,7 @@ export interface linksNav {
 
 export interface LogInResponse {
   token: string;
+  user: IUserResponse
 }
 
 export interface LogInServiceResponse {

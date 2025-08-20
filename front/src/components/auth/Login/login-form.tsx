@@ -19,7 +19,7 @@ type LoginDTO = LogInFormValues;
 
 
 export const LoginForm = ()=> {
-const { saveToken } = useAuth();
+const { saveUserData } = useAuth();
 
   const Routes = useRouter();
 
@@ -46,7 +46,7 @@ const { saveToken } = useAuth();
           });
         }
         
-        saveToken(res.data);
+        saveUserData(res.data);
         
         await Swal.fire({
           position: "top-end",

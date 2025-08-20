@@ -41,22 +41,13 @@ export const RegisterForm = ()=> {
         
         const res = await postRegister(data); 
 
-        if (!res) {
+        if (!res || res.errors) {
           return Swal.fire({
             icon: "error",
-            title: "Error al iniciar sesión",
-            text: "Error desconocido",
+            title: "Error al registrar usuario",
+            text: res?.message ?? "Error desconocido",
           });
         }
-
-        if (res.errors) {
-          return Swal.fire({
-            icon: "error",
-            title: "Error al iniciar sesión",
-            text: res.message,
-          });
-        }
-
 
         await Swal.fire({
           position: "top-end",
