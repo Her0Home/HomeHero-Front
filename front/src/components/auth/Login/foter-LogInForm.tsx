@@ -6,6 +6,10 @@ import { FC } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 const FooterLogInForm: FC = () => {
+  
+  const handleGoogleLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/login`;
+  };
   return (
     <div className="flex flex-col gap-2 mt-4">
       <div
@@ -15,10 +19,8 @@ const FooterLogInForm: FC = () => {
           O continua con
         </span>
       </div>
-      <Button variant="outline" type="button" className="w-full bg-hero-black" asChild>
-        <Link href={"https://homehero-back.onrender.com/login"}> 
-      {<FcGoogle className="text-2xl " />}Inicia sesión con Google 
-        </Link>
+      <Button variant="outline" type="button" onClick={handleGoogleLogin} className="w-full bg-hero-black" >
+          {<FcGoogle className="text-2xl " />}Iniciar sesión con Google
       </Button>
 
       <div className="text-sm text-center">

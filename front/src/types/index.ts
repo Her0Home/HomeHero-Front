@@ -1,10 +1,11 @@
 import { LucideIcon } from "lucide-react";
+import { IUserResponse } from "./users";
 
 export enum Role {
   ADMIN = "admin",
   CLIENTE = "cliente",
   PROFESSIONAL = "profesional",
-  NOTVERIFY = "no verificado",
+  unknown = "desconocido",
 }
 
 export enum AppointmentStatus {
@@ -28,6 +29,7 @@ export interface linksNav {
 
 export interface LogInResponse {
   token: string;
+  user: IUserResponse 
 }
 
 export interface LogInServiceResponse {
