@@ -54,6 +54,7 @@ export interface IUser {
 
   profesionalChats: IChat[];
 }
+
 export interface IUserResponse {
   id: string;
 

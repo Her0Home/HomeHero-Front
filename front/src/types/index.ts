@@ -5,7 +5,7 @@ export enum Role {
   ADMIN = "admin",
   CLIENTE = "cliente",
   PROFESSIONAL = "profesional",
-  NOTVERIFY = "no verificado",
+  unknown = "desconocido",
 }
 
 export enum AppointmentStatus {
@@ -29,7 +29,7 @@ export interface linksNav {
 
 export interface LogInResponse {
   token: string;
-  user: IUserResponse
+  user: IUserResponse 
 }
 
 export interface LogInServiceResponse {

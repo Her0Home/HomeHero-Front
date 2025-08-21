@@ -16,7 +16,7 @@ import { Role } from "@/types";
 
 export const NavMenu: FC = () => {
   
-  const {isAuth, resetuserData,user } = useAuth();
+  const {isAuth, resetuserData, user } = useAuth();
    // Esto en real vendría de un estado global o auth
   const logout = () => {
     resetuserData();

@@ -14,7 +14,7 @@ type AuthContextType = {
   isAuth: boolean | null;
   user: IUserResponse | null;
   token: string | null;
-  saveUserData: (data: LogInResponse) => void;
+  saveUserData: (data: any) => void;
   resetuserData: () => void;
 };
 
