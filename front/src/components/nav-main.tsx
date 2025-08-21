@@ -1,8 +1,7 @@
 "use client"
 
-import { MailIcon } from "lucide-react"
+import { LucideCircleUserRound } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -12,7 +11,8 @@ import {
 } from "@/components/ui/sidebar"
 import Link from "next/link"
 import { Role } from "@/types"
-import { sidebarAdminLinks, sidebarClientLinks, sidebarProLinks } from "@/constants/sidebar"
+import { sidebarAdminLinks, sidebarClientLinks, sidebarLinks, sidebarProLinks } from "@/constants/sidebar"
+import { routes } from "@/routes"
 
 interface NavMainProps {
   role: Role
@@ -31,8 +31,10 @@ export function NavMain({ role, user }: NavMainProps)
         return sidebarProLinks; 
         case  Role.ADMIN:
         return sidebarAdminLinks;
+        case Role.CLIENTE :
+        return sidebarClientLinks
       default:
-        return sidebarClientLinks; // Assuming client has similar links as admin // Default to admin links if role is unknown
+        return sidebarLinks;
     }
   }
   return (
@@ -43,21 +45,17 @@ export function NavMain({ role, user }: NavMainProps)
             <SidebarMenuButton
               tooltip="Quick Create"
               className="min-w-8 bg-hero-purple text-white hover:bg-purple-300 font-Title"
+              asChild
             >
-              <span>{user}</span>
+              <Link href={routes.dashboard}>
+              <span className="flex flex-row  gap-1 justify-center items-center text-sm"> <LucideCircleUserRound/> {user}</span>
+              </Link>
+
             </SidebarMenuButton>
-            <Button
-              size="icon"
-              className="h-9 w-9 shrink-0 group-data-[collapsible=icon]:opacity-0"
-              variant="outline"
-            >
-              <MailIcon />
-              <span className="sr-only">Inbox</span>
-            </Button>
           </SidebarMenuItem>
 
         </SidebarMenu>
-        <SidebarMenu>
+        <SidebarMenu className=" gap-2 mt-4 ">
           {navLinks().map((item) => (
             <SidebarMenuItem key={item.label}>
               <SidebarMenuButton className="font-Text" tooltip={item.label}>
