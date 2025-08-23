@@ -88,7 +88,7 @@ return (
           </div>
 
           <div className="mt-12 text-center">
-            <Link href="/buscar">
+            <Link href="/servicios">
               <Button size="lg" variant="outline" className="bg-transparent">
                 Ver Todos los Profesionales
               </Button>
