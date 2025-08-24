@@ -51,7 +51,7 @@ const allProfessionals: Professional[] = [
     totalReviews: 127,
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/electricistaProfile.jpg?updatedAt=1754778578455",
     hourlyRate: 45,
-    location: "cdmx",
+    location: "belgrano",
     experience: "8 años",
     description:
       "Electricista certificado con más de 8 años de experiencia en instalaciones residenciales y comerciales.",
@@ -76,7 +76,7 @@ const allProfessionals: Professional[] = [
     totalReviews: 89,
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/paseador-perros.jpg?updatedAt=1754756810322",
     hourlyRate: 25,
-    location: "cdmx",
+    location: "belgrano",
     experience: "5 años",
     description: "Cuidadora profesional de mascotas con certificación en primeros auxilios veterinarios.",
     services: ["Paseo de perros", "Cuidado en casa", "Alimentación de mascotas", "Administración de medicamentos"],
@@ -95,7 +95,7 @@ const allProfessionals: Professional[] = [
     totalReviews: 156,
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/jardineria.jpg?updatedAt=1754756810383",
     hourlyRate: 30,
-    location: "cdmx",
+    location: "belgrano",
     experience: "6 años",
     description: "Especialista en servicios de limpieza residencial y comercial con productos ecológicos.",
     services: ["Limpieza general", "Limpieza profunda", "Organización del hogar", "Limpieza post-construcción"],
@@ -114,7 +114,7 @@ const allProfessionals: Professional[] = [
     totalReviews: 98,
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/plomeroPerfil.jpg?updatedAt=1754778343505",
     hourlyRate: 40,
-    location: "guadalajara",
+    location: "caballito",
     experience: "10 años",
     description:
       "Plomero con amplia experiencia en reparaciones, instalaciones y mantenimiento de sistemas hidráulicos.",
@@ -134,7 +134,7 @@ const allProfessionals: Professional[] = [
     totalReviews: 73,
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/aseoProfile.jpg?updatedAt=1754778577652",
     hourlyRate: 35,
-    location: "monterrey",
+    location: "recoleta",
     experience: "7 años",
     description: "Carpintera especializada en muebles a medida, reparaciones y proyectos de carpintería fina.",
     services: ["Muebles a medida", "Reparación de muebles", "Instalación de puertas", "Trabajos de ebanistería"],
@@ -153,7 +153,7 @@ const allProfessionals: Professional[] = [
     totalReviews: 112,
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/pintura.jpg?updatedAt=1754756810337",
     hourlyRate: 28,
-    location: "puebla",
+    location: "villa-urquiza",
     experience: "9 años",
     description: "Pintor profesional especializado en interiores, exteriores y técnicas decorativas.",
     services: ["Pintura de interiores", "Pintura de exteriores", "Técnicas decorativas", "Preparación de superficies"],
@@ -343,7 +343,7 @@ export function SearchResults({ searchParams }: SearchResultsProps) {
           </div>
           <h3 className="mb-2 text-xl font-bold text-gray-900 font-zen-dots">No se encontraron profesionales</h3>
           <p className="mb-4 text-gray-600">Intenta ajustar tus filtros de búsqueda o busca con términos diferentes.</p>
-          <Link href="/buscar">
+          <Link href="/servicios">
             <Button variant="outline">Limpiar búsqueda</Button>
           </Link>
         </div>

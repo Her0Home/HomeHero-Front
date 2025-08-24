@@ -141,11 +141,11 @@ export function SearchBar({ onSearch, showFilters = false, initialQuery = "" }: 
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Todas las ubicaciones</SelectItem>
-                  <SelectItem value="cdmx">Ciudad de México</SelectItem>
-                  <SelectItem value="guadalajara">Guadalajara</SelectItem>
-                  <SelectItem value="monterrey">Monterrey</SelectItem>
-                  <SelectItem value="puebla">Puebla</SelectItem>
-                  <SelectItem value="tijuana">Tijuana</SelectItem>
+                  <SelectItem value="belgrano">Belgrano</SelectItem>
+                  <SelectItem value="caballito">Caballito</SelectItem>
+                  <SelectItem value="recoleta">Recoleta</SelectItem>
+                  <SelectItem value="villa-urquiza">Villa Urquiza</SelectItem>
+                  <SelectItem value="palermo">Palermo</SelectItem>
                 </SelectContent>
               </Select>
             </div>
