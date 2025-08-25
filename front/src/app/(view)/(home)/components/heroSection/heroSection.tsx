@@ -25,18 +25,20 @@ return (
           
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Badge className="px-4 py-2 text-orange-800 bg-orange-100 font-Text">
-              <Shield className="w-4 h-4 mr-2" />
-              Profesionales Verificados
-            </Badge>
-            <Badge className="px-4 py-2 text-blue-800 bg-blue-100 font-Text">
-              <Clock className="w-4 h-4 mr-2" />
-              Agenda tu citas
-            </Badge>
-            <Badge className="px-4 py-2 text-green-800 bg-green-100 font-Text">
-              <CheckCircle className="w-4 h-4 mr-2" />
-              Garantía de Calidad
-            </Badge>
+          <Badge className="px-4 py-2 text-orange-800 transition-none bg-orange-100 font-Text hover:bg-orange-100 hover:text-orange-800 hover:shadow-none">
+  <Shield className="w-4 h-4 mr-2" />
+  Profesionales Verificados
+</Badge>
+
+<Badge className="px-4 py-2 text-blue-800 transition-none bg-blue-100 font-Text hover:bg-blue-100 hover:text-blue-800 hover:shadow-none">
+  <Clock className="w-4 h-4 mr-2" />
+  Agenda tu citas
+</Badge>
+
+<Badge className="px-4 py-2 text-green-800 transition-none bg-green-100 font-Text hover:bg-green-100 hover:text-green-800 hover:shadow-none">
+  <CheckCircle className="w-4 h-4 mr-2" />
+  Garantía de Calidad
+</Badge>
           </div>
 
           {/* <div className="flex flex-col justify-center gap-4 sm:flex-row">
