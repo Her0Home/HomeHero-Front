@@ -1,110 +1,39 @@
-import { routes } from "@/routes";
-import { linksNav } from "@/types";
-import { Hammer, Library, LucideCircleUserRound, MailIcon, MessageCircle, Settings } from "lucide-react";
+import { linkNav } from "@/types";
+import { itemsNavs } from ".";
 
 
-export const sidebarProLinks:linksNav[] = [
-
-  {
-    label: "Chats",
-    href: routes.chats,
-  },
-  {
-    label: "Comentarios",
-    href: routes.comentarios,
-  },
-  {
-    label: "Citas",
-    href: routes.citas,
-
-  },
-
-  
+export const sidebarProMain:linkNav[] = [
+  itemsNavs.chats,
+  itemsNavs.comentarios,
+  itemsNavs.citas,  
+  itemsNavs.trabajo
 ]
 
-export const sidebarProLinks2:linksNav[] = [
-  
-  {
-    label: "Editar perfil",
-    href: routes.edit_perfil,
-    icon: Settings
-  },
-  {
-    label: "Facturas",
-    href: routes.historial_pagos,
-    icon:Library
-  },
-  
+export const sidebarProSub:linkNav[] = [
+  itemsNavs.editarPerfil,
+  itemsNavs.facturas 
 ]
 
-export const sidebarLinks:linksNav[] = [
-  
-  {
-    label: "Perfil",
-    href: routes.dashboard,
-    icon: LucideCircleUserRound
-  },
-
+export const sidebarClientMain:linkNav[] = [
+  itemsNavs.servicios,
+  itemsNavs.citas,
+  itemsNavs.chats
 ]
 
-export const sidebarClientLinks:linksNav[] = [
-
-  {
-    label: "Servicios",
-    href: routes.servicios,
-    icon: Hammer
-  },
-  {
-    label: "Citas",
-    href: routes.citas,
-    icon: MailIcon
-  },
-  {
-    label: "Chats",
-    href: routes.chats,
-    icon: MessageCircle
-  },
-
-
-]
-export const sidebarClientLinks2:linksNav[] = [
-
-  {
-    label: "Editar perfil",
-    href: routes.edit_perfil,
-    icon: Settings
-  },
-
+export const sidebarLinks:linkNav[] = [
+  itemsNavs.servicios,
+  itemsNavs.trabajo
 ]
 
-export const sidebarAdminLinks:linksNav[] = [
-
-  {
-    label: "Chats",
-    href: routes.chats,
-  },
-  {
-    label: "Citas Managear",
-    href: routes.citas_managear,
-  },
-  {
-    label: "Clientes Managear",
-    href: routes.clientes_managear,
-  },
-  {
-    label: "Profesionales Managear",
-    href: routes.pro_managear,
-  },
+export const sidebarAdminMain:linkNav[] = [
+  itemsNavs.chats,
+  itemsNavs.citasManagear,
+  itemsNavs.clientsManagear,
+  itemsNavs.profesionalManagear
 ]
 
 
-export const sidebarAdminLinks2:linksNav[] = [
-  {
-    label: "Reportes",
-    href: routes.reportes,
-  },
-  {
-    label: "Facturación",
-    href: routes.facturacion,
-  },
+export const sidebarAdminSub:linkNav[] = [
+  itemsNavs.reportes,
+  itemsNavs.facturacion
 ]

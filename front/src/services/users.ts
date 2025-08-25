@@ -1,30 +1,39 @@
-import { IUserResponse } from "@/types/users";
-import { axiosApiBack } from "."
+import {  axiosApiBack2 } from "."
+import { UserIdResponse } from "@/types";
 
 
-export const getUser = async (token: string): Promise<IUserResponse | null> => {
-  if (!token || typeof token !== "string") {
-    console.warn("Token inválido en getUser");
-    return null;
-  }
-  try {
-    const res = await axiosApiBack.get<IUserResponse>("/users", {
+export const getUser = async (id:string, token:string): Promise<UserIdResponse | undefined> => {
+  try{
+    const res = await axiosApiBack2.get(`/users/${id}`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
-
+    })
     if (!res.data) {
-      console.warn("No se pudo obtener el usuario", res.data);
-      return null;
+      console.warn("No se pudo registrar el usuario", res.data);
+      return {
+        message: "Error a el obtener datos de el usuario",
+        errors: res.data,
+      };
+    }
+    return {
+      message : "Usuario obtenido Correctamente",
+      data : res.data
     }
 
-    return res.data;
-  } catch (e: unknown) {
-    if (e instanceof Error) {
-      console.warn("Error fetching user data:", e.message);
-    }
-    return null;
   }
+  catch(e:unknown){
+    if (e instanceof Error) {
+      console.warn("Error logging in user:", e?.message);
+      return {
+        message: `Error al obtener datos Id ${id} Token: ${token}`,
+        errors: (e ).message || "Error desconocido",
+      };
+    }
+
+    
+  }
+
+  
 };
 

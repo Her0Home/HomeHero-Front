@@ -7,9 +7,13 @@ import {
   NavigationMenuList,
 } from "@/components/layout/Navbar/navigation-menu";
 import { Button } from "../../ui/button";
-import { navbarLinks } from "@/constants/navbar";
+import { navbar } from "@/constants/navbar";
 import { routes } from "@/routes";
 import {  IUserResponse } from "@/types/users";
+import cs from "classnames";
+import { usePathname } from "next/navigation";
+
+
 type Props = {
   handleOnClick: () => void;
   isAuthenticated: boolean | null;
@@ -26,15 +30,20 @@ const ItemsNav: FC<Props> = ({
 
   console.log("este es el user",User);
   
+  const pathname = usePathname();
+
   if (!isAuthenticated) {
     return (
       <NavigationMenu>
         <NavigationMenuList className="gap-8">
-          {navbarLinks.map((item) => (
+          {navbar.map((item) => (
             <Button
               key={item.label}
               variant="link"
-              className="font-Title"
+              className={cs("font-Title",
+                              pathname === item.href &&
+                                " underline text-hero-orange"
+                            )}
               asChild
             >
               <Link href={item.href}>{item.label}</Link>
@@ -67,7 +76,10 @@ const ItemsNav: FC<Props> = ({
           <Button
             key={items.label}
             variant={"link"}
-            className="font-Title "
+            className={cs("font-Title",
+              pathname === items.href &&
+                " underline text-hero-orange"
+            )}
             asChild
           >
             <Link href={items.href}>

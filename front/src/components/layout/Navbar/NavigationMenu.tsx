@@ -5,9 +5,10 @@ import ItemsNav from "./itemsNav";
 import { routes } from "@/routes";
 import Swal from "sweetalert2";
 import {
-  navbarClientLinks,
-  navbarLinks,
-  navbarProLinks,
+  navbarClient,
+  navbarPro,
+  navbarAdmin,
+  navbarUnknown,
 } from "@/constants/navbar";
 import {  roleGlobal } from "@/helpers/estatus";
 import { useAuth } from "@/context/authcontext";
@@ -38,11 +39,13 @@ export const NavMenu: FC = () => {
   const links = () => {
     switch (roles) {
       case Role.PROFESSIONAL:
-        return navbarProLinks;
+        return navbarPro;
       case Role.CLIENTE:
-        return navbarClientLinks;
+        return navbarClient;
+      case Role.ADMIN:
+        return navbarAdmin;
       default:
-        return navbarLinks;
+        return navbarUnknown;
     }
   };
   console.log("return de auth user", user);
