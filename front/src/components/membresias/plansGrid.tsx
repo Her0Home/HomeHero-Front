@@ -30,8 +30,8 @@ export default function PlansGrid() {
       if (res.data?.url) {
         window.location.href = res.data.url; // redirige al link de Stripe
       } else {
-        console.log("res de link",res.data);
-        console.error("No se obtuvo el link de Stripe", res.errors);
+        console.log("res de link",res.data?.url);
+        console.error("No se obtuvo el link de Stripe","Error", res.errors,"Mensage", res.message);
       }
     } catch (err) {
       console.error("Error al crear sesión de Stripe", err);

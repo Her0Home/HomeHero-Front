@@ -1,4 +1,5 @@
-import { Card, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getAgeFromBirthdate } from "@/helpers/edad";
 import { IUser } from "@/types/users";
@@ -42,17 +43,48 @@ const InfoGen: FunctionComponent<InfoGenProps> = ({ user }) => {
             <Separator orientation="horizontal" className="bg-gray-300" />
 
             <div className="flex flex-row gap-14">
-              <p className="font-Title">Edad:{" "}</p>
+              <p className="font-Title">Edad: </p>
               <p>
                 {user?.birthdate
                   ? `${getAgeFromBirthdate(user.birthdate)} años`
                   : "No disponible"}{" "}
-              
               </p>
             </div>
             <Separator orientation="horizontal" className="bg-gray-300" />
           </div>
         </CardHeader>
+        <CardContent className="mt-2">
+          <div>
+            <Card className="flex  max-w-sm mx-auto bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
+              <CardHeader className="p-4 flex">
+                <h2 className="text-lg font-semibold text-gray-800">
+                  Membresía:{" "}
+                  <br/>
+                  <span className="text-hero-orange">
+                     Sin membresía
+                  </span>
+                </h2>
+                <p className="mt-2 text-lg font-Text font-semibold ">
+                  Estado:{" "} 
+                  {user?.membership ? (
+                    <span className="text-green-600 font-medium">Activa</span>
+                  ) : (
+                    <span className="text-red-600 font-medium">Inactiva</span>
+                  )}
+                </p>
+              </CardHeader>
+              <CardFooter className="p-4 flex justify-end">
+              <Button
+                    // onClick={handleCancelSubscription}
+                    variant={"destructive"}
+
+                  >
+                    Cancelar Suscripción
+                  </Button>
+              </CardFooter>
+            </Card>
+          </div>
+        </CardContent>
       </Card>
     </div>
   );

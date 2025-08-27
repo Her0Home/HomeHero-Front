@@ -11,7 +11,7 @@ export const membresias = [
     icon: <Shield className="w-8 h-8" />,
     color: "from-gray-500 to-gray-600",
     popular: false,
-    active: false,
+    active: true,
     features: [
       { name: "Hasta 5 días en destacados por mes", included: true },
       { name: "Gestión automatizada de agenda", included: true },
@@ -52,7 +52,7 @@ export const membresias = [
     icon: <Crown className="w-8 h-8" />,
     color: "from-blue-500 to-purple-600",
     popular: false,
-    active: false, // 👈 ejemplo de inactivo
+    active: true, // 👈 ejemplo de inactivo
     features: [
       { name: "Todo lo del Plan Trimestral", included: true },
       { name: "Hasta 15 días en destacados por mes", included: true },

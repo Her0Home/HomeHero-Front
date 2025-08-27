@@ -21,8 +21,8 @@ export const PostLinkStripe = async (Id: string, priceId: string, token:string):
       {
         userId: Id,
         priceId: priceId,
-        successUrl: "http://localhost:3000/dashboard",
-        cancelUrl: "http://localhost:3000/membresias",
+      successUrl: "https://home-hero-front-3ds3.vercel.app/dashboard",
+      cancelUrl: "https://home-hero-front-3ds3.vercel.app/membresias",
       },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -47,12 +47,12 @@ export const PostLinkStripe = async (Id: string, priceId: string, token:string):
     if (e instanceof Error) {
       console.warn("Error creating Stripe link:", e.message);
       return {
-        message: "Error al generar el link de Stripe",
+        message: `Error al generar el link de Stripe    este es el ID:${Id}      Este es el token: ${token}    id de Precio ${priceId}   `,
         errors: e.message,
       };
     }
     return {
-      message: "Error desconocido al generar el link de Stripe",
+      message: `Error desconocido al generar el link de Stripe  `,
       errors: e,
     };
   }

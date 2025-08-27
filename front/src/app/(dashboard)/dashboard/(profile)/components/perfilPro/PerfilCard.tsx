@@ -1,4 +1,9 @@
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { IUser } from "@/types/users";
 import Image from "next/image";
 import { FunctionComponent } from "react";
@@ -38,6 +43,16 @@ const PerfilCard: FunctionComponent<PerfilCardProps> = ({ user }) => {
           <p className="text-4xl logo font-Title">{user?.name}</p>
           <p className="text-lg text-gray-400">{user?.email}</p>
         </CardContent>
+        <CardFooter className="-mt-5">
+          <Card className="max-w-sm mx-auto bg-white shadow-lg rounded-lg p-4 border border-gray-200">
+              <h2 className="text-lg font-semibold font-Text text-gray-800">
+                Cuenta:{" "}
+                {user?.isActive 
+                  ? <span className="text-green-400">Activa</span>
+                  : <span className="text-red-500">Temporalmente Desactivada</span>}
+              </h2>
+          </Card>
+        </CardFooter>
       </Card>
     </div>
   );
