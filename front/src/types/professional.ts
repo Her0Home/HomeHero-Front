@@ -12,7 +12,7 @@ export interface IProfessionalRating {
 
   avaregeRating: string;
   
-  categories: ICategoryPro;
+  category: ICategoryPro;
 
   totalAppointments: number;
 
@@ -40,7 +40,7 @@ avaregeRating: string;
 
   isMembresyActive: boolean;
 
-  categories: ICategoryPro[];
+  category: ICategoryPro;
 
   subcategories: ISubcategorypro[];
 

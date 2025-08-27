@@ -58,7 +58,15 @@ export const SectionProfesional = () => {
                   <div className="flex flex-wrap justify-center gap-2 my-2">
   
 
-    <span className="font-semibold text-gray-900">{professional.categories.name}</span>
+    
+ {professional.category?.name && (
+  <span className="font-semibold font-Title text-hero-orange">
+    {professional.category.name}
+  </span>
+)}
+
+
+
    
 
 

@@ -51,7 +51,7 @@ export const getAvailability = async (professionalId: string, date: string, toke
 
 
 export const createAppointment = async (data: AppointmentPayload, token: string) => {
-const res = await axiosApiBack.post("/appointments", data, {
+const res = await axiosApiBack.post("/appointment", data, {
       headers: { Authorization: `Bearer ${token}` },
     })
 

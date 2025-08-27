@@ -159,6 +159,7 @@ console.log(token)
       {/* Botón de confirmar */}
       <div className="flex space-x-3">
         <Button
+          type="button"
           onClick={handleSubmit}
           className="flex-1 text-white bg-orange-500 hover:bg-orange-600"
           disabled={!bookingDetails.service || !bookingDetails.description || !bookingDetails.address}

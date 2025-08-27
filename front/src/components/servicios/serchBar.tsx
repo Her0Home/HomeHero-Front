@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
+import { useCategoryOptions } from "@/hooks/topProfesionals"
 
 interface SearchFilters {
   query: string
@@ -24,6 +25,9 @@ interface SearchBarProps {
   showFilters?: boolean
   initialQuery?: string
 }
+
+// const categoryOptions = useCategoryOptions(allCategories)
+
 
 export function SearchBar({ onSearch, showFilters = false, initialQuery = "" }: SearchBarProps) {
   const router = useRouter()
