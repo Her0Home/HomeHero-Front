@@ -119,7 +119,7 @@ console.log(token)
         <div>
           <label className="block mb-2 text-sm font-medium">Tipo de servicio</label>
           <select
-            className="w-full p-2 border rounded-md"
+            className="w-full bg p-2 border rounded-md"
             value={bookingDetails.service}
             onChange={(e) => onChangeDetails({ ...bookingDetails, service: e.target.value })}
           >

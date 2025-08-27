@@ -8,7 +8,7 @@ import { IMembership } from "./membership";
 import { ISubCategory } from "./subCategory";
 
 export interface IUser {
-  id: string;
+  id : string
 
   auth0Id?: string;
 
@@ -36,23 +36,23 @@ export interface IUser {
 
   role: Role;
 
-  clientAppointments: IAppointment[];
+  clientAppointments?: IAppointment[];
 
-  professionalAppointments: IAppointment[];
+  professionalAppointments?: IAppointment[];
 
-  membership: IMembership;
+  membership?: IMembership;
 
   categories: ICategory;
 
   subcategories?: ISubCategory[];
 
-  addres: IAddres[]
+  addres?: IAddres[]
 
-  image: IImage[];
+  image?: IImage[];
 
-  clientChats: IChat[];
+  clientChats?: IChat[];
 
-  profesionalChats: IChat[];
+  profesionalChats?: IChat[];
 }
 
 export interface IUserResponse {
@@ -67,6 +67,8 @@ export interface IUserResponse {
   role: Role;
 
 }
+
+
 
 export interface LoginUserDTO {
   email: string;
