@@ -12,9 +12,9 @@ import { Params } from "@/types";
 export default async function ProfessionalProfilePage({
   params,
 }: {
-  readonly params: Params <{ slug: string[] }>;
+  params: Params <{ slug: string[] }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const id = slug[0];
 
   const professional: IProfessionalSearch | null = await getProfessionalById(
