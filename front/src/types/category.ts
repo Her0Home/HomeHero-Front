@@ -1,4 +1,4 @@
-import { ISubCategory } from "./subCategory";
+import { ISubCategory, ISubcategorypro } from "./subCategory";
 import { IUser } from "./users";
 
 export interface ICategory {
@@ -13,4 +13,11 @@ export interface ICategory {
   subcategories: ISubCategory[];
 
   professional: IUser[];
+}
+
+
+export interface ICategoryPro {
+  id: string
+  name: string
+  subcategories: ISubcategorypro[]
 }
