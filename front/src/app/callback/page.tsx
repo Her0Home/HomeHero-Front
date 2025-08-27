@@ -6,9 +6,8 @@ import { useAuth } from "@/context/authcontext";
 import { routes } from "@/routes";
 import Swal from "sweetalert2";
 import NameLogo from "@/components/Logo/logo";
-import {
-  RotateCw,
-} from "lucide-react";
+import { RotateCw } from "lucide-react";
+import { Role } from "@/types";
 
 export default function AuthCallbackPage() {
   const { saveUserData } = useAuth();
@@ -17,30 +16,37 @@ export default function AuthCallbackPage() {
   useEffect(() => {
     const fetchProfileAndSetToken = async () => {
       try {
-        const response = await fetch('https://homehero-back.onrender.com/auth0/profile', {
-          credentials: 'include',
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth0/profile`,
+          {
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) {
-          router.push(routes.login);
-          
           Swal.fire({
             icon: "error",
-            title: "Error a el verificar la sesión",
-            text: "Hubo un problema al iniciar tu sesión. Por favor, inténtalo de nuevo."
+            title: "Error al verificar la sesión",
+            text: "Hubo un problema al iniciar tu sesión. Por favor, inténtalo de nuevo.",
+          });
+          return router.push(routes.login);
+        }
 
-          })
-          throw new Error('No se pudo verificar la sesión');
-          
-        } 
-        
         const data = await response.json();
 
         saveUserData(data);
 
-        router.push(routes.dashboard);
-
-        await Swal.fire({
+        const redirectByRole = async (role: Role) => {
+          if (role === Role.ADMIN) {
+            return routes.reportes;
+          }
+          
+          return routes.dashboard;
+        };
+        
+        router.push(await redirectByRole(data.user.role));
+        
+          Swal.fire({
           toast: true,
           position: "top-end",
           icon: "success",
@@ -49,8 +55,8 @@ export default function AuthCallbackPage() {
           timer: 3000,
           timerProgressBar: true,
         });
-
-
+        
+        
       } catch (error) {
         console.error("Error en el callback de autenticación:", error);
         Swal.fire({
@@ -62,10 +68,8 @@ export default function AuthCallbackPage() {
         router.push(routes.login);
       }
     };
-
     fetchProfileAndSetToken();
-
-  }, [saveUserData, router]);
+  }, []);
 
   return (
     <div className="flex  flex-col h-screen w-full items-center justify-center bg-hero-">

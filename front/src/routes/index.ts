@@ -22,7 +22,7 @@ export const routes = {
   comentarios : "/dashboard/comentarios",
   edit_perfil: "/dashboard/editar-perfil",
   historial_pagos: "/dashboard/historial-pagos",
-  membership: "/dashboard/membership",
+  membership: "/membresias",
   soporte: "/dashboard/soporte",
   
   //AUTHENTICATION

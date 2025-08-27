@@ -16,6 +16,7 @@ type AuthContextType = {
   token: string | null;
   saveUserData: (data: any) => void;
   resetuserData: () => void;
+  updateUser :(user: IUserResponse) => void;
 };
 
 const AUTH_KEY = "authData";
@@ -37,12 +38,23 @@ export const AuthProvider = ({
     setIsAuth(true);
     localStorage.setItem(AUTH_KEY, JSON.stringify(data));
   };
-
+  const updateUser = (user:IUserResponse) => {
+    setUser(user);
+    setIsAuth(true);
+    
+    // actualizas el localStorage manteniendo token
+    const stored = localStorage.getItem(AUTH_KEY);
+    if (stored) {
+      const prevData = JSON.parse(stored);
+      localStorage.setItem(AUTH_KEY, JSON.stringify({ ...prevData, user }));
+    }
+  };
   const resetuserData = () => {
     setUser(null);
     setToken(null);
     setIsAuth(false);
     localStorage.removeItem(AUTH_KEY);
+
   };
   useEffect(() => {
     const storage = localStorage.getItem(AUTH_KEY);
@@ -70,7 +82,7 @@ export const AuthProvider = ({
   }, []); 
   return (
     <AuthContext.Provider
-      value={{ isAuth, user, token, saveUserData, resetuserData }}
+      value={{ isAuth, user, token, saveUserData, updateUser, resetuserData}}
     >
       {children}
     </AuthContext.Provider>

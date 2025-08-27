@@ -1,20 +1,25 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Star, MapPin, Clock, Calendar, Wrench } from "lucide-react"
-import Image from "next/image"
-import { BookingModal } from "@/components/bookingModal"
-import { ProfessionalReviews } from "@/components/ui/profesionalReview"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Star, MapPin, Clock, Calendar, Wrench } from "lucide-react";
+import Image from "next/image";
+import { BookingModal } from "@/components/bookingModal";
+import { ProfessionalReviews } from "@/components/ui/profesionalReview";
 
-import { IProfessionalSearch } from "@/types/professional"
-import { getProfessionalById } from "@/services/profesionals"
+import { IProfessionalSearch } from "@/types/professional";
+import { getProfessionalById } from "@/services/profesionals";
+import { Params } from "@/types";
 
-type Props = {
-  params: { slug: string[] }
-}
+export default async function ProfessionalProfilePage({
+  params,
+}: {
+  params: Params <{ slug: string[] }>;
+}) {
+  const { slug } = await params;
+  const id = slug[0];
 
-export default async function ProfessionalProfilePage({ params }: Props) {
-  const id = params.slug[0]
-  const professional: IProfessionalSearch | null = await getProfessionalById(id)
+  const professional: IProfessionalSearch | null = await getProfessionalById(
+    id
+  );
 
   if (!professional) {
     return (
@@ -23,7 +28,7 @@ export default async function ProfessionalProfilePage({ params }: Props) {
           No se encontró el perfil del profesional
         </h2>
       </div>
-    )
+    );
   }
 
   return (
@@ -69,7 +74,8 @@ export default async function ProfessionalProfilePage({ params }: Props) {
                             <Star
                               key={i}
                               className={`w-6 h-6 ${
-                                i < Math.floor(Number(professional.avaregeRating))
+                                i <
+                                Math.floor(Number(professional.avaregeRating))
                                   ? "text-yellow-500 fill-current"
                                   : "text-gray-300"
                               }`}
@@ -91,43 +97,45 @@ export default async function ProfessionalProfilePage({ params }: Props) {
                     </p>
 
                     {/* Categoría y Subcategorías */}
-{professional.category?.name && (
-  <div className="mt-6 space-y-4">
-    <h4 className="text-lg font-semibold text-hero-orange font-Title">
-      Especialidades
-    </h4>
+                    {professional.category?.name && (
+                      <div className="mt-6 space-y-4">
+                        <h4 className="text-lg font-semibold text-hero-orange font-Title">
+                          Especialidades
+                        </h4>
 
-    <div className="space-y-2">
-      <span className="font-medium text-gray-700 font-Text">
-        {professional.category.name}
-      </span>
+                        <div className="space-y-2">
+                          <span className="font-medium text-gray-700 font-Text">
+                            {professional.category.name}
+                          </span>
 
-      {professional.subcategories?.length > 0 && (
-        <div className="flex flex-wrap gap-2 mt-2">
-          {professional.subcategories
-            .filter((sub) => sub && typeof sub.name === 'string')
-            .map((sub) => (
-              <div
-                key={sub.id}
-                className="flex items-center px-3 py-1 text-sm text-gray-800 bg-gray-100 rounded-full font-Text"
-              >
-                {sub.image && (
-                  <Image
-                    src={sub.image}
-                    alt={sub.name}
-                    width={20}
-                    height={20}
-                    className="object-cover mr-2 rounded-full"
-                  />
-                )}
-                {sub.name}
-              </div>
-            ))}
-        </div>
-      )}
-    </div>
-  </div>
-)}
+                          {professional.subcategories?.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mt-2">
+                              {professional.subcategories
+                                .filter(
+                                  (sub) => sub && typeof sub.name === "string"
+                                )
+                                .map((sub) => (
+                                  <div
+                                    key={sub.id}
+                                    className="flex items-center px-3 py-1 text-sm text-gray-800 bg-gray-100 rounded-full font-Text"
+                                  >
+                                    {sub.image && (
+                                      <Image
+                                        src={sub.image}
+                                        alt={sub.name}
+                                        width={20}
+                                        height={20}
+                                        className="object-cover mr-2 rounded-full"
+                                      />
+                                    )}
+                                    {sub.name}
+                                  </div>
+                                ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Categorías y Subcategorías */}
                     {/* {professional.categories?.length > 0 && (
@@ -194,6 +202,5 @@ export default async function ProfessionalProfilePage({ params }: Props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

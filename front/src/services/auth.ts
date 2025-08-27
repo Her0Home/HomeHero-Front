@@ -21,7 +21,7 @@ export const postRegister = async (data: RegisterUserDTO) => {
       console.warn("Error registering user:", error?.message);
       return {
         message: "Error al registrar el usuario",
-        errors: (error as Error).message || "Error desconocido",
+        errors: (error).message || "Error desconocido",
       };
     }
   }
@@ -38,9 +38,7 @@ export const postLogin = async (
         message: "No se pudo iniciar sesión",
         errors: res.data,
       };
-    }
-    console.log("response post login", res.data);
-    
+    }    
     return {
       message: "Usuario inició sesión correctamente", 
       data: res.data 
@@ -52,8 +50,9 @@ export const postLogin = async (
       console.warn("Error logging in user:", e?.message);
       return {
         message: "Error al iniciar sesión",
-        errors: (e as Error).message || "Error desconocido",
+        errors: (e ).message || "Error desconocido",
       };
     }
   }
 };
+

@@ -10,14 +10,11 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Role } from "@/types";
-import {
-  sidebarAdminLinks2,
-  sidebarClientLinks2,
-  sidebarLinks,
-
-  sidebarProLinks2,
-} from "@/constants/sidebar";
+import { sidebarAdminSub, sidebarProSub } from "@/constants/sidebar";
 import Link from "next/link";
+import { itemsNavs } from "@/constants";
+import cs from "classnames";
+import { usePathname } from "next/navigation";
 
 export function NavSecondary({
   role,
@@ -25,19 +22,18 @@ export function NavSecondary({
 }: {
   role: Role;
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
-  
   const roles = role;
+
+  const pathname = usePathname();
 
   const navLinks = () => {
     switch (roles) {
       case Role.PROFESSIONAL:
-        return sidebarProLinks2;
+        return sidebarProSub;
       case Role.ADMIN:
-        return sidebarAdminLinks2;
-      case Role.CLIENTE:
-        return sidebarClientLinks2;
+        return sidebarAdminSub;
       default:
-        return sidebarLinks;
+        return itemsNavs.editarPerfil ? [itemsNavs.editarPerfil] : [];
     }
   };
   return (
@@ -46,7 +42,13 @@ export function NavSecondary({
         <SidebarMenu>
           {navLinks().map((item) => (
             <SidebarMenuItem key={item.label}>
-              <SidebarMenuButton className="font-Text" tooltip={item.label}>
+              <SidebarMenuButton
+                className={cs(
+                  "font-Text",
+                  pathname === item.href && "outline-hero-purple"
+                )}
+                tooltip={item.label}
+              >
                 <Link href={item.href}>
                   <div className="flex flex-row items-center gap-2">
                     {item.icon && <item.icon className="mr-2 h-4 w-4" />}
