@@ -3,10 +3,12 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Star, MapPin, Clock, Phone, Award } from "lucide-react"
+import { Star, MapPin, Award } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { BookingModal } from "../bookingModal"
+
+import { routes } from "@/routes"
+import { generateUrl } from "@/utils/gerateURL"
 
 
 interface Professional {
@@ -19,7 +21,7 @@ interface Professional {
   image: string
   hourlyRate: number
   location: string
-  experience: string
+  totalAppointments: number
   description: string
   services: string[]
   availability: string[]
@@ -52,7 +54,7 @@ const allProfessionals: Professional[] = [
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/electricistaProfile.jpg?updatedAt=1754778578455",
     hourlyRate: 45,
     location: "belgrano",
-    experience: "8 años",
+    totalAppointments: 8,
     description:
       "Electricista certificado con más de 8 años de experiencia en instalaciones residenciales y comerciales.",
     services: [
@@ -77,7 +79,7 @@ const allProfessionals: Professional[] = [
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/paseador-perros.jpg?updatedAt=1754756810322",
     hourlyRate: 25,
     location: "belgrano",
-    experience: "5 años",
+    totalAppointments: 5,
     description: "Cuidadora profesional de mascotas con certificación en primeros auxilios veterinarios.",
     services: ["Paseo de perros", "Cuidado en casa", "Alimentación de mascotas", "Administración de medicamentos"],
     availability: ["today", "weekend"],
@@ -96,7 +98,7 @@ const allProfessionals: Professional[] = [
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/jardineria.jpg?updatedAt=1754756810383",
     hourlyRate: 30,
     location: "belgrano",
-    experience: "6 años",
+    totalAppointments: 6,
     description: "Especialista en servicios de limpieza residencial y comercial con productos ecológicos.",
     services: ["Limpieza general", "Limpieza profunda", "Organización del hogar", "Limpieza post-construcción"],
     availability: ["today"],
@@ -115,7 +117,7 @@ const allProfessionals: Professional[] = [
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/plomeroPerfil.jpg?updatedAt=1754778343505",
     hourlyRate: 40,
     location: "caballito",
-    experience: "10 años",
+    totalAppointments: 10,
     description:
       "Plomero con amplia experiencia en reparaciones, instalaciones y mantenimiento de sistemas hidráulicos.",
     services: ["Reparación de tuberías", "Instalación de sanitarios", "Destapado de drenajes", "Calentadores de agua"],
@@ -135,7 +137,7 @@ const allProfessionals: Professional[] = [
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/aseoProfile.jpg?updatedAt=1754778577652",
     hourlyRate: 35,
     location: "recoleta",
-    experience: "7 años",
+    totalAppointments: 7,
     description: "Carpintera especializada en muebles a medida, reparaciones y proyectos de carpintería fina.",
     services: ["Muebles a medida", "Reparación de muebles", "Instalación de puertas", "Trabajos de ebanistería"],
     availability: ["today", "weekend"],
@@ -154,7 +156,7 @@ const allProfessionals: Professional[] = [
     image: "https://ik.imagekit.io/ankxi835d/Home%20Hero/pintura.jpg?updatedAt=1754756810337",
     hourlyRate: 28,
     location: "villa-urquiza",
-    experience: "9 años",
+    totalAppointments: 9,
     description: "Pintor profesional especializado en interiores, exteriores y técnicas decorativas.",
     services: ["Pintura de interiores", "Pintura de exteriores", "Técnicas decorativas", "Preparación de superficies"],
     availability: ["today", "weekend"],
@@ -273,7 +275,7 @@ export function SearchResults({ searchParams }: SearchResultsProps) {
             </div>
             <div className="flex items-center gap-1">
               <Award className="w-4 h-4" />
-              <span>{professional.experience} de experiencia</span>
+              <span>Trabajos terminados: {professional.totalAppointments} con Excelente Calificación</span>
             </div>
           </div>
           <p className="text-gray-700 line-clamp-4 sm:line-clamp-none">{professional.description}</p>
@@ -308,15 +310,9 @@ export function SearchResults({ searchParams }: SearchResultsProps) {
             <span className="font-bold">{professional.rating}</span>
           </div>
 
-          {/* Botones */}
+          {/* Boton */}
           <div className="flex flex-col w-full gap-3">
-            <BookingModal professional={professional}>
-              <Button className="w-full text-white bg-orange-500 hover:bg-orange-600">
-                <Clock className="w-4 h-4 mr-2" />
-                Reservar Cita
-              </Button>
-            </BookingModal>
-            <Link href={`/profesional/${professional.id}`}>
+            <Link href={generateUrl(professional.id, routes.pro_detail, professional.name)}>
               <Button
                 variant="outline"
                 className="w-full text-blue-600 bg-transparent border-blue-500 hover:bg-blue-50"
@@ -324,10 +320,6 @@ export function SearchResults({ searchParams }: SearchResultsProps) {
                 Ver Perfil Completo
               </Button>
             </Link>
-            <Button variant="ghost" className="w-full">
-              <Phone className="w-4 h-4 mr-2" />
-              Contactar
-            </Button>
           </div>
         </div>
       </div>

@@ -42,7 +42,7 @@ export interface IUser {
 
   membership: IMembership;
 
-  categories: ICategory[];
+  categories: ICategory;
 
   subcategories?: ISubCategory[];
 

@@ -1,28 +1,28 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Clock, CalendarIcon, User, MapPin } from "lucide-react"
-import { format, addHours } from "date-fns"
-import { es } from "date-fns/locale"
+import { Card, CardContent} from "@/components/ui/card"
+import { format } from "date-fns"
 import Image from "next/image"
+import { getAvailability } from "@/services/appointments"
+import { useAuth } from "@/context/authcontext"
+import { StepDate } from "./modalApointments/stepDate"
+import TimeStep from "./modalApointments/stepTime"
+import ConfirmStep from "./modalApointments/stepConfirm"
+
+
 
 interface Professional {
   id: string
   name: string
-  profession: string
-  rating: number
-  image: string
-  hourlyRate: number
+  description: string
+  imageProfile: string
 }
 
 interface BookingModalProps {
+  professionalId: string
   professional: Professional
   children: React.ReactNode
 }
@@ -43,37 +43,40 @@ export function BookingModal({ professional, children }: BookingModalProps) {
     description: "",
     address: "",
   })
+  const { token } = useAuth();
 
   // Generar franjas horarias de 4 horas para el día seleccionado
-  const generateTimeSlots = (date: Date): TimeSlot[] => {
-    const slots: TimeSlot[] = []
-    const startHour = 8 // 8:00 AM
-    const endHour = 20 // 8:00 PM
+  
+const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([])
+const [loadingSlots, setLoadingSlots] = useState(false)
 
-    for (let hour = startHour; hour < endHour; hour += 4) {
-      const startTime = new Date(date)
-      startTime.setHours(hour, 0, 0, 0)
-      const endTime = addHours(startTime, 4)
 
-      slots.push({
-        id: `slot-${hour}`,
-        startTime,
-        endTime,
-        available: Math.random() > 0.3, // Simulamos disponibilidad
-      })
-    }
+  // const timeSlots = selectedDate ? generateTimeSlots(selectedDate) : []
 
-    return slots
+  const handleDateSelect = async (date: Date | undefined) => {
+  setSelectedDate(date)
+  setSelectedTimeSlot(undefined)
+  setStep("time")
+
+  if (!date) return
+
+  setLoadingSlots(true)
+  if(!token) return
+  try {
+    const formattedDate = format(date, "yyyy-MM-dd")
+    console.log(professional.id)
+    console.log("Fecha formateada:", formattedDate) // Asegurate del formato que espera el backend
+    const slots = await getAvailability(professional.id, formattedDate, token)
+    setTimeSlots(slots)
+  } catch (error) {
+    console.error("Error al obtener disponibilidad:", error)
+    setTimeSlots([])
+  } finally {
+    setLoadingSlots(false)
   }
+}
 
-  const timeSlots = selectedDate ? generateTimeSlots(selectedDate) : []
 
-  const handleDateSelect = (date: Date | undefined) => {
-    setSelectedDate(date)
-    if (date) {
-      setStep("time")
-    }
-  }
 
   const handleTimeSlotSelect = (slot: TimeSlot) => {
     setSelectedTimeSlot(slot)
@@ -89,24 +92,6 @@ export function BookingModal({ professional, children }: BookingModalProps) {
       details: bookingDetails,
     })
 
-    // Simular guardado de reserva
-    const newBooking = {
-      id: `booking_${Date.now()}`,
-      professionalId: professional.id,
-      professionalName: professional.name,
-      service: bookingDetails.service,
-      description: bookingDetails.description,
-      address: bookingDetails.address,
-      date: selectedDate,
-      timeSlot: selectedTimeSlot,
-      status: "pending",
-      createdAt: new Date().toISOString(),
-    }
-
-    // Guardar en localStorage para persistencia
-    const existingBookings = JSON.parse(localStorage.getItem("clientBookings") || "[]")
-    existingBookings.push(newBooking)
-    localStorage.setItem("clientBookings", JSON.stringify(existingBookings))
 
     alert(
       "¡Solicitud de reserva enviada! El profesional confirmará el horario específico dentro de tu franja seleccionada.",
@@ -127,7 +112,7 @@ export function BookingModal({ professional, children }: BookingModalProps) {
             <CardContent className="flex items-center p-4 space-x-4">
               <div className="relative w-16 h-16">
               <Image
-                src={professional.image || "/placeholder.svg"}
+                src={professional.imageProfile || "/placeholder.svg"}
                 alt={professional.name}
                 fill
                 className="object-cover rounded-full"
@@ -135,165 +120,40 @@ export function BookingModal({ professional, children }: BookingModalProps) {
               </div>
               <div className="flex-1">
                 <h3 className="font-bold font-Title">{professional.name}</h3>
-                <p className="text-hero-orange font-Text">{professional.profession}</p>
+                <p className="text-hero-orange font-Text">{professional.description}</p>
               </div>
             </CardContent>
           </Card>
 
           {/* Paso 1: Seleccionar fecha */}
           {step === "date" && (
-            <div className="space-y-4">
-              <h3 className="text-lg font-Title">Selecciona una fecha</h3>
-              <div className="flex justify-center font-Text">
-                <Calendar
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={handleDateSelect}
-                  disabled={(date) => date < new Date() || date.getDay() === 0} // No domingos ni fechas pasadas
-                  locale={es}
-                  className="border rounded-md"
-                />
-              </div>
-            </div>
+           <StepDate
+             selectedDate={selectedDate}
+             handleDateSelect={handleDateSelect}
+           />
           )}
 
           {/* Paso 2: Seleccionar franja horaria */}
           {step === "time" && selectedDate && (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-Title">
-                  Franjas disponibles para {format(selectedDate, "dd/MM/yyyy", { locale: es })}
-                </h3>
-                <Button variant="outlineGradient" onClick={() => setStep("date")}>
-                  Cambiar fecha
-                </Button>
-              </div>
-
-              <div className="grid gap-3">
-                {timeSlots.map((slot) => (
-                  <Card
-                    key={slot.id}
-                    className={`cursor-pointer transition-all ${
-                      slot.available ? "hover:border-orange-500 hover:shadow-md" : "opacity-50 cursor-not-allowed"
-                    }`}
-                    onClick={() => slot.available && handleTimeSlotSelect(slot)}
-                  >
-                    <CardContent className="flex items-center justify-between p-4">
-                      <div className="flex items-center space-x-3">
-                        <Clock className="w-5 h-5 text-orange-500" />
-                        <div>
-                          <p className="font-semibold">
-                            {format(slot.startTime, "HH:mm")} - {format(slot.endTime, "HH:mm")}
-                          </p>
-                          <p className="text-sm text-hero-orange font-Text">Franja de 4 horas</p>
-                        </div>
-                      </div>
-                      <Badge variant={slot.available ? "default" : "secondary"}>
-                        {slot.available ? "Disponible" : "Ocupado"}
-                      </Badge>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              <div className="p-4 rounded-lg bg-blue-50">
-                <p className="text-sm text-blue-800 font-Text">
-                  <strong>Nota:</strong> Selecciona una franja de 4 horas. El profesional te confirmará el horario
-                  específico dentro de esta franja en las próximas horas.
-                </p>
-              </div>
-            </div>
+            <TimeStep
+              selectedDate={selectedDate}
+              timeSlots={timeSlots}
+              onBack={() => setStep("date")}
+              onSelect={handleTimeSlotSelect}
+            />
           )}
 
           {/* Paso 3: Confirmar reserva */}
           {step === "confirm" && selectedDate && selectedTimeSlot && (
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-zen-dots">Confirmar reserva</h3>
-                <Button variant="outline" onClick={() => setStep("time")}>
-                  Cambiar horario
-                </Button>
-              </div>
-
-              {/* Resumen de la reserva */}
-              <Card className="border-orange-200 bg-orange-50">
-                <CardHeader>
-                  <CardTitle className="text-lg text-orange-800 font-zen-dots">Resumen de tu reserva</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <User className="w-4 h-4 text-orange-600" />
-                    <span>
-                      {professional.name} - {professional.profession}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <CalendarIcon className="w-4 h-4 text-orange-600" />
-                    <span>{format(selectedDate, "EEEE, dd/MM/yyyy", { locale: es })}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Clock className="w-4 h-4 text-orange-600" />
-                    <span>
-                      {format(selectedTimeSlot.startTime, "HH:mm")} - {format(selectedTimeSlot.endTime, "HH:mm")}
-                      <span className="ml-2 text-sm text-gray-600">(Franja de 4 horas)</span>
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Detalles del servicio */}
-              <div className="space-y-4">
-                <div>
-                  <label className="block mb-2 text-sm font-medium">Tipo de servicio</label>
-                  <select
-                    className="w-full p-2 border rounded-md"
-                    value={bookingDetails.service}
-                    onChange={(e) => setBookingDetails({ ...bookingDetails, service: e.target.value })}
-                  >
-                    <option value="">Selecciona un servicio</option>
-                    <option value="reparacion">Reparación</option>
-                    <option value="mantenimiento">Mantenimiento</option>
-                    <option value="instalacion">Instalación</option>
-                    <option value="limpieza">Limpieza</option>
-                    <option value="paseo">Paseo de mascotas</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block mb-2 text-sm font-medium">Descripción del trabajo</label>
-                  <textarea
-                    className="w-full h-24 p-2 border rounded-md"
-                    placeholder="Describe detalladamente qué necesitas..."
-                    value={bookingDetails.description}
-                    onChange={(e) => setBookingDetails({ ...bookingDetails, description: e.target.value })}
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-2 text-sm font-medium">Dirección</label>
-                  <div className="flex items-center space-x-2">
-                    <MapPin className="w-4 h-4 text-gray-400" />
-                    <input
-                      type="text"
-                      className="flex-1 p-2 border rounded-md"
-                      placeholder="Ingresa tu dirección completa"
-                      value={bookingDetails.address}
-                      onChange={(e) => setBookingDetails({ ...bookingDetails, address: e.target.value })}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex space-x-3">
-                <Button
-                  onClick={handleBookingSubmit}
-                  className="flex-1 text-white bg-orange-500 hover:bg-orange-600"
-                  disabled={!bookingDetails.service || !bookingDetails.description || !bookingDetails.address}
-                >
-                  Confirmar Reserva
-                </Button>
-              </div>
-            </div>
+            <ConfirmStep
+              professional={professional}
+              selectedDate={selectedDate}
+              selectedTimeSlot={selectedTimeSlot}
+              bookingDetails={bookingDetails}
+              onChangeDetails={setBookingDetails}
+              onBack={() => setStep("time")}
+              onSubmit={handleBookingSubmit}
+            />
           )}
         </div>
       </DialogContent>

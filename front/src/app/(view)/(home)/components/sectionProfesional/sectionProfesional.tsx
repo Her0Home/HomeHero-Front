@@ -1,23 +1,22 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { IProfessionalRating } from "@/types/users"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { generateUrl } from "@/utils/gerateURL"
 import { routes } from "@/routes"
-import { getPro } from "@/services/profesionals"
+import { getProDest } from "@/services/profesionals"
+import { IProfessionalRating } from "@/types/professional"
 
 export const SectionProfesional = () => {
   const [professionals, setProfessionals] = useState<IProfessionalRating[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getPro().then((data) => {
+    getProDest().then((data) => {
       if (data) setProfessionals(data)
       setLoading(false)
     })
@@ -56,19 +55,31 @@ export const SectionProfesional = () => {
                     )}
                   </div>
                   <h3 className="mb-1 text-lg font-bold font-Title">{professional.name}</h3>
+                  <div className="flex flex-wrap justify-center gap-2 my-2">
+  
+
+    <span className="font-semibold text-gray-900">{professional.categories.name}</span>
+   
+
+
+</div>
+
                   <span className="text-gray-500">({professional.description})</span>
                   <div className="flex items-center justify-center mb-2 space-x-1">
                     <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                    <span className="font-semibold">{professional.averageRating}</span>
+                    <span className="font-semibold">{professional.avaregeRating}</span>
                   </div>
                   <p className="mb-4 text-sm text-gray-600">
-                    {professional.totalAppointments} con Excelente Calificación
+                   Citas terminadas: {professional.totalAppointments} con Excelente Calificación
                   </p>
-                  <Link href={generateUrl(professional.id, routes.pro_detail, professional.name)}>
-                    <Button className="w-full text-white bg-orange-500 hover:bg-orange-600">
-                      Ver Perfil
-                    </Button>
-                  </Link>
+                  {professional.id && professional.name && (
+  <Link href={`${routes.pro_detail}/${professional.id}/${professional.name}`}>
+    <Button className="w-full text-white bg-orange-500 hover:bg-orange-600">
+      Ver Perfil
+    </Button>
+  </Link>
+)}
+
                 </CardContent>
               </Card>
             ))}
