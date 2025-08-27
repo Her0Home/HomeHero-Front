@@ -12,3 +12,9 @@ export interface ISubCategory {
 
   professionals?: IUser[];
 }
+
+export interface ISubcategorypro {
+  id: string
+  name: string
+  image: string | null
+}

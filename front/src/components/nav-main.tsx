@@ -1,40 +1,48 @@
-"use client"
+"use client";
 
-import { MailIcon } from "lucide-react"
+import { LucideCircleUserRound } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import Link from "next/link"
-import { Role } from "@/types"
-import { sidebarAdminLinks, sidebarClientLinks, sidebarProLinks } from "@/constants/sidebar"
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import { Role } from "@/types";
+import {
+  sidebarAdminMain,
+  sidebarClientMain,
+  sidebarLinks,
+  sidebarProMain,
+} from "@/constants/sidebar";
+import { routes } from "@/routes";
+import { usePathname } from "next/navigation";
+import cs from "classnames";
 
 interface NavMainProps {
-  role: Role
-  user: string
+  role: Role;
+  user: string;
 }
 
-export function NavMain({ role, user }: NavMainProps) 
+export function NavMain({ role, user }: NavMainProps) {
+  const roles = role;
 
-{
-
-  const roles = role
+  const pathname = usePathname();
 
   const navLinks = () => {
     switch (roles) {
       case Role.PROFESSIONAL:
-        return sidebarProLinks; 
-        case  Role.ADMIN:
-        return sidebarAdminLinks;
+        return sidebarProMain;
+      case Role.ADMIN:
+        return sidebarAdminMain;
+      case Role.CLIENTE:
+        return sidebarClientMain;
       default:
-        return sidebarClientLinks; // Assuming client has similar links as admin // Default to admin links if role is unknown
+        return sidebarLinks;
     }
-  }
+  };
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
@@ -42,33 +50,44 @@ export function NavMain({ role, user }: NavMainProps)
           <SidebarMenuItem className="flex items-center gap-2">
             <SidebarMenuButton
               tooltip="Quick Create"
-              className="min-w-8 bg-hero-purple text-white hover:bg-purple-300 font-Title"
+              className={cs(
+                "bg-gray-300 text-hero-black font-Title",
+                pathname === routes.dashboard &&
+                  "min-w-8 bg-hero-purple text-white hover:bg-hero-purple"
+              )}
+              asChild
             >
-              <span>{user}</span>
+              {role === Role.ADMIN ? (
+                <span className="flex flex-row gap-1 justify-center items-center text-sm">
+                  <LucideCircleUserRound />
+                  {user}
+                </span>
+              ) : (
+                <Link href={routes.dashboard}>
+                  <span className="flex flex-row gap-1 justify-center items-center text-sm">
+                    <LucideCircleUserRound />
+                    {user}
+                  </span>
+                </Link>
+              )}
             </SidebarMenuButton>
-            <Button
-              size="icon"
-              className="h-9 w-9 shrink-0 group-data-[collapsible=icon]:opacity-0"
-              variant="outline"
-            >
-              <MailIcon />
-              <span className="sr-only">Inbox</span>
-            </Button>
           </SidebarMenuItem>
-
         </SidebarMenu>
-        <SidebarMenu>
+        <SidebarMenu className=" gap-2 mt-4 ">
           {navLinks().map((item) => (
             <SidebarMenuItem key={item.label}>
-              <SidebarMenuButton className="font-Text" tooltip={item.label}>
-                <Link
-                href={item.href}
-                > 
-                <div className="flex flex-row items-center gap-2">
-                {item.icon && <item.icon className="mr-2 h-4 w-4" />}
-                <span> {item.label}</span>
-                </div>
-                
+              <SidebarMenuButton
+                className={cs(
+                  "font-Text",
+                  pathname === item.href && "outline-hero-purple"
+                )}
+                tooltip={item.label}
+              >
+                <Link href={item.href}>
+                  <div className="flex flex-row items-center gap-2">
+                    {item.icon && <item.icon className="mr-2 h-4 w-4" />}
+                    <span> {item.label}</span>
+                  </div>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -76,5 +95,5 @@ export function NavMain({ role, user }: NavMainProps)
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  )
+  );
 }

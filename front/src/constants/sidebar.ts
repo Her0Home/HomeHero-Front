@@ -1,88 +1,40 @@
-import { routes } from "@/routes";
-import { linksNav } from "@/types";
-import { LucideCircleUserRound } from "lucide-react";
+import { linkNav } from "@/types";
+import { itemsNavs } from ".";
 
 
-export const sidebarProLinks:linksNav[] = [
-
-  {
-    label: "Perfil",
-    href: routes.dashboard,
-    icon: LucideCircleUserRound
-  },
-  {
-    label: "Chats",
-    href: routes.chats,
-  },
-  {
-    label: "Comentarios",
-    href: routes.comentarios,
-  },
-  {
-    label: "Citas",
-    href: routes.citas,
-
-  },
-  
-  {
-    label: "Editar perfil",
-    href: routes.edit_perfil,
-  },
-  {
-    label: "Facturas",
-    href: routes.historial_pagos,
-  },
-  
+export const sidebarProMain:linkNav[] = [
+  itemsNavs.chats,
+  itemsNavs.comentarios,
+  itemsNavs.citas,  
+  itemsNavs.trabajo
 ]
 
-export const sidebarClientLinks:linksNav[] = [
-  {
-    label: "Perfil",
-    href: routes.dashboard,
-    icon: LucideCircleUserRound
-  },
-  {
-    label: "Servicios",
-    href: routes.servicios,
-  },
-  {
-    label: "Citas",
-    href: routes.citas,
-  },
-  {
-    label: "Chats",
-    href: routes.chats,
-  },
-  {
-    label: "Editar perfil",
-    href: routes.edit_perfil,
-  },
-
+export const sidebarProSub:linkNav[] = [
+  itemsNavs.membresia,
+  itemsNavs.editarPerfil,
+  itemsNavs.facturas 
 ]
 
-export const sidebarAdminLinks:linksNav[] = [
-  {
-    label: "Reportes",
-    href: routes.reportes,
-  },
-  {
-    label: "Facturación",
-    href: routes.facturacion,
-  },
-  {
-    label: "Chats",
-    href: routes.chats,
-  },
-  {
-    label: "Citas Managear",
-    href: routes.citas_managear,
-  },
-  {
-    label: "Clientes",
-    href: routes.clientes_managear,
-  },
-  {
-    label: "Profesionales",
-    href: routes.pro_managear,
-  },
+export const sidebarClientMain:linkNav[] = [
+  itemsNavs.servicios,
+  itemsNavs.citas,
+  itemsNavs.chats
+]
+
+export const sidebarLinks:linkNav[] = [
+  itemsNavs.servicios,
+  itemsNavs.trabajo
+]
+
+export const sidebarAdminMain:linkNav[] = [
+  itemsNavs.chats,
+  itemsNavs.citasManagear,
+  itemsNavs.clientsManagear,
+  itemsNavs.profesionalManagear
+]
+
+
+export const sidebarAdminSub:linkNav[] = [
+  itemsNavs.reportes,
+  itemsNavs.facturacion
 ]

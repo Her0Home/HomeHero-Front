@@ -1,37 +1,31 @@
-import { routes } from "@/routes";
+import { itemsNavs } from ".";
 
 
-export const navbarLinks = [
-  {
-    label: "Servicios",
-    href: routes.servicios,
-  },
-  {
-    label : "Trabaja con nosotros",
-    href: routes.infopro,
-  }
+export const navbar = [
+  itemsNavs.servicios,
+  itemsNavs.trabajo
 ]
 
-export const navbarClientLinks = [
+export const navbarUnknown = [
+  itemsNavs.servicios,
+  itemsNavs.trabajo,
+  itemsNavs.perfil
+]
+
+export const navbarClient = [
   
-  {
-    label: "Servicios",
-    href: routes.servicios,
-  },
-  {
-    label : "Perfil",
-    href: routes.dashboard,
-  }
+  itemsNavs.servicios,
+  itemsNavs.citas,
+  itemsNavs.perfil
+
 ]
 
-export const navbarProLinks = [
-
-  {
-    label: "Citas",
-    href: routes.citas,
-  },
-  {
-    label: "Perfil",
-    href: routes.dashboard,
-  },
+export const navbarPro = [
+  itemsNavs.trabajo,
+  itemsNavs.citas,
+  itemsNavs.perfil
+]
+export const navbarAdmin= [
+  itemsNavs.reportes,
+  itemsNavs.facturacion
 ]

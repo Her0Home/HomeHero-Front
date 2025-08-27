@@ -11,6 +11,7 @@ import { Button } from "../../ui/button";
 import { LogInSchema } from "@/schemas/loginYup";
 import { useAuth } from "@/context/authcontext";
 import { postLogin } from "@/services/auth";
+import { Role } from "@/types";
 interface LogInFormValues {
   email: string;
   password: string;
@@ -19,7 +20,7 @@ type LoginDTO = LogInFormValues;
 
 
 export const LoginForm = ()=> {
-const { saveToken } = useAuth();
+const { saveUserData } = useAuth();
 
   const Routes = useRouter();
 
@@ -38,7 +39,7 @@ const { saveToken } = useAuth();
       try {
         const res = await postLogin(data);   
 
-        if (!res?.data) {
+        if (!res || !res.data) {
           return Swal.fire({
             icon: "error",
             title: "Error al iniciar sesión",
@@ -46,9 +47,10 @@ const { saveToken } = useAuth();
           });
         }
         
-        saveToken(res.data);
+        saveUserData(res.data);
         
         await Swal.fire({
+          toast:true,
           position: "top-end",
           icon: "success",
           title: "Usuario logueado correctamente",
@@ -56,12 +58,24 @@ const { saveToken } = useAuth();
           timer: 2000,
         });
         resetForm();
-        Routes.push(routes.home);
+
+        console.log(res.data.user.role);
+        console.log(Role.ADMIN);
+        
+        
+        if(res.data.user.role === Role.ADMIN){
+          return Routes.push(routes.reportes)
+        }else{
+          return Routes.push(routes.dashboard);
+
+        }
+        
       } catch (e: unknown) {
-        console.error("Error al registrar usuario", e);
+        console.error("Error al iniciar sesion", e);
         Swal.fire({
           icon: "error",
-          title: "Error al registrar el usuario",
+          title: "Error al iniciar sesion ",
+          text: "Verifica tus credenciales"
         });
       }
     },

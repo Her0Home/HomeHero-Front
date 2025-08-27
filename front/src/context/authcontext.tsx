@@ -1,157 +1,88 @@
-// "use client";
-// import React, {
-//   createContext,
-//   useContext,
-//   ReactNode,
-//   useState,
-//   JSX,
-//   useEffect,
-// } from "react";
-// import {  IUserResponse } from "@/types/users";
-// import { LogInResponse } from "@/types";
-
-// type AuthContextType = {
-//   isAuth: boolean | null;
-//   user: IUserResponse | null;
-//   token: string | null;
-//   saveUserData: (data: any) => void;
-//   resetuserData: () => void;
-// };
-
-// const AUTH_KEY = "authData";
-
-// const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// export const AuthProvider = ({
-//   children,
-// }: {
-//   children: ReactNode;
-// }): JSX.Element => {
-//   const [isAuth, setIsAuth] = useState<boolean | null>(null);
-//   const [user, setUser] = useState<IUserResponse | null>(null);
-//   const [token, setToken] = useState<string | null>(null);
-//   ///Actions
-//   const saveUserData = (data: LogInResponse) => { 
-//     setUser(data.user);
-//     setToken(data.token);
-//     setIsAuth(true);
-//     localStorage.setItem(AUTH_KEY, JSON.stringify(data));
-//   };
-
-//   const resetuserData = () => {
-//     setUser(null);
-//     setToken(null);
-//     setIsAuth(false);
-//     localStorage.removeItem(AUTH_KEY);
-//   };
-//   useEffect(() => {
-//     const storage = localStorage.getItem(AUTH_KEY);
-//     if (!storage) {
-//       setIsAuth(false);
-//       return;
-//     }
-//     try {
-//       const parsed: LogInResponse = JSON.parse(storage);
-
-//       // Validación básica para mayor defensividad
-//       if (!parsed.token || !parsed.user) {
-//         setIsAuth(false); 
-//         return;
-//       }
-
-      
-//       setUser(parsed.user);
-//       setToken(parsed.token);
-//       setIsAuth(parsed.login);
-//     } catch (error) {
-//         console.error("Error al parsear authData:", error);
-//         setIsAuth(false);
-//     }
-//   }, []); 
-//   return (
-//     <AuthContext.Provider
-//       value={{ isAuth, user, token, saveUserData, resetuserData }}
-//     >
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export const useAuth = () => {
-//   const context = useContext(AuthContext);
-//   if (!context) {
-//     throw new Error("useAuth must be used within an AuthProvider");
-//   }
-//   return context;
-// };
-
-
 "use client";
 import React, {
   createContext,
   useContext,
   ReactNode,
   useState,
+  JSX,
   useEffect,
 } from "react";
-import { IUserResponse } from "@/types/users";
-import { getUser } from "@/services/users";
+import {  IUserResponse } from "@/types/users";
 import { LogInResponse } from "@/types";
 
 type AuthContextType = {
-  isAuth: boolean;
+  isAuth: boolean | null;
   user: IUserResponse | null;
   token: string | null;
-  saveToken: (token: LogInResponse) => void;
+  saveUserData: (data: any) => void;
   resetuserData: () => void;
+  updateUser :(user: IUserResponse) => void;
 };
 
-const AUTH_KEY = "authToken";
+const AUTH_KEY = "authData";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [token, setToken] = useState<string | null>(null);
+export const AuthProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
   const [user, setUser] = useState<IUserResponse | null>(null);
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-
-  const saveToken = (data: LogInResponse) => {
+  const [token, setToken] = useState<string | null>(null);
+  ///Actions
+  const saveUserData = (data: LogInResponse) => { 
+    setUser(data.user);
     setToken(data.token);
     setIsAuth(true);
-    localStorage.setItem(AUTH_KEY, data.token );
+    localStorage.setItem(AUTH_KEY, JSON.stringify(data));
   };
-
+  const updateUser = (user:IUserResponse) => {
+    setUser(user);
+    setIsAuth(true);
+    
+    // actualizas el localStorage manteniendo token
+    const stored = localStorage.getItem(AUTH_KEY);
+    if (stored) {
+      const prevData = JSON.parse(stored);
+      localStorage.setItem(AUTH_KEY, JSON.stringify({ ...prevData, user }));
+    }
+  };
   const resetuserData = () => {
-    setToken(null);
     setUser(null);
+    setToken(null);
     setIsAuth(false);
     localStorage.removeItem(AUTH_KEY);
+
   };
-
   useEffect(() => {
-    const storedToken = localStorage.getItem(AUTH_KEY);
-    if (!storedToken) return;
+    const storage = localStorage.getItem(AUTH_KEY);
+    if (!storage) {
+      setIsAuth(false);
+      return;
+    }
+    try {
+      const parsed: LogInResponse = JSON.parse(storage);
 
-    setToken(storedToken);
-
-    const fetchUserData = async () => {
-      const userData = await getUser(storedToken);
-      if (userData && typeof userData === "object" && "id" in userData) {
-        setUser(userData);
-        setIsAuth(true);
-      } else {
-        resetuserData(); // Token inválido o error en fetch
+      // Validación básica para mayor defensividad
+      if (!parsed.token || !parsed.user) {
+        setIsAuth(false); 
+        return;
       }
-    };
 
-    fetchUserData();
-  }, []);
-
-  
-
+      
+      setUser(parsed.user);
+      setToken(parsed.token);
+      setIsAuth(true);
+    } catch (error) {
+        console.error("Error al parsear authData:", error);
+        setIsAuth(false);
+    }
+  }, []); 
   return (
     <AuthContext.Provider
-      value={{ isAuth, user, token, saveToken, resetuserData }}
+      value={{ isAuth, user, token, saveUserData, updateUser, resetuserData}}
     >
       {children}
     </AuthContext.Provider>

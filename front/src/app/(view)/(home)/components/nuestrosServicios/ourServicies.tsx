@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 
 const services = [
     {
@@ -106,12 +107,12 @@ return (
           </div>
 
           <div className="mt-12 text-center">
-    
+            <Link href="/servicios">
               <Button size="lg" className="text-white bg-blue-500 hover:bg-blue-600">
                 <Search className="w-5 h-5 mr-2" />
-                Ver Todos los Servicios
+                Ver Todos los Profesionales
               </Button>
-           
+            </Link>
           </div>
         </div>
       </section>

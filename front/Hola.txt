@@ -1,3 +1,4 @@
 "email": "ricardo.diaz@example.com",
 
   "password": "Password456@",
+https://restfulapi.net/rest-api-best-practices/

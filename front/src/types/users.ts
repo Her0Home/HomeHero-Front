@@ -8,7 +8,7 @@ import { IMembership } from "./membership";
 import { ISubCategory } from "./subCategory";
 
 export interface IUser {
-  id: string;
+  id : string
 
   auth0Id?: string;
 
@@ -36,56 +36,13 @@ export interface IUser {
 
   role: Role;
 
-  clientAppointments: IAppointment[];
-
-  professionalAppointments: IAppointment[];
-
-  membership: IMembership;
-
-  categories: ICategory[];
-
-  subcategories?: ISubCategory[];
-
-  addres: IAddres[]
-
-  image: IImage[];
-
-  clientChats: IChat[];
-
-  profesionalChats: IChat[];
-}
-export interface IUserResponse {
-  id: string;
-
-  name: string;
-
-  email: string;
-
-  birthdate?: Date;
-
-  dni?: number;
-
-  imageProfile?: string;
-
-  description?: string;
-
-  avaregeRating?: number;
-
-  totalAppointments?: number;
-
-  isVerified: boolean;
-
-  isActive: boolean;
-
-  role: Role;
-
   clientAppointments?: IAppointment[];
 
   professionalAppointments?: IAppointment[];
 
-  membership: IMembership;
+  membership?: IMembership;
 
-  categories?: ICategory[];
+  categories: ICategory;
 
   subcategories?: ISubCategory[];
 
@@ -97,6 +54,21 @@ export interface IUserResponse {
 
   profesionalChats?: IChat[];
 }
+
+export interface IUserResponse {
+  id: string;
+
+  name: string;
+
+  isVerified: boolean;
+
+  isActive: boolean;
+
+  role: Role;
+
+}
+
+
 
 export interface LoginUserDTO {
   email: string;
@@ -111,4 +83,25 @@ export interface RegisterUserDTO {
 
   password: string;
 }
+
+export interface IProfessionalRating {
+  id: string;
+  
+  name: string;
+
+  imageProfile: string;
+
+  description: string;
+
+  averageRating: number;
+
+  totalAppointments: number;
+
+  isVerified: boolean;
+
+  isMembresyActive: boolean;
+}
+
+
+
 
