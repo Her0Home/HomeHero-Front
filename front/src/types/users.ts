@@ -42,7 +42,7 @@ export interface IUser {
 
   membership: IMembership;
 
-  categories: ICategory[];
+  categories: ICategory;
 
   subcategories?: ISubCategory[];
 
@@ -81,4 +81,25 @@ export interface RegisterUserDTO {
 
   password: string;
 }
+
+export interface IProfessionalRating {
+  id: string;
+  
+  name: string;
+
+  imageProfile: string;
+
+  description: string;
+
+  averageRating: number;
+
+  totalAppointments: number;
+
+  isVerified: boolean;
+
+  isMembresyActive: boolean;
+}
+
+
+
 

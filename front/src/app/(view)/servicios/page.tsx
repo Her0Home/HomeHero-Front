@@ -17,7 +17,7 @@ export default function Servicios() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-blue-50">
       <div className="container px-4 py-8 mx-auto">
         {/* Barra de búsqueda */}
         <div className="mb-8">

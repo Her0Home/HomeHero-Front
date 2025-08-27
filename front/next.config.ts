@@ -12,7 +12,19 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'example.com',
         pathname: '/**',
-      }
+      },
+        {
+      protocol: 'https',
+      hostname: 'lh3.googleusercontent.com',
+      pathname: '/**',
+    },
+
+      {
+      protocol: 'https',
+      hostname: 'miapp.com',
+      pathname: '/uploads/**',
+    }
+
 
     ],
   },

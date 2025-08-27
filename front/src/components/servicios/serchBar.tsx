@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
+import { useCategoryOptions } from "@/hooks/topProfesionals"
 
 interface SearchFilters {
   query: string
@@ -24,6 +25,9 @@ interface SearchBarProps {
   showFilters?: boolean
   initialQuery?: string
 }
+
+// const categoryOptions = useCategoryOptions(allCategories)
+
 
 export function SearchBar({ onSearch, showFilters = false, initialQuery = "" }: SearchBarProps) {
   const router = useRouter()
@@ -150,58 +154,6 @@ export function SearchBar({ onSearch, showFilters = false, initialQuery = "" }: 
               </Select>
             </div>
 
-            {/* Calificación mínima */}
-            <div>
-              <label className="block mb-2 text-sm font-medium">Calificación mín.</label>
-              <Select value={filters.minRating} onValueChange={(value) => setFilters({ ...filters, minRating: value })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Cualquiera" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Cualquier calificación</SelectItem>
-                  <SelectItem value="4.5">4.5+ estrellas</SelectItem>
-                  <SelectItem value="4.0">4.0+ estrellas</SelectItem>
-                  <SelectItem value="3.5">3.5+ estrellas</SelectItem>
-                  <SelectItem value="3.0">3.0+ estrellas</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Precio máximo */}
-            <div>
-              <label className="block mb-2 text-sm font-medium">Precio máx./hora</label>
-              <Select value={filters.maxPrice} onValueChange={(value) => setFilters({ ...filters, maxPrice: value })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Sin límite" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Sin límite</SelectItem>
-                  <SelectItem value="25">Hasta $25</SelectItem>
-                  <SelectItem value="35">Hasta $35</SelectItem>
-                  <SelectItem value="50">Hasta $50</SelectItem>
-                  <SelectItem value="75">Hasta $75</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Disponibilidad */}
-            <div>
-              <label className="block mb-2 text-sm font-medium">Disponibilidad</label>
-              <Select
-                value={filters.availability}
-                onValueChange={(value) => setFilters({ ...filters, availability: value })}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Cualquiera" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Cualquier momento</SelectItem>
-                  <SelectItem value="today">Disponible hoy</SelectItem>
-                  <SelectItem value="weekend">Fines de semana</SelectItem>
-                  <SelectItem value="emergency">Emergencias 24/7</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
           </div>
 
           {/* Filtros activos y botón limpiar */}
