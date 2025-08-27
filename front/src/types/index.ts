@@ -1,5 +1,5 @@
 import { LucideIcon } from "lucide-react";
-import { IUserResponse } from "./users";
+import { IUser, IUserResponse } from "./users";
 
 export enum Role {
   ADMIN = "admin",
@@ -21,10 +21,14 @@ export enum typeMemberships {
   PREMIUM = "premium",
 }
 
-export interface linksNav {
+export interface linkNav {
   label: string;
   href: string;
   icon?: LucideIcon;
+} 
+
+export interface itemsNavs {
+  key :linkNav
 }
 
 export interface LogInResponse {
@@ -37,3 +41,12 @@ export interface LogInServiceResponse {
   data?: LogInResponse;
   errors?: any;
 }
+
+export interface UserIdResponse {
+  message: string;
+  data?: IUser;
+  errors?: any;
+}
+
+export type Params<T> = Promise<T>;
+export type SearchParams<T> = Promise<T>;

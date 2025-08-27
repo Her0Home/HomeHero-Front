@@ -1,15 +1,32 @@
-import { FC } from "react";
+// import { AppSidebar } from "@/components/app-sidebar"
+import { ChartAreaInteractive } from "@/components/chart-area-interactive"
+import { DataTable } from "@/components/data-table"
+import { SectionCards } from "@/components/section-cards"
+import { SiteHeader } from "@/components/site-header"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 
-const ReportesPage: FC = () => {
+import data from "../../components/data.json"
+
+export default function Reportes() {
   return (
-    <div className="flex h-full w-full items-center justify-center bg-hero-cream">
-      <h1 
-      className="text-4xl font-bold text-gray-800"
-      >
-        Reportes
-      </h1>
-    </div>
-  );
-};
-
-export default ReportesPage;
+    <SidebarProvider>
+      {/* /sidebar */}
+      {/* <AppSidebar variant="inset" /> */}
+      
+      <SidebarInset>
+        <SiteHeader label="Reportes" />
+        <div className="flex flex-1 flex-col">
+          <div className="@container/main flex flex-1 flex-col gap-2">
+            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+              <SectionCards />
+              <div className="px-4 lg:px-6">
+                <ChartAreaInteractive />
+              </div>
+              <DataTable data={data} />
+            </div>
+          </div>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  )
+}
