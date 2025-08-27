@@ -13,7 +13,6 @@ import {
 import Link from "next/link";
 import NameLogo from "./Logo/logo";
 import { routes } from "@/routes";
-import { roleGlobal } from "@/helpers/estatus";
 import { useAuth } from "@/context/authcontext";
 import Swal from "sweetalert2";
 import { NavSecondary } from "./nav-secondary";
