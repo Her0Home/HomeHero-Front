@@ -1,6 +1,6 @@
 import { IUser } from "@/types/users";
 import { FC } from "react";
-import InfoGen from "../perfilPro/InfoGen";
+import InfoGen from "../InfoGen";
 import PerfilCard from "../perfilPro/PerfilCard";
 import LateralCliente from "./LateralCliente";
 import UltimasCitas from "./UltimasCitas";

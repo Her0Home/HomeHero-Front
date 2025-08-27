@@ -23,6 +23,12 @@ const nextConfig: NextConfig = {
       protocol: 'https',
       hostname: 'miapp.com',
       pathname: '/uploads/**',
+    },
+    
+    {
+      protocol: 'https',
+      hostname: 'res.cloudinary.com',
+      pathname: '/**',
     }
 
 
