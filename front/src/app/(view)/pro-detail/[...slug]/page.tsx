@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Star, MapPin, Clock, Calendar, Wrench } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Star, MapPin, Calendar } from "lucide-react";
 import Image from "next/image";
 import { BookingModal } from "@/components/bookingModal";
 import { ProfessionalReviews } from "@/components/ui/profesionalReview";

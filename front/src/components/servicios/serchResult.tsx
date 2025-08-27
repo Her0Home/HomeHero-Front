@@ -357,8 +357,7 @@ import { routes } from "@/routes"
 import { generateUrl } from "@/utils/gerateURL"
 import { IProfessionalSearch } from "@/types/professional"
 import { getProSearch } from "@/services/profesionals"
-import { ICategoryPro } from "@/types/category"
-import { useCategoryOptions } from "@/hooks/topProfesionals"
+
 
 
 interface SearchResultsProps {
@@ -479,7 +478,7 @@ export function SearchResults({ searchParams }: SearchResultsProps) {
                         </div>
                         <div className="flex items-center gap-1">
                           <Award className="w-4 h-4" />
-                          <span>Trabajos terminados: {professional.totalAppointments}</span>
+                          <span>Trabajos terminados:  {professional.totalAppointments}</span>
                         </div>
                       </div>
                       <div className="flex flex-wrap gap-2">
