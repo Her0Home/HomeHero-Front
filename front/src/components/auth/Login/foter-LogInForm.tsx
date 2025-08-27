@@ -2,13 +2,15 @@
 import { Button } from "@/components/ui/button";
 import { routes } from "@/routes";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { FcGoogle } from "react-icons/fc";
 
 const FooterLogInForm: FC = () => {
   
+  const router = useRouter()
   const handleGoogleLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/login`;
+    router.push(`${process.env.NEXT_PUBLIC_API_URL}/login`);
   };
   return (
     <div className="flex flex-col gap-2 mt-4">
