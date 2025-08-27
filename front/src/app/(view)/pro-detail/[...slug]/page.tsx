@@ -69,7 +69,7 @@ export default async function ProfessionalProfilePage({ params }: Props) {
                             <Star
                               key={i}
                               className={`w-6 h-6 ${
-                                i < Math.floor(Number(professional.avaregeRating))
+                                i < Math.floor(Number(professional.averageRating))
                                   ? "text-yellow-500 fill-current"
                                   : "text-gray-300"
                               }`}
@@ -77,7 +77,7 @@ export default async function ProfessionalProfilePage({ params }: Props) {
                           ))}
                         </div>
                         <span className="text-2xl font-bold text-gray-900">
-                          {professional.avaregeRating}
+                          {professional.averageRating}
                         </span>
                       </div>
                       <span className="text-gray-600">
@@ -98,7 +98,7 @@ export default async function ProfessionalProfilePage({ params }: Props) {
     </h4>
 
     <div className="space-y-2">
-      <span className="font-medium text-gray-700 font-Text">
+      <span className="font-medium text-hero-black font-Title">
         {professional.category.name}
       </span>
 

@@ -9,7 +9,7 @@ export interface AppointmentPayload {
   startTime: string // ISO format
   description?: string
   status?: "pending" | "confirmed" | "cancelled"
-  imageService?: string
+  imageFile?: string
 }
 
 export interface ReschedulePayload {
