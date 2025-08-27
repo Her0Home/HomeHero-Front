@@ -47,3 +47,6 @@ export interface UserIdResponse {
   data?: IUser;
   errors?: any;
 }
+
+export type Params<T> = Promise<T>;
+export type SearchParams<T> = Promise<T>;

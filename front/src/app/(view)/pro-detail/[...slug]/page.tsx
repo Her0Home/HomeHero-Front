@@ -8,15 +8,14 @@ import { ProfessionalReviews } from "@/components/ui/profesionalReview";
 import { IProfessionalSearch } from "@/types/professional";
 import { getProfessionalById } from "@/services/profesionals";
 
-type PageProps = {
-  readonly params: { readonly slug: string[] };
-};
+export default async function ProfessionalProfilePage({
+  params,
+}: {
+  readonly params: { slug: string[] };
+}) {
+  const { slug } = params;
+  const id = slug[0];
 
-export default async function ProfessionalProfilePage( {  params }: PageProps) {
-  const id = params.slug?.[0];
-  if (!id) {
-    return <div className="p-8 text-red-600">ID no válido</div>;
-  }
   const professional: IProfessionalSearch | null = await getProfessionalById(
     id
   );
