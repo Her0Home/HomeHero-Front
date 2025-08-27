@@ -18,7 +18,7 @@ const PerfilCliente: FC<PerfilClienteProps> = ({
 }: PerfilClienteProps) => {
   return (
     <div className="flex flex-row gap-2">
-
+{/* 
       {user?.isVerified === false && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
           <Card className="bg-red-50 border border-red-300 text-red-800 p-6 rounded-xl shadow-lg max-w-md w-full text-center">
@@ -40,7 +40,7 @@ const PerfilCliente: FC<PerfilClienteProps> = ({
             </Button>
           </Card>
         </div>
-      )}
+      )} */}
 
       <div className="flex flex-col w-3/4  gap-2 h-fit">
         <div className="flex gap-2">

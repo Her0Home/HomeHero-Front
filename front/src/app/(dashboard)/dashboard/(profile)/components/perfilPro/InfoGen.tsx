@@ -17,7 +17,7 @@ const InfoGen: FunctionComponent<InfoGenProps> = ({ user }) => {
           <p className="text-2xl font-Title text-hero-orange">
             Información General
           </p>
-
+ 
           <div className="flex flex-col gap-2 font-Text ">
             <div className="flex flex-row gap-14">
               <p className="font-Title">Name:</p>
@@ -61,7 +61,7 @@ const InfoGen: FunctionComponent<InfoGenProps> = ({ user }) => {
                   Membresía:{" "}
                   <br/>
                   <span className="text-hero-orange">
-                     Sin membresía
+                    Sin membresía
                   </span>
                 </h2>
                 <p className="mt-2 text-lg font-Text font-semibold ">
