@@ -48,5 +48,5 @@ export interface UserIdResponse {
   errors?: any;
 }
 
-export type Params<T> = Promise<T>;
-export type SearchParams<T> = Promise<T>;
+export type Params<T> = Readonly<T>;
+export type SearchParams<T> = Readonly<T>;

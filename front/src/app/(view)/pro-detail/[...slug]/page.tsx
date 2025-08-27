@@ -7,11 +7,12 @@ import { ProfessionalReviews } from "@/components/ui/profesionalReview";
 
 import { IProfessionalSearch } from "@/types/professional";
 import { getProfessionalById } from "@/services/profesionals";
+import { Params } from "@/types";
 
 export default async function ProfessionalProfilePage({
   params,
 }: {
-  readonly params: { slug: string[] };
+  readonly params: Params <{ slug: string[] }>;
 }) {
   const { slug } = params;
   const id = slug[0];
