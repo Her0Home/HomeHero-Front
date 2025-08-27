@@ -9,7 +9,7 @@ import { IProfessionalSearch } from "@/types/professional";
 import { getProfessionalById } from "@/services/profesionals";
 
 type PageProps = {
-  readonly params: {readonly  slug: [string] };
+  readonly params: { readonly slug: string[] };
 };
 
 export default async function ProfessionalProfilePage( {  params }: PageProps) {
