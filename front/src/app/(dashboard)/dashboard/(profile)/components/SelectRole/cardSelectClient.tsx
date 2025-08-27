@@ -10,7 +10,13 @@ import {
 import Image from "next/image";
 import { FC } from "react";
 
-export const CardSelectClient: FC = () => {
+interface Props {
+  handleOnClick: () => Promise<void>;
+}
+
+export const CardSelectClient: FC<Props> = (
+  {handleOnClick}
+) => {
   return (
     <Card className="w-2/5 border bg-hero-orange text-hero-white flex flex-col items-center
       transition-all duration-1000 ease-in-out hover:scale-105 hover:shadow-xl
@@ -41,7 +47,7 @@ export const CardSelectClient: FC = () => {
           👇
         </p>
 
-        <Button variant={"ghost"}>Necesito Un Ayudante</Button>
+        <Button variant={"ghost"} onClick={handleOnClick}>Necesito Un Ayudante</Button>
       </CardFooter>
     </Card>
   );

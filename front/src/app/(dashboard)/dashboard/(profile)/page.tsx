@@ -56,8 +56,10 @@ const Perfil = () => {
     <div className="flex flex-col">
       <SiteHeader label="Perfil" />
 
-      <div className="p-5 ">
-        <div>{perfilComponent}</div>
+      <div className="p-5 bg-gradient-to-br from-orange-50 to-blue-50 ">
+        <div>
+          {perfilComponent}
+        </div>
       </div>
     </div>
   );

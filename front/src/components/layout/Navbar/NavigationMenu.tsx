@@ -10,9 +10,9 @@ import {
   navbarAdmin,
   navbarUnknown,
 } from "@/constants/navbar";
-import {  roleGlobal } from "@/helpers/estatus";
 import { useAuth } from "@/context/authcontext";
 import { Role } from "@/types";
+import { parseRole } from "@/helpers/rolEnum";
 
 
 export const NavMenu: FC = () => {
@@ -34,7 +34,8 @@ export const NavMenu: FC = () => {
     });
   };
 
-  const roles = roleGlobal ; // Esto en real vendría de un estado global o auth
+  const roles = parseRole(user?.role) ; // Esto en real vendría de un estado global o auth
+  
   
   const links = () => {
     switch (roles) {
@@ -51,6 +52,8 @@ export const NavMenu: FC = () => {
   console.log("return de auth user", user);
   
   return (
+    <>
     <ItemsNav handleOnClick={logout} User={user} isAuthenticated={isAuth} Links={links} />
+    </>
   );
 };

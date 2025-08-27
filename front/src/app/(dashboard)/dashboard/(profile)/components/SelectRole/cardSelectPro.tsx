@@ -3,8 +3,14 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import Image from "next/image";
 import { FC } from "react";
 
+interface Props  {
+  handleOnClick: () => Promise<void>;
+}
 
-export const CardSelectPro:FC = ()=>{
+
+export const CardSelectPro:FC<Props> = (
+  {handleOnClick}
+)=>{
 return(
   <Card className="w-2/5 bg-hero-blue text-hero-white flex flex-col items-center 
   transition-all duration-1000 ease-in-out hover:scale-105 hover:shadow-xl
@@ -32,7 +38,7 @@ return(
   </CardContent>
   <CardFooter className="justify-center flex flex-col">
     <p className="text-center">Elige esta opción si deseas trabajar con nosotros y ofrecer tus servicios. <br/>👇</p>
-    <Button variant={"ghost"} className=" hover:text-hero-blue">
+    <Button variant={"ghost"} onClick={handleOnClick} className=" hover:text-hero-blue">
       Quiero Trabajar
     </Button>
   </CardFooter>

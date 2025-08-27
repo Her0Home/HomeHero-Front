@@ -17,6 +17,7 @@ import { roleGlobal } from "@/helpers/estatus";
 import { useAuth } from "@/context/authcontext";
 import Swal from "sweetalert2";
 import { NavSecondary } from "./nav-secondary";
+import { parseRole } from "@/helpers/rolEnum";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user, resetuserData } = useAuth();
@@ -38,7 +39,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   // This component is used to render the sidebar in the application.
   const name = user?.name;
-  const typeUser = roleGlobal;
+  const typeUser = parseRole(user?.role);
   // This should be dynamically set based on the logged-in user
   return (
     <Sidebar collapsible="offcanvas" {...props}>

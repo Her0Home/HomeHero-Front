@@ -20,9 +20,9 @@ return (
               <tbody className="font-Text">
                 <tr className="border-b">
                   <td className="px-4 py-4 font-semibold">Precio mensual</td>
-                  <td className="px-4 py-4 text-center">$29 USD</td>
-                  <td className="px-4 py-4 text-center">$25 USD</td>
+                  <td className="px-4 py-4 text-center">$9 USD</td>
                   <td className="px-4 py-4 text-center">$20 USD</td>
+                  <td className="px-4 py-4 text-center">$15 USD</td>
                 </tr>
                 <tr className="border-b">
                   <td className="px-4 py-4">Destacados por mes</td>

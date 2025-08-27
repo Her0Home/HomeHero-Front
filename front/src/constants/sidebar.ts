@@ -10,6 +10,7 @@ export const sidebarProMain:linkNav[] = [
 ]
 
 export const sidebarProSub:linkNav[] = [
+  itemsNavs.membresia,
   itemsNavs.editarPerfil,
   itemsNavs.facturas 
 ]

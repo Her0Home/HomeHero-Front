@@ -1,0 +1,62 @@
+import {  Crown, Shield, Star, } from "lucide-react";
+
+export const membresias = [
+  {
+    id: "monthly",
+    name: "Plan Mensual",
+    description: "Perfecto para profesionales que están empezando",
+    monthlyPrice: 5,
+    annualPrice: 108,
+    priceId: "price_1S0Zvs4bdqSkDlOganffRWmZ" ,
+    icon: <Shield className="w-8 h-8" />,
+    color: "from-gray-500 to-gray-600",
+    popular: false,
+    active: false,
+    features: [
+      { name: "Hasta 5 días en destacados por mes", included: true },
+      { name: "Gestión automatizada de agenda", included: true },
+      { name: "Solicitudes vía email", included: true },
+      { name: "Estadísticas básicas", included: true },
+      { name: "Soporte vía email", included: true },
+      { name: "Prioridad en búsquedas", included: false },
+      { name: "Soporte técnico 24/7", included: false },
+    ],
+  },
+  {
+    id: "quarterly",
+    name: "Plan Trimestral",
+    description: "Ideal para profesionales establecidos que buscan crecer",
+    monthlyPrice: 20,
+    quarterlyPrice: 20,
+    annualPrice: 240,
+    priceId: "price_1S0Zx74bdqSkDlOgZSAfOI5N" ,
+    icon: <Star className="w-8 h-8" />,
+    color: "from-orange-500 to-orange-600",
+    popular: true,
+    active: true,
+    features: [
+      { name: "Todo lo del Plan Mensual", included: true },
+      { name: "Hasta 10 días en destacados por mes", included: true },
+      { name: "Prioridad en búsquedas", included: true },
+      { name: "Soporte por chat", included: true },
+      { name: "Soporte técnico 24/7", included: false },
+    ],
+  },
+  {
+    id: "annual",
+    name: "Plan Anual",
+    description: "Para profesionales que quieren maximizar su alcance",
+    monthlyPrice: 15,
+    annualPrice: 70,
+    priceId: "price_1S0a0f4bdqSkDlOgoUfxyaB6" ,
+    icon: <Crown className="w-8 h-8" />,
+    color: "from-blue-500 to-purple-600",
+    popular: false,
+    active: false, // 👈 ejemplo de inactivo
+    features: [
+      { name: "Todo lo del Plan Trimestral", included: true },
+      { name: "Hasta 15 días en destacados por mes", included: true },
+      { name: "Soporte técnico 24/7", included: true },
+    ],
+  },
+];

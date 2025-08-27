@@ -1,5 +1,5 @@
 import { routes } from "@/routes"
-import { ChartNoAxesCombined, ClipboardClock, FileSearch, Hammer, Handshake,  Library, LucideCircleUserRound,  MessageCircle, MessageSquareHeart, ReceiptText, Settings, UserSearch } from "lucide-react"
+import { ChartNoAxesCombined, ClipboardClock, FileSearch, Hammer, Handshake,  Library, LucideCircleUserRound,  MessageCircle, MessageSquareHeart, ReceiptText, Settings, UserSearch, Star } from "lucide-react"
 
 export const itemsNavs = {
   perfil:  {
@@ -66,6 +66,11 @@ export const itemsNavs = {
     label:"Trabaja Con Nosotros",
     href: routes.infopro,
     icon: Handshake
+  },
+  membresia:{
+    label:"Membresias",
+    href: routes.membership,
+    icon: Star
   }
 }
 

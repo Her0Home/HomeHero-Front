@@ -69,7 +69,7 @@ export default function AuthCallbackPage() {
       }
     };
     fetchProfileAndSetToken();
-  }, [router,saveUserData ]);
+  }, []);
 
   return (
     <div className="flex  flex-col h-screen w-full items-center justify-center bg-hero-">
