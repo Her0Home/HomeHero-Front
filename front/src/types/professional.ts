@@ -63,6 +63,7 @@ export interface UpdateUserPayload {
   streetNumber: number
   imageProfile: string
   subcategories: string[]
+  description: string
 }
 export interface UpdateclientPayload {
   dni?: string
