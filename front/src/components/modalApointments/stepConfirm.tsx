@@ -29,6 +29,7 @@ interface BookingDetails {
   service: string
   description: string
   address: string
+  photo?: File; 
 }
 
 interface ConfirmStepProps {
@@ -55,40 +56,54 @@ export default function ConfirmStep({
   console.error("Token ausente")
   return
 }
+const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files && e.target.files.length > 0) {
+        onChangeDetails({ ...bookingDetails, photo: e.target.files[0] });
+      }
+    };
 
     const handleSubmit = async () => {
-//   const startTimeUtc = zonedTimeToUtc(selectedTimeSlot.startTime, "America/Argentina/Buenos_Aires").toISOString()
-const startTimeUtc = new Date(selectedTimeSlot.startTime).toISOString()
-const  clientId = user?.id || ""
+        if (!token || !user?.id) {
+          console.error("Token o ID de usuario ausente");
+          return;
+        }
 
-  const payload = {
-    clientId,
-    professionalId: professional.id,
-    startTime: startTimeUtc,
-    description: bookingDetails.description,
-    status: "pending" as const,
-    imageFile: bookingDetails.address,
-  }
-console.log(payload)
-console.log(token)
-  try {
-    const res = await createAppointment(payload, token)
-    console.log("Reserva creada:", res)
-    onSubmit() // si querés avanzar al siguiente paso
-  } catch (err) {
-    console.error("Error al crear la reserva:", err)
-    // Podés mostrar un toast o mensaje de error acá
-  }
-}
-  return (
+  
+        const formData = new FormData();
+        formData.append('clientId', user.id);
+        formData.append('professionalId', professional.id);
+        formData.append('startTime', new Date(selectedTimeSlot.startTime).toISOString());
+        formData.append('description', bookingDetails.description);
+        formData.append('status', 'pending');
+        formData.append('imageService', bookingDetails.service); 
+
+        if (bookingDetails.photo) {
+          formData.append('imageFile', bookingDetails.photo);
+        }
+
+        try {
+          const res = await createAppointment(formData, token);
+          console.log("Reserva creada:", res);
+          onSubmit();
+        } catch (err) {
+          console.error("Error al crear la reserva:", err);
+        }
+    }
+
+    if (!token) {
+        console.error("Token ausente")
+        return null; // O un componente de carga/error
+    }
+   return (
     <div className="space-y-4">
-{/* Header */}
+      {/* Header */}
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-zen-dots">Confirmar reserva</h3>
         <Button variant="outline" onClick={onBack}>
           Cambiar horario
         </Button>
       </div>
+
       {/* Resumen */}
       <Card className="border-orange-200 bg-orange-50">
         <CardHeader>
@@ -97,9 +112,7 @@ console.log(token)
         <CardContent className="space-y-3">
           <div className="flex items-center space-x-2">
             <User className="w-4 h-4 text-orange-600" />
-            <span>
-              {professional.name} - 
-            </span>
+            <span>{professional.name}</span>
           </div>
           <div className="flex items-center space-x-2">
             <CalendarIcon className="w-4 h-4 text-orange-600" />
@@ -114,6 +127,7 @@ console.log(token)
           </div>
         </CardContent>
       </Card>
+
       {/* Detalles del servicio */}
       <div className="space-y-4">
         <div>
@@ -141,35 +155,34 @@ console.log(token)
             onChange={(e) => onChangeDetails({ ...bookingDetails, description: e.target.value })}
           />
         </div>
-
+        
+        {/* 4. Input de tipo "file" actualizado */}
         <div>
-          <label className="block mb-2 text-sm font-medium">Fotos</label>
+          <label className="block mb-2 text-sm font-medium">Sube una foto (opcional)</label>
           <div className="flex items-center space-x-2">
             <MapPin className="w-4 h-4 text-gray-400" />
             <input
               type="file"
+              accept="image/*"
               className="flex-1 p-2 border rounded-md"
-              placeholder="Ingresa tu dirección completa"
-              value={bookingDetails.address}
-              onChange={(e) => onChangeDetails({ ...bookingDetails, address: e.target.value })}
+              onChange={handleFileChange}
             />
           </div>
         </div>
       </div>
+
       {/* Botón de confirmar */}
       <div className="flex space-x-3">
         <Button
           type="button"
           onClick={handleSubmit}
           className="flex-1 text-white bg-orange-500 hover:bg-orange-600"
-          disabled={!bookingDetails.service || !bookingDetails.description || !bookingDetails.address}
+          disabled={!bookingDetails.service || !bookingDetails.description}
         >
           Confirmar Reserva
         </Button>
       </div>
-      
     </div>
-
   )
 }
 // "use client"
