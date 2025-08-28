@@ -7,7 +7,7 @@ import { routes } from "@/routes";
 import Swal from "sweetalert2";
 import NameLogo from "@/components/Logo/logo";
 import { RotateCw } from "lucide-react";
-import { GetMembershipInfo } from "@/services/Stripe"; // ajusta la ruta según tu proyecto
+import { GetMembershipInfo } from "@/services/Stripe"; 
 import { itemsNavs } from "@/constants";
 
 export default function MembershipCallbackPage() {
@@ -15,45 +15,73 @@ export default function MembershipCallbackPage() {
   const router = useRouter();
 
   useEffect(() => {
+    console.log("[MembershipCallback] useEffect iniciado");
+
     const verifyMembership = async () => {
-      if(!token)return
+      console.log("[MembershipCallback] verifyMembership iniciado");
+
+      if (!token) {
+        console.log("[MembershipCallback] No hay token disponible");
+        return;
+      }
+      console.log("[MembershipCallback] Token:", token);
+
       try {
-        const response = await GetMembershipInfo(token); // llamas tu servicio
-        // asumimos que response tiene la forma { active: boolean, ... }
+        const response = await GetMembershipInfo(token);
+        console.log("[MembershipCallback] Respuesta de GetMembershipInfo:", response);
+
         if (response?.data?.active) {
-          // actualizas el estado en auth
+          console.log("[MembershipCallback] Membresía activa: true");
+
           updateMembershipStatus(true);
+ 
+          Swal.fire({
+          toast: true,
+          position: "top-end",
+          icon: "success",
+          title: "¡Pago Exitoso!",
+          text: "Mebresia activada con exito",
+          showConfirmButton: false,
+          timer: 5000,
+          timerProgressBar: true,
+        });
+        
 
-          // alerta de éxito
-          await Swal.fire({
-            icon: "success",
-            title: "Pago exitoso",
-            text: "Tu membresía ha sido activada correctamente.",
-          });
-
+          console.log("[MembershipCallback] Redirigiendo a dashboard");
           router.push(itemsNavs.editarPerfil.href);
         } else {
-          // alerta de fallo
+          console.log("[MembershipCallback] Membresía activa: false o respuesta inválida");
+
           await Swal.fire({
             icon: "error",
             title: "Pago rechazado",
             text: "No se pudo activar tu membresía, inténtalo de nuevo.",
           });
+
+          console.log("[MembershipCallback] Redirigiendo a membresías");
           router.push(routes.membership);
         }
       } catch (error) {
-        console.error("Error verificando membresía:", error);
+        console.error("[MembershipCallback] Error verificando membresía:", error);
+
         await Swal.fire({
+          toast: true,
           icon: "error",
           title: "Error",
+          timer: 5000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+
           text: "Ocurrió un problema al verificar tu pago. Intenta de nuevo.",
         });
+
+        console.log("[MembershipCallback] Redirigiendo a membresías por error");
         router.push(routes.membership);
       }
     };
 
     verifyMembership();
-  }, []);
+  }, [token, router, updateMembershipStatus]);
 
   return (
     <div className="flex flex-col h-screen w-full items-center justify-center bg-hero-">
