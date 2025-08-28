@@ -30,7 +30,7 @@ const LateralCliente: FC<LateralClienteProps> = ({
           <CardContent className="p-2 max-h-80 w-11/12 overflow-y-auto rounded-md bg-hero-gray mx-auto">
             <div className="flex flex-col gap-2">
             {appointments
-                .filter((a) => a.status === AppointmentStatus.PENDING || AppointmentStatus.IN_PROGRESS)
+                .filter((a) => a.status === AppointmentStatus.PENDING || a.status === AppointmentStatus.IN_PROGRESS)
                 .map((appointment) => (
                   <CardSolicitudesCliente
                     key={appointment.id}
@@ -53,7 +53,7 @@ const LateralCliente: FC<LateralClienteProps> = ({
             <div className="flex flex-col gap-2">
 
             {appointments
-                .filter((a) => a.status === AppointmentStatus.COMPLETED || AppointmentStatus.CANCELED)
+                .filter((a) => a.status === AppointmentStatus.COMPLETED || a.status === AppointmentStatus.CANCELED)
                 .map((appointment) => (
                   <CardSolicitudesCliente
                     key={appointment.id}

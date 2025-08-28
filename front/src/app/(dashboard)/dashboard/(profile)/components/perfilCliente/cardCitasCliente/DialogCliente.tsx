@@ -1,76 +1,61 @@
 import { Button } from "@/components/ui/button";
-import { DialogHeader, DialogFooter } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "@radix-ui/react-dialog";
+import {
+  DialogHeader,
+  DialogFooter,
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription
+} from "@/components/ui/dialog";
+import { AppointmentStatus } from "@/types";
+import { IAppointment } from "@/types/appointments";
 
-
- 
-const DialogCliente = () => {
-  return ( 
-    <Dialog>
-          <DialogTrigger asChild>
-          <Button size="sm" variant="outline">
-              Ver más
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>info de la cita </DialogTitle>
-
-              <p>Nombre Cliente</p>
-              <p>Diereccion</p>
-              <p>Id</p>
-            </DialogHeader>
-            <DialogDescription>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque fuga
-              consequatur expedita omnis sapiente et tenetur voluptatum. Aspernatur
-              exercitationem quis possimus incidunt totam unde accusantium! Magnam
-              placeat obcaecati facilis labore?
-            </DialogDescription>
-            <DialogFooter>
-              <Button variant={"destructive"}>
-                Cancelar
-              </Button>
-
-              <Dialog>
-          <DialogTrigger asChild>
-          <Button size="sm" variant="outline">
-              Re-Agendar
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle> Agenda Una Fecha Diferente </DialogTitle>
-
-              <p>Nombre Cliente</p>
-              <p>Diereccion</p>
-              <p>Id</p>
-              <Input/>
-              <Input/>
-
-              <Input/>
-              <Input/>
-              <Input/>
-
-            </DialogHeader>
-          
-            <DialogFooter>
-              <Button variant={"primary"}>
-                Re-Agendar
-              </Button>
-            
-            </DialogFooter>
-          </DialogContent>
-
-      </Dialog>
-            
-            </DialogFooter>
-          </DialogContent>
-
-      </Dialog>
-
-
-   );
+interface CardProps {
+  idUser: string | undefined;
+  appointment: IAppointment;
 }
- 
+
+const DialogCliente = ({ appointment }: CardProps) => {
+  const statusClass: Record<AppointmentStatus, string> = {
+    [AppointmentStatus.CANCELED]: "text-red-500",
+    [AppointmentStatus.COMPLETED]: "text-green-500",
+    [AppointmentStatus.CONFIRMED]: "text-blue-500",
+    [AppointmentStatus.IN_PROGRESS]: "text-hero-orange",
+    [AppointmentStatus.PENDING]: "text-yellow-500",
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size="sm" variant="outline">
+          Ver más
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle className="font-Title text-3xl text-h">
+            Info de la cita
+          </DialogTitle>
+
+          <p className="text-2xl font-Text">
+            Profesional: <span className="text-xl">{appointment.client.name}</span>
+          </p>
+          <p className="text-2xl font-Text">
+            Id de la Cita: <span className="text-xl">{appointment.id}</span>
+          </p>
+          <p className="text-2xl font-Text">
+            Estado:{" "}
+            <span className={`text-xl ${statusClass[appointment.status]}`}>
+              {appointment.status}
+            </span>
+          </p>
+        </DialogHeader>
+        <DialogDescription>{appointment.description}</DialogDescription>
+      
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 export default DialogCliente;

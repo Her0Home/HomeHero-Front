@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { ChatProvider } from "@/context/chatContext";
 
 interface LayoutMainViewProps {
   children:React.ReactNode; 
@@ -12,7 +13,9 @@ const LayoutMainViews: FC<LayoutMainViewProps> = ({ children }) => {
       <AppSidebar variant="inset" />
       
       <SidebarInset>
+        <ChatProvider>
           {children}
+        </ChatProvider>
         
       </SidebarInset>
     </SidebarProvider>
