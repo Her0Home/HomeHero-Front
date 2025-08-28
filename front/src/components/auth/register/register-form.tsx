@@ -55,7 +55,7 @@ export const RegisterForm = ()=> {
           title: "Usuario registrado correctamente",
           text:  res.message,
           showConfirmButton: false,
-          timer: 5000,
+          timer: 3000,
         });
         resetForm();
         Routes.push(routes.login);
