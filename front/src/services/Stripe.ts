@@ -21,8 +21,8 @@ export const PostLinkStripe = async (Id: string, priceId: string, token:string):
       {
       userId: Id,
       priceId: priceId,
-      successUrl: "https://home-hero-front-3ds3.vercel.app/calback-membership",
-      cancelUrl: "https://home-hero-front-3ds3.vercel.app/calback-membership",
+      successUrl: "https://home-hero-front-3ds3.vercel.app/callback-membership",
+      cancelUrl: "https://home-hero-front-3ds3.vercel.app/membresias",
       },
       {
         headers: { Authorization: `Bearer ${token}` },
