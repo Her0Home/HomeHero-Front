@@ -1,20 +1,36 @@
-import { IAppointment } from "./appointments";
-import { IMessage } from "./messages";
-import { IUser } from "./users";
+export interface Message {
+  id: string
+  content: string
+  sentAt: string
+  isRead: boolean
+  chat: {
+    id: string
+  }
+  sender: {
+    id: string
+    name: string
+    imageProfile: string
+  }
+}
 
-export interface IChat {
-  id: string;
-
-  lastMessageContent?: string;
-
-  lastMessageAt?: Date;
-
-  appointment?: IAppointment;
-
-  cliente: IUser;
-
-  profesional: IUser;
-
-  messages: IMessage[];
-
+export interface Chat {
+  id: string
+  lastMessageContent: string | null
+  lastMessageAt: string | null
+  appointment: {
+    id: string
+    status: string
+  }
+  cliente: {
+    id: string
+    name: string
+    imageProfile: string
+  }
+  profesional: {
+    id: string
+    name: string
+    imageProfile: string
+  }
+  messages?: Message[]
+  unreadCount?: number
 }
