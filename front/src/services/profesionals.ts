@@ -1,5 +1,5 @@
 'use server'
-import { IProfessionalRating, IProfessionalSearch } from "@/types/professional"
+import { IProfessionalRating, IProfessionalSearch, UpdateclientPayload, UpdateUserPayload } from "@/types/professional"
 import { axiosApiBack } from "."
 
 
@@ -67,5 +67,43 @@ export const getLatestCommentsByProfessional = async (professionalId: string) =>
   } catch (error: any) {
     console.error("Error al obtener comentarios:", error.response?.data || error.message)
     throw error
+  }
+}
+export const updatePro = async (payload: UpdateUserPayload, token: string): Promise<void> => {
+  if (!payload || !payload.categoriesId || !payload.birthdate || !payload.city) {
+    throw new Error('Payload incompleto: faltan campos obligatorios')
+  }
+
+  try {
+    await axiosApiBack.put('/users', payload, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+  
+    },
+  })
+  } catch (error: any) {
+    const message = error.response?.data?.message || error.message
+    console.error('Error al actualizar usuario:', message)
+    throw new Error(message)
+  }
+}
+
+
+export const updateClient = async (payload: UpdateclientPayload, token: string): Promise<void> => {
+  if (!payload || !payload.birthdate || !payload.city) {
+    throw new Error('Payload incompleto: faltan campos obligatorios')
+  }
+
+  try {
+    await axiosApiBack.put('/users', payload, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+  
+    },
+  })
+  } catch (error: any) {
+    const message = error.response?.data?.message || error.message
+    console.error('Error al actualizar usuario:', message)
+    throw new Error(message)
   }
 }

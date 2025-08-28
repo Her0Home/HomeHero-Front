@@ -54,3 +54,21 @@ export interface IComment {
   clientName?: string
 }
 
+export interface UpdateUserPayload {
+  dni?: string
+  categoriesId: string
+  birthdate: string // formato ISO
+  city: string
+  aptoNumber: string
+  streetNumber: number
+  imageProfile: string
+  subcategories: string[]
+}
+export interface UpdateclientPayload {
+  dni?: string
+  birthdate: string // formato ISO
+  city: string
+  aptoNumber: string
+  streetNumber: number
+  imageProfile: string
+}
