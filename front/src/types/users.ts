@@ -26,7 +26,7 @@ export interface IUser {
 
   password?: string;
 
-  avaregeRating?: number;
+  averageRating?: number;
 
   totalAppointments?: number;
 
