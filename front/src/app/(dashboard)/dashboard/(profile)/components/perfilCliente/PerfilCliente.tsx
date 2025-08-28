@@ -1,13 +1,14 @@
 import { IUser } from "@/types/users";
 import { FC } from "react";
 import InfoGen from "../InfoGen";
-import PerfilCard from "../perfilPro/PerfilCard";
+import PerfilCard from "../PerfilCard";
 import LateralCliente from "./LateralCliente";
 import UltimasCitas from "./UltimasCitas";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { itemsNavs } from "@/constants";
+import { appointments } from "@/helpers/Appointents";
 
 interface PerfilClienteProps {
   user: IUser | undefined;
@@ -16,6 +17,9 @@ interface PerfilClienteProps {
 const PerfilCliente: FC<PerfilClienteProps> = ({
   user,
 }: PerfilClienteProps) => {
+  
+  const AppoinmentsList = appointments
+
   return (
     <div className="flex flex-row gap-2">
 {/* 
@@ -48,10 +52,10 @@ const PerfilCliente: FC<PerfilClienteProps> = ({
           <InfoGen user={user} />
         </div>
 
-        <UltimasCitas />
+        <UltimasCitas idUser={user?.id} appointments={AppoinmentsList}  />
       </div>
 
-      <LateralCliente idUser={user?.id} />
+      <LateralCliente idUser={user?.id} appointments={AppoinmentsList} />
     </div>
   );
 };

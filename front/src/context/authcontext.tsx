@@ -17,6 +17,7 @@ type AuthContextType = {
   saveUserData: (data: any) => void;
   resetuserData: () => void;
   updateUser :(user: IUserResponse) => void;
+  updateMembershipStatus: (isMembresyActive: boolean, isVerified?: boolean) => void
 };
 
 const AUTH_KEY = "authData";
@@ -38,6 +39,33 @@ export const AuthProvider = ({
     setIsAuth(true);
     localStorage.setItem(AUTH_KEY, JSON.stringify(data));
   };
+
+  const updateMembershipStatus = (isMembresyActive: boolean, isVerified?: boolean) => {
+    setUser((prev) => {
+      if (!prev) return prev;
+  
+      const updatedUser = {
+        ...prev,
+        isMembresyActive,
+        ...(isVerified !== undefined ? { isVerified } : {}),
+      };
+  
+      // actualizamos el localStorage manteniendo el token
+      const stored = localStorage.getItem(AUTH_KEY);
+      if (stored) {
+        const prevData = JSON.parse(stored);
+        localStorage.setItem(
+          AUTH_KEY,
+          JSON.stringify({ ...prevData, user: updatedUser })
+        );
+      }
+  
+      return updatedUser;
+    });
+  };
+  
+
+
   const updateUser = (user:IUserResponse) => {
     setUser(user);
     setIsAuth(true);
@@ -82,7 +110,7 @@ export const AuthProvider = ({
   }, []); 
   return (
     <AuthContext.Provider
-      value={{ isAuth, user, token, saveUserData, updateUser, resetuserData}}
+      value={{ isAuth, user, token, saveUserData, updateMembershipStatus, updateUser, resetuserData}}
     >
       {children}
     </AuthContext.Provider>

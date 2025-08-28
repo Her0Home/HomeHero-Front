@@ -1,35 +1,20 @@
 import { AppointmentStatus } from ".";
-import { IChat } from "./chat";
-import { IImage } from "./image";
-import { IUser } from "./users";
 
-export interface IAppointment {
-  id: string;
-
-
-  date: Date;
-
-
-  time: string;
-
-  description: string;
-
-  token: number;
-
-  status: AppointmentStatus;
-
-
-  imageService: string;
-
-  client: IUser;
-
-  professional: IUser;
-
-  chat: IChat;
-
-  image: IImage[];
+export interface IUserAP {
+  id: string
+  name: string
 }
 
+export interface IAppointment {
+  id: string
+  startTime: string // ISO string
+  endTime: string   // ISO string
+  description: string
+  status: AppointmentStatus
+  imageService: string
+  client: IUserAP
+  professional: IUserAP
+}
 
 export interface IAppointmentCreate {
   date: Date;

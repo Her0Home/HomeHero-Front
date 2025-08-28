@@ -65,7 +65,7 @@ const InfoGen: FunctionComponent<InfoGenProps> = ({ user }) => {
               <h2 className="text-lg font-semibold text-gray-800">
                 Membresía:{" "}
                 <br/>
-                <span className="text-hero-orange">
+                <span className="text-hero-or ange">
                   Sin membresía
                 </span>
               </h2>
