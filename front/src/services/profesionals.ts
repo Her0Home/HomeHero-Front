@@ -55,3 +55,17 @@ export const getProfessionalById = async (id: string): Promise<IProfessionalSear
     return null
   }
 }
+
+export const getLatestCommentsByProfessional = async (professionalId: string) => {
+  if (!professionalId) throw new Error("El ID del profesional es obligatorio")
+
+  try {
+    const response = await axiosApiBack.get(
+      `/comments/professional/${professionalId}/latest`
+    )
+    return response.data // debería ser un array de comentarios
+  } catch (error: any) {
+    console.error("Error al obtener comentarios:", error.response?.data || error.message)
+    throw error
+  }
+}

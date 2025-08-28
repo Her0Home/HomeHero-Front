@@ -75,7 +75,7 @@ export const SectionProfesional = () => {
                   <span className="text-gray-500">({professional.description})</span>
                   <div className="flex items-center justify-center mb-2 space-x-1">
                     <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                    <span className="font-semibold">{professional.avaregeRating}</span>
+                    <span className="font-semibold">{professional.averageRating}</span>
                   </div>
                   <p className="mb-4 text-sm text-gray-600">
                    Citas terminadas: {professional.totalAppointments} con Excelente Calificación

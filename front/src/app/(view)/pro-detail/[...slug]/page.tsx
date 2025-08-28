@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Star, MapPin, Clock, Calendar, Wrench } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Star, MapPin, Calendar } from "lucide-react";
 import Image from "next/image";
 import { BookingModal } from "@/components/bookingModal";
 import { ProfessionalReviews } from "@/components/ui/profesionalReview";
@@ -74,8 +74,7 @@ export default async function ProfessionalProfilePage({
                             <Star
                               key={i}
                               className={`w-6 h-6 ${
-                                i <
-                                Math.floor(Number(professional.avaregeRating))
+                                i < Math.floor(Number(professional.averageRating))
                                   ? "text-yellow-500 fill-current"
                                   : "text-gray-300"
                               }`}
@@ -83,7 +82,7 @@ export default async function ProfessionalProfilePage({
                           ))}
                         </div>
                         <span className="text-2xl font-bold text-gray-900">
-                          {professional.avaregeRating}
+                          {professional.averageRating}
                         </span>
                       </div>
                       <span className="text-gray-600">
@@ -103,10 +102,10 @@ export default async function ProfessionalProfilePage({
                           Especialidades
                         </h4>
 
-                        <div className="space-y-2">
-                          <span className="font-medium text-gray-700 font-Text">
-                            {professional.category.name}
-                          </span>
+    <div className="space-y-2">
+      <span className="font-medium text-hero-black font-Title">
+        {professional.category.name}
+      </span>
 
                           {professional.subcategories?.length > 0 && (
                             <div className="flex flex-wrap gap-2 mt-2">
