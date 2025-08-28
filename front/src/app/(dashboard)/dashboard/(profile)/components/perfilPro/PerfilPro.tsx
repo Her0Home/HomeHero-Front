@@ -3,7 +3,7 @@ import { FC } from "react";
 import ComentariosPro from "./ComentariosPro";
 import DescripcionPro from "./DescripcionPro";
 import InfoGen from "../InfoGen";
-import PerfilCard from "./PerfilCard";
+import PerfilCard from "../PerfilCard";
 import LateralPro from "./CitasPro";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
