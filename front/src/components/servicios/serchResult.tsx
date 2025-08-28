@@ -357,8 +357,7 @@ import { routes } from "@/routes"
 import { generateUrl } from "@/utils/gerateURL"
 import { IProfessionalSearch } from "@/types/professional"
 import { getProSearch } from "@/services/profesionals"
-import { ICategoryPro } from "@/types/category"
-import { useCategoryOptions } from "@/hooks/topProfesionals"
+
 
 
 interface SearchResultsProps {
@@ -417,7 +416,7 @@ export function SearchResults({ searchParams }: SearchResultsProps) {
 
     const matchesRating =
       searchParams.minRating && searchParams.minRating !== "all"
-        ? parseFloat(prof.avaregeRating) >= parseFloat(searchParams.minRating)
+        ? parseFloat(prof.averageRating) >= parseFloat(searchParams.minRating)
         : true
 
     return matchesQuery && matchesCategory && matchesLocation && matchesRating
@@ -479,7 +478,7 @@ export function SearchResults({ searchParams }: SearchResultsProps) {
                         </div>
                         <div className="flex items-center gap-1">
                           <Award className="w-4 h-4" />
-                          <span>Turnos tomados: {professional.totalAppointments}</span>
+                          <span>Trabajos terminados:  {professional.totalAppointments}</span>
                         </div>
                       </div>
                       <div className="flex flex-wrap gap-2">
@@ -503,14 +502,14 @@ export function SearchResults({ searchParams }: SearchResultsProps) {
                             <Star
                               key={i}
                               className={`w-4 h-4 ${
-                                i < Math.floor(parseFloat(professional.avaregeRating))
+                                i < Math.floor(parseFloat(professional.averageRating))
                                   ? "text-yellow-500 fill-current"
                                   : "text-gray-300"
                               }`}
                             />
                           ))}
                         </div>
-                        <span className="font-bold">{professional.avaregeRating}</span>
+                        <span className="font-bold">{professional.averageRating}</span>
                       </div>
 
                       <div className="flex flex-col w-full gap-3">

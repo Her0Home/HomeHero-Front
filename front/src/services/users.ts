@@ -1,7 +1,7 @@
 "use server";
 
 import { axiosApiBack } from ".";
-import { LogInServiceResponse, UserIdResponse } from "@/types";
+import { UserIdResponse } from "@/types";
 
 export const getUser = async (
   id: string,
@@ -57,4 +57,20 @@ export const putUserRole = async (
     throw e;
   }
 };
+
+export const getAppoinment = async (Id: string, token:string)=>{
+  
+  try{
+    const res = await axiosApiBack.get(`/appointment/${Id}`,{
+      headers:{ Authorization :`Bearer ${token}`  }
+    })
+    return res.data
+  }
+  catch(error: any) {
+    console.error("Error al obtener comentarios:", error.response?.data || error.message)
+    throw error
+  }
+
+}
+
 

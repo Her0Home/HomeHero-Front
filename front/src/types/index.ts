@@ -8,7 +8,7 @@ export enum Role {
   unknown = "desconocido",
 }
 
-export enum AppointmentStatus {
+export enum   AppointmentStatus {
   PENDING = "pending",
   CONFIRMED = "confirmed",
   IN_PROGRESS = "in_progress",

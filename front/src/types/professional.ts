@@ -10,7 +10,7 @@ export interface IProfessionalRating {
 
   description: string;
 
-  avaregeRating: string;
+  averageRating: string;
   
   category: ICategoryPro;
 
@@ -32,7 +32,7 @@ export interface IProfessionalSearch {
 
   description: string;
 
-avaregeRating: string;
+ averageRating: string;
 
   totalAppointments: number;
 
@@ -46,3 +46,11 @@ avaregeRating: string;
 
 
 }
+export interface IComment {
+  id: string
+  rating: number
+  comment: string
+  createdAt: string
+  clientName?: string
+}
+
