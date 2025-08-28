@@ -69,3 +69,18 @@ export const getLatestCommentsByProfessional = async (professionalId: string) =>
     throw error
   }
 }
+
+export const getAppoinmentProfesional = async (professionalId: string, token:string)=>{
+  
+  try{
+    const res = await axiosApiBack.get(`/appointment/professional/${professionalId}`,{
+      headers:{ Authorization :`Bearer ${token}`  }
+    })
+    return res.data
+  }
+  catch(error: any) {
+    console.error("Error al obtener comentarios:", error.response?.data || error.message)
+    throw error
+  }
+
+}
