@@ -12,6 +12,8 @@ const FooterLogInForm: FC = () => {
   const handleGoogleLogin = () => {
     router.push(`${process.env.NEXT_PUBLIC_API_URL}/login`);
   };
+  console.log(`${process.env.NEXT_PUBLIC_API_URL}/login`);
+  
   return (
     <div className="flex flex-col gap-2 mt-4">
       <div
