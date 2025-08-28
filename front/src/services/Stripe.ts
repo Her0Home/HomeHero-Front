@@ -19,8 +19,8 @@ export const PostLinkStripe = async (Id: string, priceId: string, token:string):
     const res = await axiosApiBack.post(
       "/stripe/create-checkout-session",
       {
-        userId: Id,
-        priceId: priceId,
+      userId: Id,
+      priceId: priceId,
       successUrl: "https://home-hero-front-3ds3.vercel.app/calback-membership",
       cancelUrl: "https://home-hero-front-3ds3.vercel.app/calback-membership",
       },
