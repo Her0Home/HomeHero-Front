@@ -50,13 +50,16 @@ export const getAvailability = async (professionalId: string, date: string, toke
 // }
 
 
-export const createAppointment = async (data: AppointmentPayload, token: string) => {
-const res = await axiosApiBack.post("/appointment", data, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+export const createAppointment = async (data: FormData, token: string) => { 
+  const res = await axiosApiBack.post("/appointment", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+   
+    },
+  });
 
-  return res.data
-}
+  return res.data;
+};
 
 // export const createAppointment = async (data: AppointmentPayload, token: string) => {
 //   const res = await axios.post("https://homehero-back.onrender.com/appointment", data, {
