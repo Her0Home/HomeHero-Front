@@ -2,7 +2,7 @@ import { Role } from ".";
 import { IAddres } from "./adres";
 import { IAppointment } from "./appointments";
 import { ICategory } from "./category";
-import { IChat } from "./chat";
+import { Chat } from "./chat";
 import { IImage } from "./image";
 import { IMembership } from "./membership";
 import { ISubCategory } from "./subCategory";
@@ -50,9 +50,9 @@ export interface IUser {
 
   image?: IImage[];
 
-  clientChats?: IChat[];
+  clientChats?: Chat[];
 
-  profesionalChats?: IChat[];
+  profesionalChats?: Chat[];
 }
 
 export interface IUserResponse {
@@ -65,6 +65,8 @@ export interface IUserResponse {
   isActive: boolean;
 
   role: Role;
+
+  isMembresyActive?: boolean;
 
 }
 

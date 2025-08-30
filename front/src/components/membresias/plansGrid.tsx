@@ -6,35 +6,75 @@ import { membresias } from "@/helpers/membresias";
 import { useAuth } from "@/context/authcontext";
 import { PostLinkStripe } from "@/services/Stripe";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+import { routes } from "@/routes";
 
 export default function PlansGrid() {
-  const {user, token}= useAuth()
+  const {user, token, isAuth}= useAuth()
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubscribe = async (priceId: string) => {
-    if (!user?.id ) {
-      console.error("No hay usuario logueado");
+    if (!isAuth) {
+      Swal.fire({
+        icon: 'warning',
+        title: '¡Debes iniciar sesión!',
+        text: 'Para suscribirte a un plan, necesitas tener una cuenta.',
+        showCancelButton: true,
+        confirmButtonText: 'Iniciar Sesión',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#F97316',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push(routes.login);
+        }
+      });
       return;
     }
-    
-    if (!token) {
-      console.error("No hay token disponible");
+
+    if (!user?.id || !token) {
+      console.error("Error de sesión: El usuario está autenticado pero faltan datos (ID o token).");
+      Swal.fire({
+          icon: 'error',
+          title: 'Error de Sesión',
+          text: 'No pudimos verificar tus datos. Por favor, intenta iniciar sesión de nuevo.'
+      });
       return;
     }
+
+    // AÑADIDO: Verificación de membresía activa ANTES de llamar a la API
+    if (user.isMembresyActive === true) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Suscripción Activa',
+        text: 'Ya tienes una membresía activa. Puedes gestionarla en tu perfil.'
+      });
+      return; // Detiene la ejecución si ya tiene un plan
+    }
+
     try {
       setLoadingPlan(priceId);
-      const res = await PostLinkStripe(user?.id, priceId, token);
-
-      console.log("res de link",res.data);
+      const res = await PostLinkStripe(user.id, priceId, token);
       
       if (res.data?.url) {
-        window.location.href = res.data.url; // redirige al link de Stripe
+        window.location.href = res.data.url; 
       } else {
-        console.log("res de link",res.data?.url);
-        console.error("No se obtuvo el link de Stripe","Error", res.errors,"Mensage", res.message);
+        // Ahora, si hay un error 400, es por otra razón y mostramos el mensaje del backend si existe
+        console.error("No se obtuvo el link de Stripe", "Error:", res.errors, "Mensaje:", res.message);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al generar el pago',
+            text: res.errors || 'No pudimos redirigirte a la página de pago. Por favor, inténtalo de nuevo más tarde.'
+        });
       }
     } catch (err) {
       console.error("Error al crear sesión de Stripe", err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Inesperado',
+        text: 'Ocurrió un problema de conexión al intentar generar el pago.'
+      });
     } finally {
       setLoadingPlan(null);
     }
@@ -134,8 +174,9 @@ export default function PlansGrid() {
                             : "bg-gray-900 hover:bg-gray-800 text-white"
                         }`}
                         onClick={() => handleSubscribe(plan.priceId)}
+                        disabled={loadingPlan === plan.priceId}
                       >
-                        {loadingPlan === plan.priceId ? "Redirigiendo..." : `Suscribirse a $${plan.name}`}
+                        {loadingPlan === plan.priceId ? "Redirigiendo..." : `Suscribirse a ${plan.name}`}
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                   ) : (
