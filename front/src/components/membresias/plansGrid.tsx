@@ -8,11 +8,12 @@ import { PostLinkStripe } from "@/services/Stripe";
 import { useState } from "react";
 
 export default function PlansGrid() {
-  const {user, token}= useAuth()
+
+  const { user, token, isAuth } = useAuth();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const handleSubscribe = async (priceId: string) => {
-    if (!user?.id ) {
+    if (!user?.id) {
       console.error("No hay usuario logueado");
       return;
     }
@@ -25,13 +26,10 @@ export default function PlansGrid() {
       setLoadingPlan(priceId);
       const res = await PostLinkStripe(user?.id, priceId, token);
 
-      console.log("res de link",res.data);
-      
       if (res.data?.url) {
         window.location.href = res.data.url; // redirige al link de Stripe
       } else {
-        console.log("res de link",res.data?.url);
-        console.error("No se obtuvo el link de Stripe","Error", res.errors,"Mensage", res.message);
+        console.error("No se obtuvo el link de Stripe", "Error:", res.errors, "Mensaje:", res.message);
       }
     } catch (err) {
       console.error("Error al crear sesión de Stripe", err);
@@ -39,10 +37,9 @@ export default function PlansGrid() {
       setLoadingPlan(null);
     }
   };
-
   
   return (
-    <div className=" bg-gray-50">
+    <div className="bg-gray-50">
       <div className="container px-4 py-12 mx-auto">
         <div className="grid gap-8 mb-12 md:grid-cols-3">
           {membresias.map((plan) => (
@@ -82,7 +79,6 @@ export default function PlansGrid() {
                     {plan.description}
                   </p>
                   <div className="text-center">
-                    {/* Precio principal */}
                     <div className="text-2xl font-bold text-gray-900">
                       {plan.id === "monthly" &&
                         `${plan.monthlyPrice} USD / mes`}
@@ -90,8 +86,6 @@ export default function PlansGrid() {
                         `${plan.quarterlyPrice} USD / 3 meses`}
                       {plan.id === "annual" && `${plan.annualPrice} USD / año`}
                     </div>
-
-                    {/* Info de referencia mensual */}
                     <div className="text-sm text-gray-500 mt-1">
                       {plan.id === "quarterly" &&
                         `≈ ${(plan.quarterlyPrice! / 3).toFixed(2)} USD al mes`}
@@ -134,8 +128,10 @@ export default function PlansGrid() {
                             : "bg-gray-900 hover:bg-gray-800 text-white"
                         }`}
                         onClick={() => handleSubscribe(plan.priceId)}
+           
+                        disabled={loadingPlan === plan.priceId || isAuth !== true}
                       >
-                        {loadingPlan === plan.priceId ? "Redirigiendo..." : `Suscribirse a $${plan.name}`}
+                        {loadingPlan === plan.priceId ? "Redirigiendo..." : `Suscribirse a ${plan.name}`}
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                   ) : (
