@@ -92,11 +92,8 @@ export function MessageView() {
             )
           })
         )}
-        {/* Este es el ancla que usa el useEffect para hacer scroll */}
         <div ref={messagesEndRef} />
       </div>
-      
-      {/* Input para enviar mensajes */}
       <MessageInput />
     </div>
   )
