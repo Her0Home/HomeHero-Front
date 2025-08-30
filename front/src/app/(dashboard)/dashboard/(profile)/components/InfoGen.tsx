@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getAgeFromBirthdate } from "@/helpers/edad";
+import { parseRole } from "@/helpers/rolEnum";
+import { Role } from "@/types";
 import { IUser } from "@/types/users";
 import { FunctionComponent } from "react";
 
@@ -10,6 +12,8 @@ interface InfoGenProps {
 }
 
 const InfoGen: FunctionComponent<InfoGenProps> = ({ user }) => {
+
+  const rol = parseRole(user?.role)
   return (
     <div className="w-2/4 ">
       <Card className="h-full">
@@ -53,38 +57,40 @@ const InfoGen: FunctionComponent<InfoGenProps> = ({ user }) => {
             <Separator orientation="horizontal" className="bg-gray-300" />
           </div>
         </CardHeader>
+        { rol === Role.PROFESSIONAL && 
         <CardContent className="mt-2">
-          <div>
-            <Card className="flex  max-w-sm mx-auto bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
-              <CardHeader className="p-4 flex">
-                <h2 className="text-lg font-semibold text-gray-800">
-                  Membresía:{" "}
-                  <br/>
-                  <span className="text-hero-orange">
-                    Sin membresía
-                  </span>
-                </h2>
-                <p className="mt-2 text-lg font-Text font-semibold ">
-                  Estado:{" "} 
-                  {user?.membership ? (
-                    <span className="text-green-600 font-medium">Activa</span>
-                  ) : (
-                    <span className="text-red-600 font-medium">Inactiva</span>
-                  )}
-                </p>
-              </CardHeader>
-              <CardFooter className="p-4 flex justify-end">
-              <Button
-                    // onClick={handleCancelSubscription}
-                    variant={"destructive"}
+        <div>
+          <Card className="flex  max-w-sm mx-auto bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
+            <CardHeader className="p-4 flex">
+              <h2 className="text-lg font-semibold text-gray-800">
+                Membresía:{" "}
+                <br/>
+                <span className="text-hero-or ange">
+                  Sin membresía
+                </span>
+              </h2>
+              <p className="mt-2 text-lg font-Text font-semibold ">
+                Estado:{" "} 
+                {user?.membership ? (
+                  <span className="text-green-600 font-medium">Activa</span>
+                ) : (
+                  <span className="text-red-600 font-medium">Inactiva</span>
+                )}
+              </p>
+            </CardHeader>
+            <CardFooter className="p-4 flex justify-end">
+            <Button
+                  // onClick={handleCancelSubscription}
+                  variant={"destructive"}
 
-                  >
-                    Cancelar Suscripción
-                  </Button>
-              </CardFooter>
-            </Card>
-          </div>
-        </CardContent>
+                >
+                  Cancelar Suscripción
+                </Button>
+            </CardFooter>
+          </Card>
+        </div>
+      </CardContent>}
+        
       </Card>
     </div>
   );

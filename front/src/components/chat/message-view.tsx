@@ -13,20 +13,9 @@ export function MessageView() {
   const { user } = useAuth()
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  console.log(`%c[PASO 3] Renderizando MessageView. Total de mensajes: ${currentChat.messages.length}`, 'color: orange; font-weight: bold;');
-  
 
   useEffect(() => {
-    console.log('%c[PASO 4] Efecto de scroll activado.', 'color: red; font-weight: bold;');
-    
-const timer = setTimeout(() => {
-      if (messagesEndRef.current) {
-        const { scrollHeight, clientHeight } = messagesEndRef.current;
-        messagesEndRef.current.scrollTop = scrollHeight - clientHeight;
-      }
-    }, 0); 
-
-    return () => clearTimeout(timer);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [currentChat.messages]);
   
 
@@ -88,7 +77,7 @@ const timer = setTimeout(() => {
           </div>
         ) : (
           currentChat.messages.map((message, index) => {
-            // Verificar si este mensaje es el primero de una serie del mismo remitente
+
             const isFirst =
               index === 0 ||
               currentChat.messages[index - 1].sender.id !== message.sender.id
@@ -106,6 +95,7 @@ const timer = setTimeout(() => {
             )
           })
         )}
+
         <div ref={messagesEndRef} />
       </div>
       

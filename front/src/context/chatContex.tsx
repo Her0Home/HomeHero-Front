@@ -1,40 +1,9 @@
 "use client"
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useRef } from 'react'
 import { getUserChats, initSocket, joinChatRoom, leaveChatRoom, getChatById, sendMessage } from '@/services/chat'
 import { useAuth } from './authcontext'
-
-interface Message {
-  id: string
-  content: string
-  sentAt: string
-  isRead: boolean
-  sender: {
-    id: string
-    name: string
-    imageProfile: string
-  },
-  chat?: {
-    id: string
-  }
-}
-
-interface Chat {
-  id: string
-  lastMessageContent: string
-  lastMessageAt: string
-  cliente: {
-    id: string
-    name: string
-    imageProfile: string
-  }
-  profesional: {
-    id: string
-    name: string
-    imageProfile: string
-  }
-  unreadCount: number
-}
+import { Chat, Message } from '@/types/chat'
 
 interface ChatContextType {
   chats: Chat[]
@@ -51,7 +20,7 @@ interface ChatContextType {
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
-  const { token, user } = useAuth()
+  const { token } = useAuth()
   const [chats, setChats] = useState<Chat[]>([])
   const [currentChat, setCurrentChat] = useState<{ chat: Chat | null; messages: Message[] }>({
     chat: null,
@@ -59,21 +28,22 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   })
   const [currentChatId, setCurrentChatId] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const prevChatIdRef = useRef<string | null>(null);
 
-  const loadChats = async () => {
-    if (!token) return
-    
+  const loadChats = useCallback(async () => {
+    if (!token) return;
+  
     try {
-      // Dejamos setLoading(true) solo para la carga inicial
-      if (chats.length === 0) setLoading(true)
-      const chatsData = await getUserChats(token)
-      setChats(chatsData)
+      setLoading(true);
+      const chatsData = await getUserChats(token);
+      setChats(chatsData);
     } catch (error) {
-      console.error('Error al cargar chats:', error)
+      console.error('Error al cargar chats:', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  }, [token]);
+
 
   useEffect(() => {
     if (!token) return;
@@ -85,17 +55,27 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       const messageChatId = message.chat?.id;
       if (!messageChatId) return;
 
-      setChats(prevChats => 
-        prevChats.map(chat => 
-          chat.id === messageChatId 
-            ? { 
-                ...chat, 
-                lastMessageContent: message.content, 
-                lastMessageAt: message.sentAt,
-              } 
-            : chat
-        ).sort((a, b) => new Date(b.lastMessageAt).getTime() - new Date(a.lastMessageAt).getTime())
-      );
+      setChats(prevChats => {
+        const updatedChats = prevChats.map(chat => {
+          if (chat.id === messageChatId) {
+            const newUnreadCount = chat.id !== currentChatId 
+              ? (chat.unreadCount || 0) + 1
+              : 0;
+
+            return { 
+              ...chat, 
+              lastMessageContent: message.content, 
+              lastMessageAt: message.sentAt,
+              unreadCount: newUnreadCount
+            };
+          }
+          return chat;
+        });
+        
+        return updatedChats.sort((a, b) => 
+          new Date(b.lastMessageAt ?? 0).getTime() - new Date(a.lastMessageAt ?? 0).getTime()
+        );
+      });
 
       if (currentChatId && messageChatId === currentChatId) {
         setCurrentChat(prev => ({
@@ -105,9 +85,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    const handleMessagesRead = (payload: { chatId: string, userId: string }) => {
-      // Lógica para marcar mensajes como leídos
-    }
+    const handleMessagesRead = (_payload: { chatId: string, userId: string }) => {}
 
     socket.on('new_message', handleNewMessage)
     socket.on('messages_read', handleMessagesRead)
@@ -116,7 +94,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       socket.off('new_message', handleNewMessage);
       socket.off('messages_read', handleMessagesRead);
     }
-  }, [token, currentChatId]);
+  }, [token, currentChatId, loadChats]);
+
 
   useEffect(() => {
     const loadChatDetails = async () => {
@@ -128,32 +107,34 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
       try {
         setLoading(true)
         
-        if (currentChat.chat && currentChat.chat.id !== currentChatId) {
-          leaveChatRoom(currentChat.chat.id)
+        if (prevChatIdRef.current && prevChatIdRef.current !== currentChatId) {
+          leaveChatRoom(prevChatIdRef.current);
         }
         
-        joinChatRoom(currentChatId)
+        joinChatRoom(currentChatId);
+        prevChatIdRef.current = currentChatId;
         
-        const chatDetails = await getChatById(currentChatId, token)
+        const chatDetails = await getChatById(currentChatId, token);
         
         setCurrentChat({
           chat: chatDetails,
           messages: chatDetails.messages || []
-        })
+        });
 
         setChats(prevChats => prevChats.map(chat => 
             chat.id === currentChatId ? { ...chat, unreadCount: 0 } : chat
         ));
 
       } catch (error) {
-        console.error('Error al cargar detalles del chat:', error)
+        console.error('Error al cargar detalles del chat:', error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     }
 
-    loadChatDetails()
-  }, [currentChatId, token])
+    loadChatDetails();
+  }, [currentChatId, token]);
+
 
   const handleSendMessage = async (content: string) => {
     if (!token || !currentChatId || !content.trim()) return
@@ -165,9 +146,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const refreshChats = async () => {
-    if (token) {
-      await loadChats()
-    }
+    await loadChats()
   }
 
   return (

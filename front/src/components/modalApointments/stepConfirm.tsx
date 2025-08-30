@@ -133,7 +133,7 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         <div>
           <label className="block mb-2 text-sm font-medium">Tipo de servicio</label>
           <select
-            className="w-full bg p-2 border rounded-md"
+            className="w-full p-2 border rounded-md bg"
             value={bookingDetails.service}
             onChange={(e) => onChangeDetails({ ...bookingDetails, service: e.target.value })}
           >
@@ -160,7 +160,7 @@ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         <div>
           <label className="block mb-2 text-sm font-medium">Sube una foto (opcional)</label>
           <div className="flex items-center space-x-2">
-            <MapPin className="w-4 h-4 text-gray-400" />
+            <MapPin className="w-4 h-4 text-hero-orange" />
             <input
               type="file"
               accept="image/*"
