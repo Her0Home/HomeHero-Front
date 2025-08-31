@@ -13,7 +13,6 @@ export function MessageView() {
   const { user } = useAuth()
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [currentChat.messages]);
@@ -31,7 +30,6 @@ export function MessageView() {
     )
   }
   
-
   const isClient = user?.id === currentChat.chat.cliente.id
   const otherPerson = isClient ? currentChat.chat.profesional : currentChat.chat.cliente
   
@@ -77,7 +75,6 @@ export function MessageView() {
           </div>
         ) : (
           currentChat.messages.map((message, index) => {
-
             const isFirst =
               index === 0 ||
               currentChat.messages[index - 1].sender.id !== message.sender.id

@@ -109,6 +109,17 @@ export const GetMembershipInfo = async (token:string ):Promise<ResponseInfoStrip
     };
   }
 }
+export const getPaymentHistory = async (token: string) => {
+  try {
+    const res = await axiosApiBack.get("/stripe/payments/history", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (e: unknown) {
+    console.error("Error fetching payment history:", e);
+    throw e;
+  }
+};
 
 
 export const PutMembershCancel = async (token:string, id:string )=> {
@@ -146,5 +157,6 @@ export const PutMembershCancel = async (token:string, id:string )=> {
       errors: e,
     };
   }
+
 }
 

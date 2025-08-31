@@ -6,33 +6,58 @@ import { membresias } from "@/helpers/membresias";
 import { useAuth } from "@/context/authcontext";
 import { PostLinkStripe } from "@/services/Stripe";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+import { routes } from "@/routes";
 
 export default function PlansGrid() {
 
   const { user, token, isAuth } = useAuth();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubscribe = async (priceId: string) => {
     if (!user?.id) {
       console.error("No hay usuario logueado");
       return;
     }
-    
-    if (!token) {
-      console.error("No hay token disponible");
+
+    if (!user?.id || !token) {
+      console.error("Error de sesión: El usuario está autenticado pero faltan datos (ID o token).");
+      Swal.fire({
+          icon: 'error',
+          title: 'Error de Sesión',
+          text: 'No pudimos verificar tus datos. Por favor, intenta iniciar sesión de nuevo.'
+      });
       return;
     }
+
+    // AÑADIDO: Verificación de membresía activa ANTES de llamar a la API
+    if (user.isMembresyActive === true) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Suscripción Activa',
+        text: 'Ya tienes una membresía activa. Puedes gestionarla en tu perfil.'
+      });
+      return; // Detiene la ejecución si ya tiene un plan
+    }
+
     try {
       setLoadingPlan(priceId);
       const res = await PostLinkStripe(user?.id, priceId, token);
 
       if (res.data?.url) {
-        window.location.href = res.data.url; // redirige al link de Stripe
+        window.location.href = res.data.url; 
       } else {
         console.error("No se obtuvo el link de Stripe", "Error:", res.errors, "Mensaje:", res.message);
       }
     } catch (err) {
       console.error("Error al crear sesión de Stripe", err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Inesperado',
+        text: 'Ocurrió un problema de conexión al intentar generar el pago.'
+      });
     } finally {
       setLoadingPlan(null);
     }
