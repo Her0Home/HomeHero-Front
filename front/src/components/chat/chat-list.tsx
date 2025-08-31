@@ -57,7 +57,7 @@ export function ChatList() {
                     fill
                     className="object-cover rounded-full"
                   />
-                  {chat.unreadCount > 0 && (
+                  {typeof chat.unreadCount === 'number' && chat.unreadCount > 0 && (
                     <div className="absolute -top-1 -right-1 bg-hero-orange text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                       {chat.unreadCount}
                     </div>
