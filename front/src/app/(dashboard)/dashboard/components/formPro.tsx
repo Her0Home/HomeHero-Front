@@ -36,6 +36,7 @@ interface FormValues {
   streetNumber: string
   aptoNumber: string
   birthdate?: string
+  description: string
 }
 
 const categories = [
@@ -143,7 +144,7 @@ export const FormPro = () => {
     categoriesId: '',
     subcategory: [],
     city: '',
-
+    description: '',
     streetNumber: '',
     birthdate: '',
   }}
@@ -163,6 +164,7 @@ onSubmit={async (values) => {
     streetNumber: parseInt(values.streetNumber, 10),
     imageProfile: '',
     subcategories: values.subcategory,
+    description: values.description
   }
 console.log(payload)
   try {
@@ -261,7 +263,13 @@ console.log(payload)
                     <Field name="streetNumber" as={Input} type="number" placeholder="Ej. 2450" />
                     <ErrorMessage name="streetNumber" component="p" className="text-sm text-red-500" />
                   </div>
+                 
 
+                  <div>
+                    <label htmlFor="description">Descripcion</label>
+                    <Field name="description" as={Input} placeholder="Ej. Av. Córdoba" />
+                    <ErrorMessage name="description" component="p" className="text-sm text-red-500" />
+                  </div>
                 </CardContent>
 
                 <CardFooter>

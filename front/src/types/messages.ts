@@ -1,4 +1,4 @@
-import { IChat } from "./chat";
+import { Chat } from "./chat";
 import { IUser } from "./users";
 
 
@@ -12,7 +12,7 @@ export interface IMessage {
   
   isRead: boolean;
   
-  chat: IChat;
+  chat: Chat;
   
   sender: IUser;
   }

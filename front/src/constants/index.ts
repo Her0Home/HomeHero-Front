@@ -69,7 +69,7 @@ export const itemsNavs = {
   },
   membresia:{
     label:"Membresias",
-    href: routes.membership,
+     href: routes.membership_status,
     icon: Star
   }
 }

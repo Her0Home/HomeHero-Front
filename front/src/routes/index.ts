@@ -23,6 +23,7 @@ export const routes = {
   edit_perfil: "/dashboard/editar-perfil",
   historial_pagos: "/dashboard/historial-pagos",
   membership: "/membresias",
+  membership_status: "/dashboard/membership",
   soporte: "/dashboard/soporte",
   
   //AUTHENTICATION
