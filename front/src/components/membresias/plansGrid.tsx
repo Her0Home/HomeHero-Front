@@ -11,25 +11,14 @@ import { useRouter } from "next/navigation";
 import { routes } from "@/routes";
 
 export default function PlansGrid() {
-  const {user, token, isAuth}= useAuth()
+
+  const { user, token, isAuth } = useAuth();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubscribe = async (priceId: string) => {
-    if (!isAuth) {
-      Swal.fire({
-        icon: 'warning',
-        title: '¡Debes iniciar sesión!',
-        text: 'Para suscribirte a un plan, necesitas tener una cuenta.',
-        showCancelButton: true,
-        confirmButtonText: 'Iniciar Sesión',
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#F97316',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push(routes.login);
-        }
-      });
+    if (!user?.id) {
+      console.error("No hay usuario logueado");
       return;
     }
 
@@ -55,18 +44,12 @@ export default function PlansGrid() {
 
     try {
       setLoadingPlan(priceId);
-      const res = await PostLinkStripe(user.id, priceId, token);
-      
+      const res = await PostLinkStripe(user?.id, priceId, token);
+
       if (res.data?.url) {
         window.location.href = res.data.url; 
       } else {
-        // Ahora, si hay un error 400, es por otra razón y mostramos el mensaje del backend si existe
         console.error("No se obtuvo el link de Stripe", "Error:", res.errors, "Mensaje:", res.message);
-        Swal.fire({
-            icon: 'error',
-            title: 'Error al generar el pago',
-            text: res.errors || 'No pudimos redirigirte a la página de pago. Por favor, inténtalo de nuevo más tarde.'
-        });
       }
     } catch (err) {
       console.error("Error al crear sesión de Stripe", err);
@@ -79,10 +62,9 @@ export default function PlansGrid() {
       setLoadingPlan(null);
     }
   };
-
   
   return (
-    <div className=" bg-gray-50">
+    <div className="bg-gray-50">
       <div className="container px-4 py-12 mx-auto">
         <div className="grid gap-8 mb-12 md:grid-cols-3">
           {membresias.map((plan) => (
@@ -122,7 +104,6 @@ export default function PlansGrid() {
                     {plan.description}
                   </p>
                   <div className="text-center">
-                    {/* Precio principal */}
                     <div className="text-2xl font-bold text-gray-900">
                       {plan.id === "monthly" &&
                         `${plan.monthlyPrice} USD / mes`}
@@ -130,8 +111,6 @@ export default function PlansGrid() {
                         `${plan.quarterlyPrice} USD / 3 meses`}
                       {plan.id === "annual" && `${plan.annualPrice} USD / año`}
                     </div>
-
-                    {/* Info de referencia mensual */}
                     <div className="text-sm text-gray-500 mt-1">
                       {plan.id === "quarterly" &&
                         `≈ ${(plan.quarterlyPrice! / 3).toFixed(2)} USD al mes`}
@@ -174,7 +153,8 @@ export default function PlansGrid() {
                             : "bg-gray-900 hover:bg-gray-800 text-white"
                         }`}
                         onClick={() => handleSubscribe(plan.priceId)}
-                        disabled={loadingPlan === plan.priceId}
+           
+                        disabled={loadingPlan === plan.priceId || isAuth !== true}
                       >
                         {loadingPlan === plan.priceId ? "Redirigiendo..." : `Suscribirse a ${plan.name}`}
                         <ArrowRight className="w-4 h-4 ml-2" />

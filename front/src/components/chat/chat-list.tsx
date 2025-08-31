@@ -10,7 +10,7 @@ import { MessageCircle } from 'lucide-react'
 export function ChatList() {
   const { chats, setCurrentChatId, currentChat, loading } = useChat()
   const { user } = useAuth()
-  
+
   if (loading && chats.length === 0) {
     return (
       <div className="flex flex-col h-full items-center justify-center p-4">
@@ -19,7 +19,7 @@ export function ChatList() {
       </div>
     )
   }
-  
+
   if (chats.length === 0) {
     return (
       <div className="flex flex-col h-full items-center justify-center p-4">
@@ -40,7 +40,7 @@ export function ChatList() {
           const isClient = user?.id === chat.cliente.id
           const otherPerson = isClient ? chat.profesional : chat.cliente
           const isActive = currentChat.chat?.id === chat.id
-          
+
           return (
             <div
               key={chat.id}
@@ -57,12 +57,12 @@ export function ChatList() {
                     fill
                     className="object-cover rounded-full"
                   />
-                  {chat.unreadCount > 0 && (
-                    <div className="absolute -top-1 -right-1 bg-hero-orange text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                      {chat.unreadCount}
-                    </div>
-                  )}
-                </div>
+                   {(chat.unreadCount ?? 0) > 0 && (
+    <div className="absolute -top-1 -right-1 bg-hero-orange text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+      {chat.unreadCount}
+    </div>
+  )}
+</div>
                 <div className="flex-1 min-w-0">
                   <div className="flex justify-between items-baseline">
                     <h3 className="font-Title truncate">{otherPerson.name}</h3>
@@ -70,7 +70,7 @@ export function ChatList() {
                       <span className="text-xs text-gray-500">
                         {formatDistanceToNow(new Date(chat.lastMessageAt), {
                           addSuffix: true,
-                          locale: es
+                          locale: es,
                         })}
                       </span>
                     )}
