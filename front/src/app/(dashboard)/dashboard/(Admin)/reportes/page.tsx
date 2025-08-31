@@ -42,6 +42,7 @@ import { SiteHeader } from '@/components/site-header'
 import { getAllUsers } from '@/services/admin'
 import { IUser } from '@/types/users'
 import { useAuth } from '@/context/authcontext'
+import BotonBan from '../../components/botonBan'
 
 export default function Reportes() {
   const [users, setUsers] = useState<IUser[]>([])
@@ -65,7 +66,6 @@ export default function Reportes() {
   fetchUsers()
 }, [token])
   
-  console.log("este es el array",users)
   return (
     <>
       <SiteHeader label="Reportes" />
@@ -91,7 +91,9 @@ export default function Reportes() {
                 <h3 className="text-lg font-bold text-gray-800">{user.name}</h3>
                 <p className="text-sm text-gray-600"><strong>Email:</strong> {user.email}</p>
                 <p className="text-sm text-gray-600"><strong>Rol:</strong> {user.role}</p>
+                <p className="text-sm text-gray-600"><strong>isActive?:</strong> {user.isActive ? '✅' : '❌'}</p>
                 <p className="text-sm text-gray-600"><strong>Verificado:</strong> {user.isVerified ? '✅' : '❌'}</p>
+                <BotonBan userId={user.id} token={token} onSuccess={() => setUsers(users.filter(u => u.id !== user.id))} onError={(error) => console.error(error)} />
               </div>
             ))}
           </div>

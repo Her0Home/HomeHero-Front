@@ -1,6 +1,7 @@
 'use server'
 import { IUser } from '@/types/users'
 import { axiosApiBack } from '.'
+import { AxiosResponse } from 'axios'
 
 
 export const getAllUsers = async (token: string): Promise<IUser[] | null> => {
@@ -22,5 +23,21 @@ export const getAllUsers = async (token: string): Promise<IUser[] | null> => {
       console.warn('Error al obtener usuarios:', e.message)
     }
     return null
+  }
+}
+
+export const banUser = async (userId: string, token: string): Promise< any| undefined> => {
+  try {
+    const res: AxiosResponse = await axiosApiBack.put(`/users/${userId}/ban`,{}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    
+if (res.data) {
+    return res.data
+  }
+  } catch (error: any) {
+    return error.response?.data || error.message
   }
 }
